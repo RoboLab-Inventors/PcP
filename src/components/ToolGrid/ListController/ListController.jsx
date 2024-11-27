@@ -3,7 +3,7 @@ import '../ToolGrid.css';
 
 const ListController = () => {
     return (
-        <div className="resizable-box">
+        <div>
             <h2>List Controller</h2>
             <div className="content">
                 <p>Control the list of items here.</p>

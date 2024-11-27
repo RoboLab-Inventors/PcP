@@ -3,7 +3,7 @@ import '../ToolGrid.css';
 
 const Overview = () => {
     return (
-        <div className="resizable-box">
+        <div>
             <h2>Overview</h2>
             <div className="content">
                 <p>Overview of the components.</p>

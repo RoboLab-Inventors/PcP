@@ -8,7 +8,7 @@ const ToolGrid = () => {
     // Removed useState for widths and related functions
 
     return (
-        <div className="tool-grid-container" style={{ marginTop: '20vh', height: '40vh' }}>
+        <div className="tool-grid-container" style={{ marginTop: '20vh', height: '35vh', marginBottom: '10vh' }}>
             <div className="grid-container grid-container--fit" style={{ gridTemplateColumns: '1fr 1fr 1fr' }}>
                 <div className="resizable-box">
                     <ComponentDetails />
