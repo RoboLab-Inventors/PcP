@@ -31,7 +31,7 @@ const CustomCursor = () => {
     }
 
     // Add event listeners for links and clickable elements
-    const links = document.querySelectorAll("a, button, input");
+    const links = document.querySelectorAll("a, button, input, img");
     links.forEach((link) => {
       link.addEventListener("mouseenter", handleMouseEnter);
       link.addEventListener("mouseleave", handleMouseLeave);

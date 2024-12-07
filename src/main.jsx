@@ -5,7 +5,7 @@ import RoutesPath from './RoutesPath/RoutesPath.jsx';
 import CustomCursor from './components/CustomCursor/CustomCursor.jsx';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import backgroundVideo from './assets/backgroundVideo.mp4';
+//import backgroundVideo from './assets/backgroundVideo.mp4'; // Uncomment this line to use the video background
 import './main.css';
 
 const theme = createTheme({
@@ -40,7 +40,7 @@ setCSSVariables(theme);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <video 
+    {/*<video 
       className="background-video" 
       autoPlay 
       loop 
@@ -49,7 +49,8 @@ createRoot(document.getElementById('root')).render(
     >
       <source src={backgroundVideo} type="video/mp4" />
       Your browser does not support the video tag.
-    </video>
+    </video>*/}
+    <div className="background"></div>
     <CustomCursor />
     <BrowserRouter future={{ v7_startTransition: true,v7_relativeSplatPath: true }}>
       <ThemeProvider theme={theme}>

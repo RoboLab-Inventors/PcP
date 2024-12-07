@@ -35,15 +35,15 @@ function Header() {
     <header className={`header ${showHeader ? "visible" : "hidden"}`}>
       <nav className="navHeader">
         <div className="nav-section">
-          <HeaderButton label="Tickets" />
-          <HeaderButton label="About" />
+          <HeaderButton label="Tool" />
+          <HeaderButton label="About Us" />
         </div>
         <div className="logo-section">
           <HeaderLogo className="logo-image overexposed-logo" />
         </div>
         <div className="nav-section">
-          <HeaderButton label="Services" />
-          <HeaderButton label="Contact" />
+          <HeaderButton label="Community" />
+          <HeaderButton label="Lessons" />
         </div>
       </nav>
     </header>
