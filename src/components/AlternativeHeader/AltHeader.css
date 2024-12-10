@@ -1,0 +1,93 @@
+.tabs {
+    display: flex;
+    position: relative;
+    background-color: var(--primary-color-main);
+    box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+    padding: 0.75rem;
+    border-radius: 99px;
+  }
+
+  .container {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    border-radius: 99px;
+    top: 40px;
+    justify-content: center; /* Center the content horizontally */
+    width: 100%; /* Ensure it takes the full width */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for showing/hiding */
+
+  }
+
+  .logo-image {
+    width: 120%; /* L'immagine sarà più grande del tab */
+    height: auto;
+    transition: transform 0.3s ease-in-out; /* Aggiungi una transizione per l'hover */
+  }
+  
+  .container.hidden {
+    transform: translateY(-100%); /* Move the header out of view */
+  }
+  
+  .container.visible {
+    transform: translateY(0); /* Bring the header into view */
+  }
+  .tabs * {
+    z-index: 2;
+  }
+  
+  .container input[type="radio"] {
+    display: none;
+  }
+  
+  .tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 10vh;
+    font-weight: 500;
+    border-radius: 99px;
+    transition: color 0.15s ease-in;
+  }
+  
+  
+  .container input[type="radio"]:checked + label {
+    color: var(--fontColor);
+  }
+  .container input[id="radio-1"]:checked ~ .glider {
+    transform: translateX(0);
+  }
+  
+  .container input[id="radio-2"]:checked ~ .glider {
+    transform: translateX(100%);
+  }
+  
+  .container input[id="radio-3"]:checked ~ .glider {
+    transform: translateX(200%);
+  }
+  .container input[id="radio-4"]:checked ~ .glider {
+    transform: translateX(300%);
+  }
+  .container input[id="radio-5"]:checked ~ .glider {
+    transform: translateX(400%);
+  }
+  
+  .glider {
+    position: absolute;
+    display: flex;
+    height: 30px;
+    width: 10vh;
+    background-color: var(--secondary-color-main);
+    z-index: 1;
+    border-radius: 99px;
+    transition: transform 0.25s ease-out;
+  }
+  
+  
+  @media (max-width: 700px) {
+    .tabs {
+      transform: scale(0.6);
+    }
+  }
+  

@@ -7,6 +7,7 @@
   border: 0;
   border-radius: 25px;
   color: var(--fontColor);
+  width: 10vh;
 }
 
 .button-header:hover {

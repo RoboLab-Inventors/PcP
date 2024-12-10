@@ -1,8 +1,8 @@
 body {
   background-color: var(--background-primary);
   color: var(--fontColor);
-  min-height: 100vh;
-  overflow: hidden;
+  min-height: 200vh;
+  overflow: auto;
   margin: 0;
 }
 
