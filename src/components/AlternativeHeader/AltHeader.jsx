@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import "./AltHeader.css";
 import { useEffect } from "react";
 import logo from "../../assets/logoHeader.png";
+import Avatar from "@mui/material/Avatar";
 
 const AltHeader = () => {
   const [showHeader, setShowHeader] = useState(true);
@@ -93,6 +94,9 @@ const AltHeader = () => {
             transform: `translateX(${translateXValue}%)`,
           }}
         ></span>
+      </div>
+      <div className="avatar">
+        <Avatar />
       </div>
     </div>
   );

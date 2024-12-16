@@ -102,3 +102,11 @@
   border-radius: 99px;
   transition: transform 0.25s ease-out;
 }
+
+.avatar {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 3vw;
+}
