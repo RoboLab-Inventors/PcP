@@ -1,6 +1,6 @@
 import { useMediaQuery } from "react-responsive";
-import AltHeader from "./AlternativeHeader/AltHeader";
-import HeaderMobile from "./HeaderMobile/HeaderMobile";
+import AltHeader from "../AlternativeHeader/AltHeader";
+import HeaderMobile from "../HeaderMobile/HeaderMobile";
 
 const HeaderSwitch = () => {
   const isMobile = useMediaQuery({ maxWidth: 500 });

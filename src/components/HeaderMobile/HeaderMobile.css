@@ -77,3 +77,13 @@
   top: 28px;
   left: 5px;
 }
+
+/* CSS code for tool page */
+@media (min-width: 500px) {
+  .burger {
+    left: 1vw;
+  }
+  .avatar {
+    right: 2vw;
+  }
+}
