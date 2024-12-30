@@ -1,0 +1,44 @@
+.btn {
+    position: relative;
+    padding: 10px 15px;
+    overflow: hidden;
+    display: inline-block;
+    border: 2px solid; /* Rimuovi il colore fisso */
+    border-radius: 12px;
+}
+
+.label, .bg {
+    pointer-events: none;
+}
+
+.label {
+    position: relative;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease-out;
+    z-index: 1;
+    /* Rimuovi il colore fisso */
+}
+
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 150%;
+    min-height: 150%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    /* Rimuovi il colore fisso */
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease-out;
+}
+
+/* hover styles */
+.btn:hover .label {
+    color: inherit;
+}
+
+.btn:hover .bg {
+    transform: translate(-50%, -50%) scale(1);
+}

@@ -1,0 +1,22 @@
+.button-header {
+  background: transparent;
+  transition: opacity 0.4s ease, background-color 0.4s ease; /* Add background-color to the transition */
+  padding: 5px 12px;
+  margin: 5px 5px 5px 5px;
+  font-size: 0.9rem;
+  border: 0;
+  border-radius: 25px;
+  color: var(--fontColor);
+  width: 10vh;
+}
+
+.button-header:hover {
+  opacity: 0.8;
+  background-color: var(--background-primary);
+}
+
+@media (max-width: 370px) {
+  .button-header {
+    font-size: 0.7rem;
+  }
+}
