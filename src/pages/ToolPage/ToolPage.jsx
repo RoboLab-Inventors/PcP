@@ -1,13 +1,10 @@
 import BottomDrawer from '../../components/BottomDrawer/BottomDrawer';
-import Header from '../../components/Header/Header';
-import ToolGrid from '../../components/ToolGrid/ToolGrid';
-
+import HeaderSwitch from '../../components/HeaderSwitch/HeaderSwitch';
 const ToolPage = () => {
   return (
     <>
-      <Header />
+      <HeaderSwitch />
       <BottomDrawer/>
-      <ToolGrid />
     </>
   );
 };
