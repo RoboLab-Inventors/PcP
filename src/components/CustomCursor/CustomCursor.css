@@ -2,41 +2,20 @@
   cursor: none;
 }
 
-/* Custom cursor styles */
-.custom-cursor {
+.cursor-dot {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 3vh;
-  height: 3vh;
-  pointer-events: none;
-  z-index: 1501;
-  opacity: 0;
-  transition: opacity 0.4s ease, width 0.5s ease, height 0.5s ease,
-    transform 0.5s ease;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-  background: radial-gradient(farthest-side ,rgb(68, 68, 66) 95%,transparent 100%);
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  box-sizing: border-box;
+  background-color: white;
+  pointer-events: none;
+  z-index: 11000;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: exclusion;
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s ease;
 }
 
-/* Adjust the size of the custom-cursor on hover */
-.custom-cursor.custom-cursor-active {
-  width: 1vh;
-  height: 1vh;
-  mix-blend-mode: difference;
-  background: radial-gradient(farthest-side ,rgb(68, 68, 66) 95%,transparent 100%);
-}
-
-/* Show the custom cursor when hovering over the body */
-body:hover .custom-cursor {
-  opacity: 1;
-} 
-
-/* Hide the custom cursor on small screens */
-@media screen and (max-width: 1200px) {
-  .custom-cursor {
-    display: none !important;
-  }
+.cursor-hover {
+  transform: translate(-50%, -50%) scale(0.3);
 }

@@ -1,56 +1,51 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CustomCursor.css";
 
 const CustomCursor = () => {
-  const [isActive, setIsActive] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
-    const cursor = document.querySelector(".custom-cursor");
-
-    const updateCursorPosition = (e) => {
-      cursor.style.top = `${e.clientY}px`;
-      cursor.style.left = `${e.clientX}px`;
+    const handleMouseMove = (e) => {
+      setPosition({ x: e.clientX, y: e.clientY });
     };
 
-    const handleMouseEnter = () => {
-      setIsActive(true);
+    document.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
     };
+  }, []);
 
-    const handleMouseLeave = () => {
-      setIsActive(false);
-    };
+  useEffect(() => {
+    // event listeners per gli elementi che attivano l'effetto hover
+    const hoverElements = document.querySelectorAll(".hover-target, a, button, input");
+    const handleMouseEnter = () => setIsHovering(true);
+    const handleMouseLeave = () => setIsHovering(false);
 
-    // Add event listeners for mouse movement
-    document.addEventListener("mousemove", updateCursorPosition);
-
-    // Aggiungi event listener per elementi con una classe specifica
-    const specialImage = document.querySelector(".logo-image overexposed-logo, .logo-section, .drawer-handle");
-    if (specialImage) {
-      specialImage.addEventListener("mouseenter", handleMouseEnter);
-      specialImage.addEventListener("mouseleave", handleMouseLeave);
-    }
-
-    // Add event listeners for links and clickable elements
-    const links = document.querySelectorAll("a, button, input, img");
-    links.forEach((link) => {
-      link.addEventListener("mouseenter", handleMouseEnter);
-      link.addEventListener("mouseleave", handleMouseLeave);
+    hoverElements.forEach((el) => {
+      el.addEventListener("mouseenter", handleMouseEnter);
+      el.addEventListener("mouseleave", handleMouseLeave);
     });
 
-    // Cleanup event listeners on component unmount
+
     return () => {
-      document.removeEventListener("mousemove", updateCursorPosition);
-      links.forEach((link) => {
-        link.removeEventListener("mouseenter", handleMouseEnter);
-        link.removeEventListener("mouseleave", handleMouseLeave);
+      hoverElements.forEach((el) => {
+        el.removeEventListener("mouseenter", handleMouseEnter);
+        el.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
   }, []);
 
   return (
-    <div
-      className={`custom-cursor ${isActive ? "custom-cursor-active" : ""}`}
-    ></div>
+    <>
+      <div
+        style={{
+          left: `${position.x}px`,
+          top: `${position.y}px`,
+        }}
+        className={`cursor-dot ${isHovering ? "cursor-hover" : ""}`}
+      />
+    </>
   );
 };
 
