@@ -8,7 +8,7 @@ function AbousUs() {
     <>
       <HeaderSwitch />
       <HeroSection />
-      {/* <Section /> */}
+      <Section />
     </>
   );
 }

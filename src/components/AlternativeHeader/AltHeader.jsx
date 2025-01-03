@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./AltHeader.css";
 import { useEffect } from "react";
-import logo from "../../assets/logoHeader.png";
+import logo from "../../assets/images/logoHeader.png";
 import Avatar from "@mui/material/Avatar";
 
 const AltHeader = () => {
