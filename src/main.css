@@ -2,9 +2,12 @@ body {
   background-color: var(--background-primary);
   color: var(--fontColor);
   min-height: 100vh;
-  overflow: hidden;
   margin: 0;
   font-family: 'SpaceGrotesk';
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 * {
@@ -19,6 +22,7 @@ body {
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
+  display: none;
 }
 
 /* Track */

@@ -1,0 +1,6 @@
+.accordion-container {
+  width: 40vw;
+  z-index: 1000;
+  overflow: auto;
+  position: relative;
+}

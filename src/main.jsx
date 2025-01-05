@@ -7,7 +7,6 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/s
 
 //import backgroundVideo from './assets/backgroundVideo.mp4'; // Uncomment this line to use the video background
 import './main.css';
-import './hooks/smoothscroll.js'
 
 // Define the palette separately
 const palette = {
