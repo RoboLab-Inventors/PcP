@@ -17,6 +17,8 @@
   justify-content: center; /* Center the content horizontally */
   width: 100%; /* Ensure it takes the full width */
   transition: transform 0.3s ease-in-out; /* Smooth transition for showing/hiding */
+  z-index: 1000; /* Assicurati che l'header sia sopra gli altri componenti */
+
 }
 
 .container.hidden {
@@ -65,7 +67,7 @@
 }
 @media (max-width: 245px) {
   .tab {
-    font-size: 18px; /* Minimum font size */
+    font-size: 18px;
   }
 }
 

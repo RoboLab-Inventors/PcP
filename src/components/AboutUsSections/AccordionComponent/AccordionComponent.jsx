@@ -17,11 +17,18 @@ const AccordionComponent = ({ accordionIndex }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleAccordionClick = (index) => {
-    const card = document.querySelector(`.card:nth-child(${index + 1})`);
+    const card = document.querySelector(`.card:nth-child(${index+1})`);
     if (card) {
       card.scrollIntoView({ behavior: "smooth" });
     }
+    if (index === 2) {
+      const carouselDiv = document.querySelector('.carousel-div');
+      if (carouselDiv) {
+        carouselDiv.scrollIntoView({ behavior: "smooth" });
+      }
+    }
   };
+
 
   useEffect(() => {
     setExpanded(accordionIndex !== null);

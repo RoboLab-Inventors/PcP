@@ -4,20 +4,33 @@ import "./CustomCursor.css";
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isActive, setIsActive] = useState(true); // Controlla se il cursore è visibile
+  const [isFading, setIsFading] = useState(false); // Controlla l'animazione di scomparsa
 
   useEffect(() => {
     const handleMouseMove = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });
+      setIsActive(true); // Rendi visibile il cursore quando il mouse si muove
+      setIsFading(false); // Rimuovi l'effetto di scomparsa
+    };
+
+    const handleMouseOut = (e) => {
+      if (!e.relatedTarget && e.toElement === null) {
+        setIsFading(true); // Attiva l'animazione di scomparsa
+        setTimeout(() => setIsActive(false), 500); // Nascondi dopo la durata dell'animazione
+      }
     };
 
     document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseout", handleMouseOut);
+
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseout", handleMouseOut);
     };
   }, []);
 
   useEffect(() => {
-    // event listeners per gli elementi che attivano l'effetto hover
     const hoverElements = document.querySelectorAll(".hover-target, a, button, input");
     const handleMouseEnter = () => setIsHovering(true);
     const handleMouseLeave = () => setIsHovering(false);
@@ -26,7 +39,6 @@ const CustomCursor = () => {
       el.addEventListener("mouseenter", handleMouseEnter);
       el.addEventListener("mouseleave", handleMouseLeave);
     });
-
 
     return () => {
       hoverElements.forEach((el) => {
@@ -38,13 +50,17 @@ const CustomCursor = () => {
 
   return (
     <>
-      <div
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-        }}
-        className={`cursor-dot ${isHovering ? "cursor-hover" : ""}`}
-      />
+      {isActive && (
+        <div
+          style={{
+            left: `${position.x}px`,
+            top: `${position.y}px`,
+          }}
+          className={`cursor-dot ${isFading ? "cursor-hidden" : ""} ${
+            isHovering ? "cursor-hover" : ""
+          }`}
+        />
+      )}
     </>
   );
 };

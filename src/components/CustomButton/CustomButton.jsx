@@ -4,11 +4,12 @@ import "./CustomButton.css";
 
 const CustomButton = ({ 
   label, 
-  labelColor, 
-  borderColor, 
-  backgroundColor, 
-  bgColor, 
-  hoverLabelColor 
+  labelColor = "var(--fontColor)", 
+  borderColor = "var(--secondary-color-main)", 
+  backgroundColor = "var(--primary-color-main)", 
+  bgColor = "var(--background-primary)", 
+  hoverLabelColor = "var(--fontColor)",
+  onClick
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -36,6 +37,7 @@ const CustomButton = ({
         setIsHovered(false);
       }}
       onMouseEnter={() => setIsHovered(true)}
+      onClick={onClick}
       style={{
         borderColor: borderColor,
         backgroundColor: backgroundColor,
@@ -61,14 +63,7 @@ CustomButton.propTypes = {
   backgroundColor: PropTypes.string,
   bgColor: PropTypes.string,
   hoverLabelColor: PropTypes.string,
-};
-
-CustomButton.defaultProps = {
-  labelColor: "var(--fontColor)",
-  borderColor: "var(--secondary-color-main)",
-  backgroundColor: "var(--primary-color-main)",
-  bgColor: "var(--background-primary)",
-  hoverLabelColor: "var(--fontColor)",
+  onClick: PropTypes.func,
 };
 
 export default CustomButton;
