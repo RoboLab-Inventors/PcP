@@ -1,5 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import RoutesPath from "./RoutesPath/RoutesPath.jsx";
 import CustomCursor from "./components/CustomCursor/CustomCursor.jsx";
@@ -50,6 +52,7 @@ const setCSSVariables = (theme) => {
 setCSSVariables(theme);
 
 createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <div className="background"></div>
     <CustomCursor />
@@ -58,5 +61,6 @@ createRoot(document.getElementById("root")).render(
         <RoutesPath />
       </ThemeProvider>
     </BrowserRouter>
+  </StrictMode>
   </StrictMode>
 );
