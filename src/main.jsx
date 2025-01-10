@@ -1,14 +1,12 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import RoutesPath from "./RoutesPath/RoutesPath.jsx";
 import CustomCursor from "./components/CustomCursor/CustomCursor.jsx";
 import { createTheme, ThemeProvider, responsiveFontSizes, } from "@mui/material/styles";
 
 import "./main.css";
-import './hooks/smoothscroll.js';
+import './hooks/SmoothScroll.js';
 
 // Define the palette separately
 const palette = {
