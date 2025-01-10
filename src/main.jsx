@@ -52,7 +52,6 @@ const setCSSVariables = (theme) => {
 setCSSVariables(theme);
 
 createRoot(document.getElementById("root")).render(
-createRoot(document.getElementById("root")).render(
   <StrictMode>
     <div className="background"></div>
     <CustomCursor />
@@ -61,6 +60,5 @@ createRoot(document.getElementById("root")).render(
         <RoutesPath />
       </ThemeProvider>
     </BrowserRouter>
-  </StrictMode>
   </StrictMode>
 );
