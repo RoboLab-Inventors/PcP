@@ -23,11 +23,11 @@ const SampleSplitter = ({ id = "drag-bar", dir, isDragging, ...props }) => {
   );
 };
 
-// Aggiunta della validazione delle proprietà
 SampleSplitter.propTypes = {
   id: PropTypes.string,
   dir: PropTypes.string.isRequired,
   isDragging: PropTypes.bool,
 };
+
 
 export default SampleSplitter;

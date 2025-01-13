@@ -51,12 +51,13 @@ const ToolLayout = () => {
         >
           <ListController />
         </div>
-        <SampleSplitter isDragging={isFileDragging} {...fileDragBarProps} />
+        <SampleSplitter dir={"vertical"} isDragging={isFileDragging} {...fileDragBarProps} />
         <div className={"flex grow"}>
           <div className={"grow bg-darker contents"}>
             <ComponentDetails />
           </div>
           <SampleSplitter
+            dir={"vertical"}
             isDragging={isPluginDragging}
             {...pluginDragBarProps}
           />

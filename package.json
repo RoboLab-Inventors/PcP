@@ -33,5 +33,18 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
     "vite": "^5.4.11"
-  }
+  },
+  "description": "<<<<<<< HEAD\r Professional Controller Profiler\r =======",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RoboLab-Inventors/PcP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RoboLab-Inventors/PcP/issues"
+  },
+  "homepage": "https://github.com/RoboLab-Inventors/PcP#readme"
 }

@@ -49,19 +49,10 @@ const CustomCursor = () => {
   }, []);
 
   return (
-    <>
-      {isActive && (
-        <div
-          style={{
-            left: `${position.x}px`,
-            top: `${position.y}px`,
-          }}
-          className={`cursor-dot ${isFading ? "cursor-hidden" : ""} ${
-            isHovering ? "cursor-hover" : ""
-          }`}
-        />
-      )}
-    </>
+    <div
+      className={`custom-cursor ${isActive ? "active" : ""} ${isFading ? "fading" : ""} ${isHovering ? "hovering" : ""}`}
+      style={{ left: `${position.x}px`, top: `${position.y}px` }}
+    ></div>
   );
 };
 

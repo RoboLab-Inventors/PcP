@@ -1,29 +1,28 @@
-import { useState, useRef } from "react";
-import "./HeaderMobile.css";
-import Avatar from "@mui/material/Avatar";
+import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import Avatar from "@mui/material/Avatar";
+import "./HeaderMobile.css";
 
 const HeaderMobile = () => {
-  const burgerRef = useRef(null); // Create a ref for the burger icon
   const [isOpen, setIsOpen] = useState(false);
+  const burgerRef = useRef(null);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
-    console.log("toggleMenu");
-    setIsOpen((prev) => !prev);
+    setIsOpen(!isOpen);
+  };
+
+  const handleMenuItemClick = (path) => {
+    navigate(path);
+    toggleMenu();
   };
 
   return (
     <div className="header-mobile">
-      <div className="burger">
-        <label className="burger" onClick={toggleMenu} htmlFor="burger">
-          <input
-            type="checkbox"
-            id="burger"
-            style={{ display: "none" }}
-            checked={isOpen} // Bind the checkbox to the state
-            onChange={toggleMenu} // Toggle the menu on change
-          ></input>
+      <div className="burger" ref={burgerRef} onClick={toggleMenu}>
+        <label>
           <span></span>
           <span></span>
           <span></span>
@@ -31,7 +30,7 @@ const HeaderMobile = () => {
       </div>
       <Menu
         id="basic-menu"
-        anchorEl={isOpen ? burgerRef.current : null} // Use the ref as anchorEl
+        anchorEl={isOpen ? burgerRef.current : null}
         open={isOpen}
         sx={{ marginTop: "40px" }}
         onClose={toggleMenu}
@@ -39,19 +38,19 @@ const HeaderMobile = () => {
           "aria-labelledby": "basic-button",
         }}
         anchorOrigin={{
-          vertical: "top", // Position the menu below the burger
+          vertical: "top",
           horizontal: "left",
         }}
         transformOrigin={{
-          vertical: "top", // Ensure the menu opens downwards
+          vertical: "top",
           horizontal: "left",
         }}
       >
-        <MenuItem onClick={toggleMenu}>Home</MenuItem>
-        <MenuItem onClick={toggleMenu}>Tool</MenuItem>
-        <MenuItem onClick={toggleMenu}>Community</MenuItem>
-        <MenuItem onClick={toggleMenu}>Lezioni</MenuItem>
-        <MenuItem onClick={toggleMenu}>About Us</MenuItem>
+        <MenuItem key="home" onClick={() => handleMenuItemClick("/")}>Home</MenuItem>
+        <MenuItem key="tool" onClick={() => handleMenuItemClick("/Tool")}>Tool</MenuItem>
+        <MenuItem key="community" onClick={() => handleMenuItemClick("/Community")}>Community</MenuItem>
+        <MenuItem key="lessons" onClick={() => handleMenuItemClick("/Lessons")}>Lezioni</MenuItem>
+        <MenuItem key="about-us" onClick={() => handleMenuItemClick("/AboutUs")}>About Us</MenuItem>
       </Menu>
       <div className="avatar">
         <Avatar />
