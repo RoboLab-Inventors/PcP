@@ -1,6 +1,26 @@
+:root {
+  --primary-color-main: #650000;
+  --secondary-color-main: #490000;
+  --primary-color-secondary: #d5a128;
+  --secondary-color-secondary: #daa857;
+  --fontColor-main: #f3e8ee;
+  --fontColor-hovered: #e3d9de;
+  --background-primary: #0f0606;
+  --background-secondary: #200b0b;
+}
+
+/* .light-mode {
+  --primary-color-main: #8B0000;
+  --secondary-color-main: #A52A2A; 
+  --fontColor-main: #333333; 
+  --fontColor-hovered: #555555;
+  --background-primary: #F5F5F5;
+  --background-secondary: #E0E0E0;
+} */
+
 body {
   background-color: var(--background-primary);
-  color: var(--fontColor);
+  color: var(--fontColor-main);
   min-height: 100vh;
   margin: 0;
   font-family: 'SpaceGrotesk';

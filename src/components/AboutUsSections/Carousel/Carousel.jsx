@@ -4,7 +4,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './Carousel.css';
 import Controller from '../../../assets/images/Controller1.png';
 import Robolablogo from '../../../assets/images/Robolablogo.png';
-import ControllerWall from '../../../assets/images/ControllerWall1.png';
 
 const CarouselComponent = () => {
   return (
@@ -24,10 +23,6 @@ const CarouselComponent = () => {
       <div>
         <img src={Robolablogo} alt="Robolablogo" />
         <p className="legend">Robolablogo</p>
-      </div>
-      <div>
-        <img src={ControllerWall} alt="ControllerWall" />
-        <p className="legend">ControllerWall</p>
       </div>
     </Carousel>
   );

@@ -30,7 +30,7 @@ const CustomButton = ({
 
   return (
     <a
-      className={`btn ${isHovered ? 'hovered' : ''}`}
+      className={`btn ${isHovered ? 'hovered' : ''} .hover-target`}
       onMouseMove={handleMouseMove}
       onMouseLeave={(e) => {
         resetScale(e);
