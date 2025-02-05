@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LoginCard from '../../components/LoginRegisterCard/LoginCard';
 import RegisterCard from '../../components/LoginRegisterCard/RegisterCard';
+import HeaderSwitch from '../../components/HeaderSwitch/HeaderSwitch';
 import './LoginRegisterPage.css';
 
 const LoginRegisterPage = () => {
@@ -11,6 +12,7 @@ const LoginRegisterPage = () => {
 
   return (
     <>
+      <HeaderSwitch/>
       {isLogin ? (
         <LoginCard switchToRegister={switchToRegister} />
       ) : (

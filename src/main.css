@@ -82,3 +82,8 @@ body {
   font-weight: normal; /* Puoi specificare il peso se necessario */
   font-style: normal; /* Puoi specificare lo stile se necessario */
 }
+
+input {
+  font-family: 'SpaceGrotesk';
+  
+}
