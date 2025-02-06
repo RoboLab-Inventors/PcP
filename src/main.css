@@ -9,15 +9,6 @@
   --background-secondary: #200b0b;
 }
 
-/* .light-mode {
-  --primary-color-main: #8B0000;
-  --secondary-color-main: #A52A2A; 
-  --fontColor-main: #333333; 
-  --fontColor-hovered: #555555;
-  --background-primary: #F5F5F5;
-  --background-secondary: #E0E0E0;
-} */
-
 body {
   background-color: var(--background-primary);
   color: var(--fontColor-main);

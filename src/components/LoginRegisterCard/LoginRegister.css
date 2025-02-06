@@ -1,103 +1,251 @@
+.login-register-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  min-width: 100vw;
+  margin-top: 20px;
+}
+
 .login-register-card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 33vw;
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    border: 1px solid var(--primary-color-secondary);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 33vw;
+  min-width: 600px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  border: 1px solid var(--primary-color-secondary);
+}
+
+.login-register-card form {
+  display: flex;
+  flex-direction: column;
+  padding: 5% 10% 10% 10%;
+}
+
+.container-container {
+  padding-bottom: 5%;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-insert {
+  width: 100%;
+  height: 40px;
+  padding: 0 40px 0 10px;
+  font-size: 16px;
+  border: 1px solid var(--fontColor-main);
+  color: var(--fontColor-main);
+  border-radius: 10px;
+  outline: none;
+  background: transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-insert:focus {
+  border-color: var(--primary-color-secondary);
+  box-shadow: 0 0 4px var(--primary-color-secondary);
+}
+
+.input-label {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--fontColor-main);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+
+.input-insert:focus+.input-label,
+.input-insert:not(:placeholder-shown)+.input-label {
+  top: -10px;
+  left: 8px;
+  font-size: 12px;
+  color: var(--fontColor-main);
+}
+
+.icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--fontColor-main);
+}
+
+.error-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--fontColor-main);
+}
+
+.tooltip {
+  position: absolute;
+  right: 0;
+  top: -30px;
+  background: var(--background-primary);
+  color: var(--fontColor-main);
+  padding: 2px 5px;
+  font-size: 12px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.error-icon:hover+.tooltip {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+.password-icon {
+  position: absolute;
+  right: 40px;
+  color: var(--fontColor-main);
+}
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.extra-fields {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+
+.date-container {
+  max-width: 50%;
+  margin-right: 10%;
+}
+
+.date-insert {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px 0 10px;
+  font-size: 16px;
+  border: 1px solid var(--fontColor-main);
+  color: var(--fontColor-main);
+  border-radius: 10px;
+  outline: none;
+  background: transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  color-scheme: dark;
+}
+
+.date-insert:focus {
+  border-color: var(--primary-color-secondary);
+  box-shadow: 0 0 4px var(--primary-color-secondary);
+}
+
+.date-insert:focus+.input-label,
+.date-insert:not(:placeholder-shown)+.input-label {
+  top: -10px;
+  left: 8px;
+  font-size: 12px;
+  color: var(--fontColor-main);
+}
+
+.gender-container {
+  max-width: 40%;
+}
+
+.gender-container {
+  max-width: 50%;
+}
+
+.gender-insert {
+  width: 100%;
+  height: 40px;
+  padding: 0 40px 0 10px;
+  ;
+  font-size: 16px;
+  border: 1px solid var(--fontColor-main);
+  color: var(--fontColor-main);
+  border-radius: 10px;
+  outline: none;
+  background: transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.gender-insert:focus {
+  border-color: var(--primary-color-secondary);
+  box-shadow: 0 0 4px var(--primary-color-secondary);
+}
+
+.gender-insert:focus+.input-label,
+.gender-insert:not(:placeholder-shown)+.input-label {
+  top: -10px;
+  left: 8px;
+  font-size: 12px;
+  color: var(--fontColor-main);
+}
+
+::-webkit-calendar-picker-indicator {
+  cursor: none;
+}
+
+@media (max-width: 768px) {
+  .login-register-card {
+    width: 90vw;
+    min-width: 300px;
   }
-  
-  .login-register-card form {
-    display: flex;
+}
+
+@media (max-width: 450px) {
+  .button-group {
     flex-direction: column;
-    padding: 10%;
   }
 
-  .container-container{
-    padding-bottom: 10%;
-  }
-  .input-container {
-    position: relative;
-    display: flex;
+  .extra-fields {
+    flex-direction: column;
     align-items: center;
   }
-  
-  .input-insert {
-    width: 100%;
-    height: 40px;
-    padding: 0 40px 0 10px;
-    font-size: 16px;
-    border: 1px solid var(--fontColor-main);
-    color: var(--fontColor-main);
-    border-radius: 10px;
-    outline: none;
-    background: transparent;
-    transition: border-color 0.3s, box-shadow 0.3s;
+
+  .gender-insert {
+    min-width: 100%;
   }
-  
-  .input-insert:focus {
-    border-color: var(--primary-color-secondary);
-    box-shadow: 0 0 4px var(--primary-color-secondary);
+
+  .date-container {
+    max-width: 100%;
+    margin-right: 0;
   }
-  
-  .input-label {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 14px;
-    color: var(--fontColor-main);
-    transition: all 0.3s;
-    pointer-events: none;
-  }
-  
-  .input-insert:focus + .input-label,
-  .input-insert:not(:placeholder-shown) + .input-label {
-    top: -10px;
-    left: 8px;
-    font-size: 12px;
-    color: var(--fontColor-main);
-  }
-  
-  .icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--fontColor-main);
-  }
-  
-  .error-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--fontColor-main);
-  }
-  
-  .tooltip {
-    position: absolute;
-    right: 0;
-    top: -30px;
-    background: transparent;
-    color: var(--fontColor-main);
-    padding: 2px 5px;
-    font-size: 12px;
-    border-radius: 4px;
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
-  }
-  
-  .error-icon:hover + .tooltip {
-    opacity: 1;
-    transform: translateY(-5px);
-  }
-  
+}
+
+.separator {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding-top: 20px;
+}
+
+.separator > div {
+  width: 100%;
+  height: 1px;
+  border-radius: 5px;
+  background-color: var(--fontColor-main);
+}
+
+.separator > span {
+  color: var(--fontColor-main);
+  font-family: var(--fontColor-main);
+  font-weight: 600;
+}
+
+.login-register-card .linkTo{
+  color: var(--primary-color-secondary)
+}
