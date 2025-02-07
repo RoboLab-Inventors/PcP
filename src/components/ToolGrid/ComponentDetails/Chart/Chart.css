@@ -1,4 +1,4 @@
-.component-container {
+.chart-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,11 +7,12 @@
     height: 100%;
 }
 
-.component-content {
+.chart-details {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 90%;
+    transition: transform 0.5s ease;
 }

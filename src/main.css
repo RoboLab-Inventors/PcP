@@ -2,6 +2,7 @@
   --primary-color-main: #650000;
   --secondary-color-main: #490000;
   --primary-color-secondary: #d5a128;
+  --primary-color-secondary-opacity: rgba(213, 161, 40, 0.5);
   --secondary-color-secondary: #daa857;
   --fontColor-main: #f3e8ee;
   --fontColor-hovered: #e3d9de;
@@ -27,7 +28,7 @@ body {
 
 
 /* width */
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 10px;
   display: none;
 }
