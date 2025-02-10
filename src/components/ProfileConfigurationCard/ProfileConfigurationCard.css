@@ -1,0 +1,165 @@
+.profileCardWrapper {
+  width: 100%;
+  background-color: var(--secondary-color-main);
+  border-top: 1px solid var(--background-secondary);
+  border-bottom: 1px solid var(--background-secondary);
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start; /* Mantiene tutte le card ancorate in alto */
+}
+
+.profileCardContainer {
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  background-color: var(--primary-color-main);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.profileCardWrapper.open .profileCardContainer {
+  height: auto; /* Adjust height when open */
+}
+
+.titleContainer {
+  overflow: hidden;
+  width: calc(100% - 45px);
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 10px;
+  position: relative;
+}
+
+.titleContainer .MuiTypography-root {
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: visible; /* Hides overflowing text */
+  display: inline-block;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(0);
+}
+
+/* Animate text on hover */
+.titleContainer:hover .MuiTypography-root {
+  animation: slideText 3s linear infinite alternate;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+@keyframes slideText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Moves text left */
+  }
+}
+
+.arrowIcon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.arrowIcon.rotate {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Section */
+.dropdownSection {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.dropdownSection.open {
+  max-height: 500px; /* Adjust based on content */
+}
+
+.descriptionContainer {
+  max-height: 100px;
+  min-height: 20px;
+  padding: 10px;
+  word-wrap: break-word; /* Ensures long words break */
+  overflow-wrap: break-word; /* Alternative for word breaking */
+  white-space: normal; /* Allows multi-line text */
+  overflow-y: auto; /* Enables vertical scrolling if content overflows */
+}
+
+/* Ensures scrollbar appears only when needed */
+.descriptionContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.descriptionContainer::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.descriptionContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Buttons Section */
+
+.profileButtonsContainer {
+  flex-direction: row;
+  padding: 0px 0px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--primary-color-main);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reactionButton {
+  position: relative;
+  background-color: var(--secondary-color-main);
+  border: none;
+  border-radius: 9999px;
+  width: 20%;
+  max-width: 70px;
+  transition: transform 0.3s;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.reactionButton:hover {
+  display: flex !important;
+  transform: translateY(-5px) scale(1.25);
+}
+
+.tooltip {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 4px 6px;
+  font-size: 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  display: none;
+}
+
+.reactionButton:hover .tooltip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reactionButton svg {
+  color: white;
+  width: 18px;
+  height: 18px;
+}

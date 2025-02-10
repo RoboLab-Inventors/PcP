@@ -96,7 +96,7 @@ const AltHeader = () => {
           }}
         ></span>
       </div>
-      <div className="avatar">
+      <div className="avatar" onClick={() => navigate("/Profile")}>
         <Avatar />
       </div>
     </div>

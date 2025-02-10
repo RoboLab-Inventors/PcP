@@ -3,7 +3,7 @@ body {
   color: var(--fontColor);
   min-height: 100vh;
   margin: 0;
-  font-family: 'SpaceGrotesk';
+  font-family: "SpaceGrotesk";
 }
 
 * {
@@ -14,11 +14,9 @@ body {
   cursor: none !important;
 }
 
-
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
-  display: none;
 }
 
 /* Track */
@@ -42,7 +40,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('./assets/images/backgroundImage.jpg'); /* Sostituisci con il percorso della tua immagine */
+  background-image: url("./assets/images/backgroundImage.jpg"); /* Sostituisci con il percorso della tua immagine */
   background-size: cover;
   background-position: center;
   opacity: 0.3; /* Imposta l'opacità desiderata */
@@ -50,15 +48,16 @@ body {
 }
 
 @font-face {
-  font-family: 'GT-Alpina'; /* Scegli un nome per il font */
-  src: url('./assets/fonts/GT-Alpina-Condensed-Thin-Trial.otf') format('opentype'); /* Percorso al file OTF */
+  font-family: "GT-Alpina"; /* Scegli un nome per il font */
+  src: url("./assets/fonts/GT-Alpina-Condensed-Thin-Trial.otf")
+    format("opentype"); /* Percorso al file OTF */
   font-weight: normal; /* Puoi specificare il peso se necessario */
   font-style: normal; /* Puoi specificare lo stile se necessario */
 }
 
 @font-face {
-  font-family: 'SpaceGrotesk'; /* Scegli un nome per il font */
-  src: url('./assets/fonts/SpaceGrotesk-Light.ttf') format('opentype'); /* Percorso al file OTF */
+  font-family: "SpaceGrotesk"; /* Scegli un nome per il font */
+  src: url("./assets/fonts/SpaceGrotesk-Light.ttf") format("opentype"); /* Percorso al file OTF */
   font-weight: normal; /* Puoi specificare il peso se necessario */
   font-style: normal; /* Puoi specificare lo stile se necessario */
 }

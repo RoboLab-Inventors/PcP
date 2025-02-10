@@ -1,6 +1,7 @@
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
+import "./SearchBar.css";
 
 const SearchBar = ({ setSearchQuery }) => (
   <form>
@@ -16,7 +17,7 @@ const SearchBar = ({ setSearchQuery }) => (
       size="small"
     />
     <IconButton type="submit" aria-label="search">
-      <SearchIcon style={{ fill: "blue" }} />
+      <SearchIcon style={{ fill: "white" }} />
     </IconButton>
   </form>
 );

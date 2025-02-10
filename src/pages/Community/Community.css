@@ -1,0 +1,30 @@
+.searchbarContainer {
+  margin-top: 134px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 41px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gridContainer {
+  margin-top: 100px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  gap: 20px; /* Add gap between grid items */
+  justify-items: center; /* Center items horizontally */
+  align-items: center; /* Align items to the start vertically */
+  justify-content: center; /* Center columns horizontally */
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
