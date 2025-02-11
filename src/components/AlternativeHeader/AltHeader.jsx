@@ -6,6 +6,7 @@ import Avatar from "@mui/material/Avatar";
 
 const AltHeader = () => {
   const [showHeader, setShowHeader] = useState(true);
+  //const [isLightMode, setIsLightMode] = useState(false);
   const lastScrollPos = useRef(0);
   const navigate = useNavigate();
   const location = useLocation();
@@ -58,6 +59,11 @@ const AltHeader = () => {
   const translateXValue =
     (hoveredTab !== null ? hoveredTab : getCheckedTabIndex()) * 100;
 
+  // const toggleTheme = () => {
+  //   setIsLightMode(!isLightMode);
+  //   document.documentElement.classList.toggle("light-mode", !isLightMode);
+  // };
+
   return (
     <div className={`container ${showHeader ? "visible" : "hidden"}`}>
       <div className="tabs">
@@ -68,7 +74,7 @@ const AltHeader = () => {
               id={`radio-${index + 1}`}
               name="tabs"
               checked={index === getCheckedTabIndex()}
-              onChange={() => {}} // Aggiungi un handler onChange vuoto
+              onChange={() => {}}
               ref={(el) => (radioRefs.current[index] = el)}
               onClick={() => handleTabClick(index)}
             />
@@ -99,6 +105,9 @@ const AltHeader = () => {
       <div className="avatar" onClick={() => navigate("/Profile")}>
         <Avatar />
       </div>
+      {/* <button onClick={toggleTheme}>
+        {isLightMode ? "Dark Mode" : "Light Mode"}
+      </button> */}
     </div>
   );
 };

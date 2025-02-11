@@ -4,8 +4,9 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Download, EditNote, Publish, Delete } from "@mui/icons-material";
 
 import { useState } from "react";
+import PropTypes from "prop-types";
 
-const ProfileConfigurationCard = () => {
+const ProfileConfigurationCard = ({ index }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -16,10 +17,7 @@ const ProfileConfigurationCard = () => {
     <div className={`profileCardWrapper ${isOpen ? "open" : ""}`}>
       <div className="profileCardContainer" onClick={toggleDropdown}>
         <div className="titleContainer">
-          <Typography>
-            Configurazione delle
-            palleculopalleprovastronzoprovaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-          </Typography>
+          <Typography>Configurazione {index}</Typography>
         </div>
         <div className="logoContainer">
           <KeyboardArrowDownIcon
@@ -31,34 +29,33 @@ const ProfileConfigurationCard = () => {
       <div className={`dropdownSection ${isOpen ? "open" : ""}`}>
         <div className="descriptionContainer">
           <Typography variant="body2">
-            Here is some extra
-            content!aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            palleculopalleprovastronzoprovaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaapalle
-            palleculopalleprovastronzoprovaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            palleculopalleprovastronzoprovaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            Here is some extra content for configuration {index}.
           </Typography>
         </div>
         <div className="profileButtonsContainer">
-          <button className="reactionButton">
-            <span className="tooltip">Modifica</span>
+          <div className="reactionButton">
+            <span className="profileTooltip">Modifica</span>
             <EditNote />
-          </button>
-          <button className="reactionButton">
-            <span className="tooltip">Scarica</span>
-            <Download className="icon" />
-          </button>
-          <button className="reactionButton">
-            <span className="tooltip">Pubblica</span>
-            <Publish className="icon" />
-          </button>
-          <button className="reactionButton">
-            <span className="tooltip">Elimina</span>
-            <Delete className="icon" />
-          </button>
+          </div>
+          <div className="reactionButton">
+            <span className="profileTooltip">Scarica</span>
+            <Download />
+          </div>
+          <div className="reactionButton">
+            <span className="profileTooltip">Pubblica</span>
+            <Publish />
+          </div>
+          <div className="reactionButton">
+            <span className="profileTooltip">Elimina</span>
+            <Delete />
+          </div>
         </div>
       </div>
     </div>
   );
+};
+ProfileConfigurationCard.propTypes = {
+  index: PropTypes.number.isRequired,
 };
 
 export default ProfileConfigurationCard;

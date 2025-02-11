@@ -10,7 +10,7 @@ import {
 } from "@mui/material/styles";
 
 import "./main.css";
-import "./hooks/SmoothScroll.js";
+import "./utils/SmoothScroll.js";
 
 // Define the palette separately
 const palette = {

@@ -16,10 +16,11 @@ const CustomButton = ({
   const handleMouseMove = (e) => {
     const btn = e.currentTarget;
     const bg = btn.querySelector(".bg");
-
-    const { pageX, pageY } = e;
-    bg.style.left = `${pageX - btn.offsetLeft}px`;
-    bg.style.top = `${pageY - btn.offsetTop}px`;
+  
+    const { clientX, clientY } = e;
+    const rect = btn.getBoundingClientRect();
+    bg.style.left = `${clientX - rect.left}px`;
+    bg.style.top = `${clientY - rect.top}px`;
     bg.style.transform = "translate(-50%, -50%) scale(1)";
   };
 
@@ -30,7 +31,7 @@ const CustomButton = ({
 
   return (
     <a
-      className={`btn ${isHovered ? 'hovered' : ''}`}
+      className={`btn ${isHovered ? 'hovered' : ''} .hover-target`}
       onMouseMove={handleMouseMove}
       onMouseLeave={(e) => {
         resetScale(e);

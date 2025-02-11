@@ -1,6 +1,18 @@
+:root {
+  --primary-color-main: #650000;
+  --secondary-color-main: #490000;
+  --primary-color-secondary: #d5a128;
+  --primary-color-secondary-opacity: rgba(213, 161, 40, 0.5);
+  --secondary-color-secondary: #daa857;
+  --fontColor-main: #f3e8ee;
+  --fontColor-hovered: #e3d9de;
+  --background-primary: #0f0606;
+  --background-secondary: #200b0b;
+}
+
 body {
   background-color: var(--background-primary);
-  color: var(--fontColor);
+  color: var(--fontColor-main);
   min-height: 100vh;
   margin: 0;
   font-family: "SpaceGrotesk";
@@ -15,7 +27,7 @@ body {
 }
 
 /* width */
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 10px;
 }
 
@@ -60,4 +72,9 @@ body {
   src: url("./assets/fonts/SpaceGrotesk-Light.ttf") format("opentype"); /* Percorso al file OTF */
   font-weight: normal; /* Puoi specificare il peso se necessario */
   font-style: normal; /* Puoi specificare lo stile se necessario */
+}
+
+input {
+  font-family: 'SpaceGrotesk';
+  
 }

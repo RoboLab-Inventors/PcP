@@ -1,11 +1,12 @@
 import "./Home.css";
 import HeaderSwitch from "../../components/HeaderSwitch/HeaderSwitch";
-import ConfigurationCard from "../../components/ConfigurationCard/ConfigurationCard";
+import ChatBot from "../../components/ChatBot/ChatBot";
+
 function Home() {
   return (
     <>
-        <HeaderSwitch />
-        <ConfigurationCard/>
+      <HeaderSwitch />
+      <ChatBot />
     </>
   );
 }

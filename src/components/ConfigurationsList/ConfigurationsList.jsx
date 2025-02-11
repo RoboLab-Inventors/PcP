@@ -15,11 +15,11 @@ const CustomList = styled(List)({
 const ConfigurationsList = () => {
   return (
     <div className="listContainer">
-      <div className="card">
+      <div className="configurationCard">
         <CustomList>
-          {Array.from({ length: 38 }).map((index) => (
+          {Array.from({ length: 38 }).map((_, index) => (
             <ListItem key={index} sx={{ padding: 0, borderRadius: 0 }}>
-              <ProfileConfigurationCard key={index} />
+              <ProfileConfigurationCard key={index} index={index} />
             </ListItem>
           ))}
         </CustomList>

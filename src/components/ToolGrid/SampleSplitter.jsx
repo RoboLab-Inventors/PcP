@@ -13,6 +13,7 @@ const SampleSplitter = ({ id = "drag-bar", dir, isDragging, ...props }) => {
       tabIndex={0}
       className={cn(
         "sample-drag-bar",
+        "hover-target",
         dir === "horizontal" && "sample-drag-bar--horizontal",
         (isDragging || isFocused) && "sample-drag-bar--dragging"
       )}

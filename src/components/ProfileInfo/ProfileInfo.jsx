@@ -102,7 +102,7 @@ const ProfileInfo = () => {
       </div>
 
       <Grid container spacing={2} style={{ marginTop: 20 }}>
-        <Grid item xs={6}>
+        <Grid xs={6}>
           <Typography variant="subtitle1" color="white">
             USERNAME
           </Typography>
@@ -120,7 +120,7 @@ const ProfileInfo = () => {
             </Typography>
           )}
         </Grid>
-        <Grid item xs={6}>
+        <Grid xs={6}>
           <Typography variant="subtitle1" color="white">
             PASSWORD
           </Typography>
@@ -140,7 +140,7 @@ const ProfileInfo = () => {
         </Grid>
       </Grid>
       <Grid container spacing={2} style={{ marginTop: 20 }}>
-        <Grid item xs={6}>
+        <Grid xs={6}>
           <Typography variant="subtitle1" color="white">
             GENDER
           </Typography>
@@ -158,7 +158,7 @@ const ProfileInfo = () => {
             </Typography>
           )}
         </Grid>
-        <Grid item xs={6}>
+        <Grid xs={6}>
           <Typography variant="subtitle1" color="white">
             DATE OF BIRTH
           </Typography>
@@ -179,7 +179,7 @@ const ProfileInfo = () => {
       </Grid>
       <Grid container spacing={2} style={{ marginTop: 20 }}>
         {isEditing ? (
-          <Grid item xs={6}>
+          <Grid xs={6}>
             <Button
               variant="contained"
               color="primary"
@@ -190,7 +190,7 @@ const ProfileInfo = () => {
             </Button>
           </Grid>
         ) : (
-          <Grid item xs={6}>
+          <Grid xs={6}>
             <Button
               variant="contained"
               color="secondary"
@@ -201,7 +201,7 @@ const ProfileInfo = () => {
             </Button>
           </Grid>
         )}
-        <Grid item xs={6}>
+        <Grid xs={6}>
           <Button
             variant="contained"
             color="error"
