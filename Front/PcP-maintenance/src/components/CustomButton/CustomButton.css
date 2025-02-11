@@ -1,0 +1,43 @@
+.btn {
+    position: relative;
+    padding: 10px 15px;
+    overflow: hidden;
+    display: inline-block;
+    border: 2px solid;
+    border-radius: 12px;
+}
+
+.label, .bg {
+    pointer-events: none;
+}
+
+.label {
+    position: relative;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease-out;
+    z-index: 1;
+}
+
+.bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 150%;
+    min-height: 150%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease-out, min-width 0.5s, min-height 0.5s;
+}
+
+.btn:hover .label {
+    color: inherit;
+}
+
+.btn:hover .bg {
+    transform: translate(-50%, -50%) scale(1);
+    min-width: 200%;
+    min-height: 200%;
+}

@@ -1,0 +1,33 @@
+  .grid-container {
+    display: grid;
+    grid-template-columns: 3fr 2fr; 
+    min-height: 100vh;
+  }
+  
+  .left-div {
+    height: 300vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .right-div {
+    position: sticky; 
+    top: 0; 
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .carousel-div{
+    position: relative;
+    width: 80%;
+  }
+  .accordion-container {
+    width: 40vw;
+    z-index: 1000;
+    overflow: auto;
+    position: relative;
+  }
