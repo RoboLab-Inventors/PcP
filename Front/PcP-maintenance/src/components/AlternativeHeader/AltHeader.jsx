@@ -1,68 +1,61 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useRef } from "react";
 import "./AltHeader.css";
+import { useEffect } from "react";
 import logo from "../../assets/images/logoHeader.png";
 import Avatar from "@mui/material/Avatar";
 
 const AltHeader = () => {
   const [showHeader, setShowHeader] = useState(true);
-  //const [isLightMode, setIsLightMode] = useState(false);
-  const lastScrollPos = useRef(0);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const lastScrollPos = useRef(0); // Use useRef to track last scroll position
 
+  // Function to handle scroll behavior
   const handleScroll = () => {
     const currentScrollPos = window.scrollY;
 
     if (currentScrollPos > lastScrollPos.current && currentScrollPos > 300) {
+      // Scrolling down - hide the header
       setShowHeader(false);
     } else if (currentScrollPos < lastScrollPos.current) {
+      // Scrolling up - show the header
       setShowHeader(true);
     }
 
-    lastScrollPos.current = currentScrollPos;
+    // Update the last scroll position
+    lastScrollPos.current = currentScrollPos; // Update the ref
   };
 
   useEffect(() => {
+    // Attach the scroll event listener
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
-  const [hoveredTab, setHoveredTab] = useState(null);
+    // Cleanup: Remove the event listener when the component unmounts
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []); // Empty array to ensure it runs only once on mount
+
+
+  const [hoveredTab, setHoveredTab] = useState(null); // Stato per gestire il tab hoverato
   const tabs = ["Lessons", "Profiler", "Logo", "About Us", "Community"];
-  const radioRefs = useRef([]);
+  const radioRefs = useRef([]); // Array per memorizzare i riferimenti agli input radio
 
   const handleHover = (index) => {
-    setHoveredTab(index);
+    setHoveredTab(index); // Aggiorna lo stato durante l'hover
   };
 
   const handleMouseLeave = () => {
-    setHoveredTab(null);
+    setHoveredTab(null); // Reset dello stato al termine dell'hover
   };
 
   const getCheckedTabIndex = () => {
-    const pathToIndex = {
-      "/Lessons": 0,
-      "/Tool": 1,
-      "/": 2,
-      "/AboutUs": 3,
-      "/Community": 4,
-    };
-    return pathToIndex[location.pathname] ?? 2;
+    // Trova l'indice dell'input radio checked
+    for (let i = 0; i < radioRefs.current.length; i++) {
+      if (radioRefs.current[i].checked) {
+        return i;
+      }
+    }
+    return 2; // Imposta "Logo" come predefinito selezionato (indice 2)
   };
-
-  const handleTabClick = (index) => {
-    const paths = ["/Lessons", "/Tool", "/", "/AboutUs", "/Community"];
-    navigate(paths[index]);
-  };
-
   const translateXValue =
     (hoveredTab !== null ? hoveredTab : getCheckedTabIndex()) * 100;
-
-  // const toggleTheme = () => {
-  //   setIsLightMode(!isLightMode);
-  //   document.documentElement.classList.toggle("light-mode", !isLightMode);
-  // };
 
   return (
     <div className={`container ${showHeader ? "visible" : "hidden"}`}>
@@ -73,22 +66,21 @@ const AltHeader = () => {
               type="radio"
               id={`radio-${index + 1}`}
               name="tabs"
-              checked={index === getCheckedTabIndex()}
-              onChange={() => {}}
-              ref={(el) => (radioRefs.current[index] = el)}
-              onClick={() => handleTabClick(index)}
+              defaultChecked={index === 2} // Imposta "Logo" come predefinito
+              ref={(el) => (radioRefs.current[index] = el)} // Assegna il riferimento
             />
             <label
-              className={`tab ${tab === "Logo" ? "logo-tab" : ""}`}
+              className={`tab ${tab === "Logo" ? "logo-tab" : ""}`} // Aggiungi una classe speciale per "Logo"
               htmlFor={`radio-${index + 1}`}
               onMouseEnter={() => handleHover(index)}
               onMouseLeave={handleMouseLeave}
             >
               {tab === "Logo" ? (
-                <div className="logo-container">
-                  <img src={logo} alt="Logo" className="logo-image" />
-                  <div className="logo-cover"></div>
-                </div>
+                <img
+                  src={logo} // Sostituisci con l'URL della tua immagine
+                  alt="Logo"
+                  className="logo-image"
+                />
               ) : (
                 tab
               )}
@@ -105,9 +97,6 @@ const AltHeader = () => {
       <div className="avatar">
         <Avatar />
       </div>
-      {/* <button onClick={toggleTheme}>
-        {isLightMode ? "Dark Mode" : "Light Mode"}
-      </button> */}
     </div>
   );
 };

@@ -37,15 +37,6 @@
   transition: transform 0.3s ease-in-out; /* Aggiungi una transizione per l'hover */
 }
 
-.logo-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-  background-color: var(--primary-color-main);
-}
-
 .container.hidden {
   transform: translateY(-300%); /* Move the header out of view */
 }
@@ -121,4 +112,3 @@
   align-items: center;
   right: 3vw;
 }
-

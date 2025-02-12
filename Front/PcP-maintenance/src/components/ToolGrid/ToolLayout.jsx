@@ -14,8 +14,8 @@ const ToolLayout = () => {
     splitterProps: terminalDragBarProps,
   } = useResizable({
     axis: "y",
-    initial: 400,
-    min: 100,
+    initial: 150,
+    min: 50,
     reverse: true,
   });
   const {
@@ -24,7 +24,7 @@ const ToolLayout = () => {
     splitterProps: fileDragBarProps,
   } = useResizable({
     axis: "x",
-    initial: 600,
+    initial: 250,
     min: 50,
   });
   const {
@@ -33,7 +33,7 @@ const ToolLayout = () => {
     splitterProps: pluginDragBarProps,
   } = useResizable({
     axis: "x",
-    initial: 600,
+    initial: 200,
     min: 50,
     reverse: true,
   });
@@ -51,13 +51,12 @@ const ToolLayout = () => {
         >
           <ListController />
         </div>
-        <SampleSplitter dir={"vertical"} isDragging={isFileDragging} {...fileDragBarProps}/>
+        <SampleSplitter isDragging={isFileDragging} {...fileDragBarProps} />
         <div className={"flex grow"}>
           <div className={"grow bg-darker contents"}>
-            <ComponentDetails chartType={"ThreeWayButtonChart"} />
+            <ComponentDetails />
           </div>
           <SampleSplitter
-            dir={"vertical"}
             isDragging={isPluginDragging}
             {...pluginDragBarProps}
           />
