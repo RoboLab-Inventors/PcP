@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import "./AltHeader.css";
 import { useEffect } from "react";
 import logo from "../../assets/images/logoHeader.png";
-import Avatar from "@mui/material/Avatar";
+import ProfileHeaderSection from "../ProfileHeaderSection/ProfileHeaderSection";
 
 const AltHeader = () => {
   const [showHeader, setShowHeader] = useState(true);
@@ -31,7 +31,6 @@ const AltHeader = () => {
     // Cleanup: Remove the event listener when the component unmounts
     return () => window.removeEventListener("scroll", handleScroll);
   }, []); // Empty array to ensure it runs only once on mount
-
 
   const [hoveredTab, setHoveredTab] = useState(null); // Stato per gestire il tab hoverato
   const tabs = ["Lessons", "Profiler", "Logo", "About Us", "Community"];
@@ -94,8 +93,8 @@ const AltHeader = () => {
           }}
         ></span>
       </div>
-      <div className="avatar">
-        <Avatar />
+      <div className="profile">
+        <ProfileHeaderSection />
       </div>
     </div>
   );
