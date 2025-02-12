@@ -1,28 +1,39 @@
 import { useState, useEffect } from "react";
 import {
   Box,
-  Grid,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
   Typography,
   Divider,
+  Grid2,
 } from "@mui/material";
+import { BASE_URL } from "../../constants";
 
 function LessonViewer() {
   const [lessons, setLessons] = useState([]); // Holds the fetched lessons
   const [selectedLesson, setSelectedLesson] = useState(null); // Tracks the selected lesson
 
-  // Fetch lessons on component mount
   useEffect(() => {
-    fetch("/lessons.json") // Assuming lessons.json is in the public folder
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchLessons = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/lesson`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        console.log(data);
         setLessons(data);
         setSelectedLesson(data[0]); // Select the first lesson by default
-      })
-      .catch((error) => console.error("Error fetching lessons:", error));
+      } catch (error) {
+        console.error("Error fetching lessons:", error);
+      }
+    };
+
+    fetchLessons();
   }, []);
 
   return (
@@ -38,38 +49,37 @@ function LessonViewer() {
       }}
     >
       {/* Sidebar */}
-      <Grid item xs={4} sx={{ borderRight: "1px solid #ccc" }}>
+      <Grid2 xs={4} sx={{ borderRight: "1px solid #ccc" }}>
         <List>
           {lessons.map((lesson, index) => (
             <ListItem key={index} disablePadding>
               <ListItemButton onClick={() => setSelectedLesson(lesson)}>
-                <ListItemText primary={lesson.title} />
+                <ListItemText primary={lesson.nomeLezione} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-      </Grid>
+      </Grid2>
 
       {/* Content Area */}
-      <Grid
-        item
+      <Grid2
         xs={8}
         sx={{ padding: 2, overflow: "auto", maxHeight: "calc(100vh - 134px)" }}
       >
         {selectedLesson ? (
           <>
             <Typography variant="h4" gutterBottom>
-              {selectedLesson.title}
+              {selectedLesson.nomeLezione}
             </Typography>
             <Divider />
             <Typography variant="body1" sx={{ marginTop: 2 }}>
-              {selectedLesson.lesson}
+              {selectedLesson.testoLezione}
             </Typography>
           </>
         ) : (
           <Typography variant="h6">Select a lesson to view details.</Typography>
         )}
-      </Grid>
+      </Grid2>
     </Box>
   );
 }

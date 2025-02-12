@@ -102,7 +102,7 @@ const AltHeader = () => {
           }}
         ></span>
       </div>
-      <div className="avatar">
+      <div className="profile">
         <ProfileHeaderSection />
       </div>
       {/* <button onClick={toggleTheme}>

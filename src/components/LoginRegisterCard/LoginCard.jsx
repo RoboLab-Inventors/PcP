@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Typography, Button, IconButton } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import PropTypes from "prop-types";
+import { Typography } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import "./LoginRegister.css";
-
+import { BASE_URL } from "../../constants";
 const LoginCard = ({ switchToRegister }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -13,7 +13,7 @@ const LoginCard = ({ switchToRegister }) => {
     e.preventDefault();
     const password = document.getElementById("password");
     const email = document.getElementById("email");
-    await fetch("http://172.20.10.12:3000/userLogin", {
+    const response = await fetch(`${BASE_URL}/loginUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,6 +23,14 @@ const LoginCard = ({ switchToRegister }) => {
         password: password.value,
       }),
     });
+    const responseData = await response.json();
+    if (responseData.token) {
+      localStorage.setItem("token", responseData.token);
+      localStorage.setItem("username", responseData.username);
+      localStorage.setItem("email", responseData.email);
+    }
+    window.location.reload();
+    alert(responseData.message);
   };
 
   return (
@@ -172,6 +180,9 @@ const LoginCard = ({ switchToRegister }) => {
       </div>
     </div>
   );
+};
+LoginCard.propTypes = {
+  switchToRegister: PropTypes.func.isRequired,
 };
 
 export default LoginCard;
