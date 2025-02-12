@@ -13,6 +13,7 @@ const SampleSplitter = ({ id = "drag-bar", dir, isDragging, ...props }) => {
       tabIndex={0}
       className={cn(
         "sample-drag-bar",
+        "hover-target",
         dir === "horizontal" && "sample-drag-bar--horizontal",
         (isDragging || isFocused) && "sample-drag-bar--dragging"
       )}
@@ -23,11 +24,11 @@ const SampleSplitter = ({ id = "drag-bar", dir, isDragging, ...props }) => {
   );
 };
 
-// Aggiunta della validazione delle proprietà
 SampleSplitter.propTypes = {
   id: PropTypes.string,
   dir: PropTypes.string.isRequired,
   isDragging: PropTypes.bool,
 };
+
 
 export default SampleSplitter;

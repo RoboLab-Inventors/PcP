@@ -1,8 +1,10 @@
-* {
-  cursor: none;
+@media screen and (max-width: 768px) {
+  .custom-cursor {
+    display: none !important;
+  }
 }
 
-.cursor-dot {
+.custom-cursor {
   position: fixed;
   width: 24px;
   height: 24px;
@@ -13,26 +15,21 @@
   transform: translate(-50%, -50%);
   mix-blend-mode: exclusion;
   backdrop-filter: blur(8px);
-  transition: opacity 0.4s ease, width 0.5s ease, height 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.4s ease, width 0.4s ease, height 0.4s ease, transform 0.4s ease;
   opacity: 1;
 }
 
-.cursor-hidden {
+.custom-cursor.fading {
   opacity: 0;
   width: 0px;
   height: 0px;
   transform: translate(-50%, -50%) scale(0.1);
 }
 
-.cursor-hover {
-  transform: translate(-50%, -50%) scale(0.3);
+.custom-cursor.active {
+  opacity: 1;
 }
 
-@media screen and (max-width: 768px) {
-  .cursor-dot {
-    display: none !important;
-  }
-  .cursor-hover {
-    display: none !important;
-  }
+.custom-cursor.hovering {
+  transform: translate(-50%, -50%) scale(0.3);
 }

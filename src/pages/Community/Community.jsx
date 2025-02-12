@@ -1,35 +1,56 @@
-import { useState } from "react";
 import "./Community.css";
 import HeaderSwitch from "../../components/HeaderSwitch/HeaderSwitch";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import Grid from "@mui/material/Grid2";
+import ConfigurationCard from "../../components/ConfigurationCard/ConfigurationCard";
 
 function Community() {
-  const filterData = (query, data) => {
-    if (!query) {
-      return data;
-    } else {
-      return data.filter((d) => d.toLowerCase().includes(query));
-    }
-  };
-
-  const data = [
-    "Paris",
-    "London",
-    "New York",
-    "Tokyo",
-    "Berlin",
-    "Buenos Aires",
-    "Cairo",
-    "Canberra",
-    "Rio de Janeiro",
-    "Dublin",
-  ];
-
-  const [searchQuery, setSearchQuery] = useState("");
-  const dataFiltered = filterData(searchQuery, data);
   return (
     <>
       <HeaderSwitch />
+
+      <div className="searchbarContainer">
+        <SearchBar />
+      </div>
+      <div className="gridContainer">
+        <div className="item">
+          <ConfigurationCard />
+        </div>
+        <div className="item">
+          <ConfigurationCard />
+        </div>
+        <div className="item">
+          <ConfigurationCard />
+        </div>
+        <div className="item">
+          <ConfigurationCard />
+        </div>
+        <div className="item">
+          <ConfigurationCard />
+        </div>
+        <div className="item">
+          <ConfigurationCard />
+        </div>
+        <div className="item">
+          <ConfigurationCard />
+        </div>
+        <div className="item">
+          <ConfigurationCard />
+        </div>
+        <div className="item">
+          <ConfigurationCard />
+        </div>
+      </div>
+      <div></div>
+      {/*
+
+<Grid container spacing={4} alignItems="start">
+          <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+            <ConfigurationCard />
+          </Grid>
+        </Grid>
+
+
       <div
         style={{
           display: "flex",
@@ -61,6 +82,7 @@ function Community() {
           ))}
         </div>
       </div>
+      */}
     </>
   );
 }
