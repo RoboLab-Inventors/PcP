@@ -24,7 +24,7 @@ const generateChartData = (length, minValue, maxValue) => {
   };
 };
 
-const generateChartOptions = (minY, maxY) => {
+const generateChartOptions = (minY, maxY, showDetails) => {
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -44,6 +44,7 @@ const generateChartOptions = (minY, maxY) => {
         ticks: {
           color: theme.palette.fontColor.main,
           stepSize: (maxY - minY) / 10,
+          display: showDetails,
         },
       },
       x: {
@@ -51,14 +52,14 @@ const generateChartOptions = (minY, maxY) => {
           color: "rgba(255, 255, 255, 0.1)",
         },
         ticks: {
-          color: "none",
+          display: false,
         },
       },
     },
   };
 };
 
-const Chart = ({ length, minValue, maxValue, minY, maxY }) => {
+const Chart = ({ length, minValue, maxValue, minY, maxY, showDetails }) => {
   const [data, setData] = useState(generateChartData(length, minValue, maxValue));
   const [currentValue, setCurrentValue] = useState(data.datasets[0].data[data.datasets[0].data.length - 1]);
 
@@ -91,9 +92,9 @@ const Chart = ({ length, minValue, maxValue, minY, maxY }) => {
   return (
     <div className="chart-container">
       <div className="chart-details">
-        <Line data={data} options={generateChartOptions(minY, maxY)} />
+        <Line data={data} options={generateChartOptions(minY, maxY, showDetails)} />
       </div>
-      <p>Value: {currentValue.toFixed(2)}</p>
+      {showDetails && <p>Value: {currentValue.toFixed(2)}</p>}
     </div>
   );
 };

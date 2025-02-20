@@ -5,6 +5,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    backdrop-filter: brightness(0.5);
 }
 
 .component-content {
