@@ -25,3 +25,38 @@
   justify-content: center;
   align-items: center;
 }
+
+.showConfigurationsButton {
+  position: fixed;
+  top: 14px;
+  right: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animateFromLeft {
+  animation: slideInFromLeft 0.5s forwards;
+}
+
+.animateToLeft {
+  animation: slideOutToLeft 0.5s forwards;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

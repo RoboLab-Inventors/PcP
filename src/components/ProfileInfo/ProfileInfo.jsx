@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Grid from "@mui/material/Grid2";
-import { Typography, TextField, Select, MenuItem } from "@mui/material";
+import { Typography, Select, MenuItem } from "@mui/material";
 import "./ProfileInfo.css";
 import CustomButton from "../CustomButton/CustomButton";
 import { styled } from "@mui/material/styles";
@@ -275,45 +275,47 @@ const ProfileInfo = () => {
       <Grid container spacing={2} style={{ marginTop: 20 }}>
         <Grid xs={6}>
           {isEditing ? (
-            <div className="gender-container">
-              <label>Sesso</label>
-              <Select
-                labelId="gender-label"
-                id="gender"
-                name="gender"
-                label="Sesso"
-                value={gender}
-                onChange={(e) => {
-                  handleChangeGender(e);
-                  handleChange(e);
-                }}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      backgroundColor: "var(--background-primary)",
-                      color: "var(--fontColor-main)",
+            <div className="dobAndGenderResponsive">
+              <div className="gender-container">
+                <label>Sesso</label>
+                <Select
+                  labelId="gender-label"
+                  id="gender"
+                  name="gender"
+                  label="Sesso"
+                  value={gender}
+                  onChange={(e) => {
+                    handleChangeGender(e);
+                    handleChange(e);
+                  }}
+                  MenuProps={{
+                    PaperProps: {
+                      sx: {
+                        backgroundColor: "var(--background-primary)",
+                        color: "var(--fontColor-main)",
+                      },
                     },
-                  },
-                }}
-                sx={{
-                  width: "100%",
-                  minWidth: "160px",
-                  height: "40px",
-                  backgroundColor: "transparent",
-                  border: "1px solid var(--fontColor-main)",
-                  color: "var(--fontColor-main)",
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    border: "none",
-                  },
-                }}
-              >
-                <CustomMenuItem value="">
-                  <em>Seleziona</em>
-                </CustomMenuItem>
-                <CustomMenuItem value="M">Maschio</CustomMenuItem>
-                <CustomMenuItem value="F">Femmina</CustomMenuItem>
-                <CustomMenuItem value="Altro">Altro...</CustomMenuItem>
-              </Select>
+                  }}
+                  sx={{
+                    width: "100%",
+                    minWidth: "160px",
+                    height: "40px",
+                    backgroundColor: "transparent",
+                    border: "1px solid var(--fontColor-main)",
+                    color: "var(--fontColor-main)",
+                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                      border: "none",
+                    },
+                  }}
+                >
+                  <CustomMenuItem value="">
+                    <em>Seleziona</em>
+                  </CustomMenuItem>
+                  <CustomMenuItem value="M">Maschio</CustomMenuItem>
+                  <CustomMenuItem value="F">Femmina</CustomMenuItem>
+                  <CustomMenuItem value="Altro">Altro...</CustomMenuItem>
+                </Select>
+              </div>
             </div>
           ) : (
             <>
@@ -328,17 +330,19 @@ const ProfileInfo = () => {
         </Grid>
         <Grid xs={6}>
           {isEditing ? (
-            <div className="date-container">
-              <label>Data di Nascita</label>
-              <input
-                type="date"
-                id="dob"
-                name="dob"
-                required
-                className="date-insert"
-                value={user.dob}
-                onChange={handleChange}
-              />
+            <div className="dobAndGenderResponsive">
+              <div className="date-container">
+                <label>Data di Nascita</label>
+                <input
+                  type="date"
+                  id="dob"
+                  name="dob"
+                  required
+                  className="date-insert"
+                  value={user.dob}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
           ) : (
             <>

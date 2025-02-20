@@ -2,6 +2,7 @@ import "./ProfileConfigurationCard.css";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Download, EditNote, Publish, Delete } from "@mui/icons-material";
+import PopUp from "../PopUp/PopUp";
 
 import { useState } from "react";
 import PropTypes from "prop-types";
@@ -11,6 +12,16 @@ const ProfileConfigurationCard = ({ index }) => {
 
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+
+  const handleDeleteClick = () => {
+    setShowDeletePopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowDeletePopup(false);
   };
 
   return (
@@ -45,12 +56,19 @@ const ProfileConfigurationCard = ({ index }) => {
             <span className="profileTooltip">Pubblica</span>
             <Publish />
           </div>
-          <div className="reactionButton">
+          <div className="reactionButton" onClick={handleDeleteClick}>
             <span className="profileTooltip">Elimina</span>
             <Delete />
           </div>
         </div>
       </div>
+      {showDeletePopup && (
+        <PopUp
+          title="Conferma Eliminazione"
+          message="Sei sicuro di voler eliminare questa configurazione?"
+          onClose={handleClosePopup}
+        ></PopUp>
+      )}
     </div>
   );
 };
