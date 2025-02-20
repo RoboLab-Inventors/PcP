@@ -1,10 +1,29 @@
 import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend, Filler } from "chart.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
 import theme from "../../../../utils/theme";
 
 import "./Chart.css";
-ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const generateChartData = (length, minValue, maxValue) => {
   return {
@@ -14,11 +33,11 @@ const generateChartData = (length, minValue, maxValue) => {
         label: "Dati in tempo reale",
         data: Array.from({ length }, () => Math.random() * 0),
         borderColor: theme.palette.primary.secondary,
-        backgroundColor: 'rgba(213, 161, 40, 0.5)',
+        backgroundColor: "rgba(213, 161, 40, 0.5)",
         color: theme.palette.fontColor.main,
         borderWidth: 3,
         pointRadius: 0,
-        fill: 'start',
+        fill: "start",
       },
     ],
   };
@@ -60,8 +79,12 @@ const generateChartOptions = (minY, maxY, showDetails) => {
 };
 
 const Chart = ({ length, minValue, maxValue, minY, maxY, showDetails }) => {
-  const [data, setData] = useState(generateChartData(length, minValue, maxValue));
-  const [currentValue, setCurrentValue] = useState(data.datasets[0].data[data.datasets[0].data.length - 1]);
+  const [data, setData] = useState(
+    generateChartData(length, minValue, maxValue)
+  );
+  const [currentValue, setCurrentValue] = useState(
+    data.datasets[0].data[data.datasets[0].data.length - 1]
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,12 +92,15 @@ const Chart = ({ length, minValue, maxValue, minY, maxY, showDetails }) => {
         const newData = [...prevData.datasets[0].data];
         newData.shift();
         let newValue;
-        switch(maxValue){
+        switch (maxValue) {
           case 256:
             newValue = Math.random() * (maxValue - minValue) + minValue;
             break;
-          case 2: case 3:
-            newValue = Math.floor(Math.random() * (maxValue - minValue) + minValue);
+          case 2:
+          case 3:
+            newValue = Math.floor(
+              Math.random() * (maxValue - minValue) + minValue
+            );
             break;
         }
         newData.push(newValue);
@@ -92,7 +118,10 @@ const Chart = ({ length, minValue, maxValue, minY, maxY, showDetails }) => {
   return (
     <div className="chart-container">
       <div className="chart-details">
-        <Line data={data} options={generateChartOptions(minY, maxY, showDetails)} />
+        <Line
+          data={data}
+          options={generateChartOptions(minY, maxY, showDetails)}
+        />
       </div>
       {showDetails && <p>Value: {currentValue.toFixed(2)}</p>}
     </div>

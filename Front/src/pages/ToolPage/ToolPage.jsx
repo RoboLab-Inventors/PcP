@@ -1,6 +1,6 @@
 import BottomDrawer from "../../components/BottomDrawer/BottomDrawer";
 import HeaderMobile from "../../components/HeaderMobile/HeaderMobile";
-import ToolGrid from "../../components/ToolGrid/ToolGrid";
+import ToolLayout from "../../components/ToolGrid/ToolLayout";
 import ChatBot from "../../components/ChatBot/ChatBot";
 
 const ToolPage = () => {
@@ -8,7 +8,7 @@ const ToolPage = () => {
     <>
       <HeaderMobile />
       <BottomDrawer />
-      <ToolGrid />
+      <ToolLayout />
       <ChatBot />
     </>
   );

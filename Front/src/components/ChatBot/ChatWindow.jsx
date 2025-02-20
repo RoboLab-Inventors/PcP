@@ -8,8 +8,17 @@ import theme from "../../utils/theme";
 import TypingEffect from "../../utils/TypingEffect";
 import ChatInput from "./ChatInput";
 import "./ChatBot.css";
+import PropTypes from "prop-types";
 
-const ChatWindow = ({ messages, input, setInput, sendMessage, toggleChat, messagesEndRef, isMobile }) => {
+const ChatWindow = ({
+  messages,
+  input,
+  setInput,
+  sendMessage,
+  toggleChat,
+  messagesEndRef,
+  isMobile,
+}) => {
   const chatContainer = (
     <Box
       sx={{
@@ -20,28 +29,44 @@ const ChatWindow = ({ messages, input, setInput, sendMessage, toggleChat, messag
         backgroundColor: "transparent",
       }}
     >
-      <Box sx={{ 
-        display: "flex", 
-        justifyContent: "space-between", 
-        p: 2, 
-        backgroundColor: "rgba(213, 161, 40, 0.5)", 
-        backdropFilter: "blur(10px)", 
-        boxShadow: 'var(--primary-color-secondary) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em' }}>
-        <Typography variant="h4" sx={{ color: theme.palette.background.main }}>NicolasAI</Typography>
-        <IconButton onClick={toggleChat} sx={{ color: theme.palette.background.main }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          p: 2,
+          backgroundColor: "rgba(213, 161, 40, 0.5)",
+          backdropFilter: "blur(10px)",
+          boxShadow:
+            "var(--primary-color-secondary) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
+        }}
+      >
+        <Typography variant="h4" sx={{ color: theme.palette.background.main }}>
+          NicolAI
+        </Typography>
+        <IconButton
+          onClick={toggleChat}
+          sx={{ color: theme.palette.background.main }}
+        >
           <CloseIcon />
         </IconButton>
       </Box>
       <Box sx={{ flex: 1, padding: 2, overflowY: "auto" }}>
         {messages.map((msg, index) => {
-          const isLastBotMessage = msg.sender === "bot" && index === messages.length - 1;
+          const isLastBotMessage =
+            msg.sender === "bot" && index === messages.length - 1;
           return (
             <Typography
               key={index}
               className="message hover-target"
               sx={{
-                backgroundColor: msg.sender === "user" ? theme.palette.primary.secondary : theme.palette.secondary.secondary,
-                color: msg.sender === "user" ? theme.palette.background.main : "black",
+                backgroundColor:
+                  msg.sender === "user"
+                    ? theme.palette.primary.secondary
+                    : theme.palette.secondary.secondary,
+                color:
+                  msg.sender === "user"
+                    ? theme.palette.background.main
+                    : "black",
                 padding: 1,
                 borderRadius: 1,
                 textAlign: msg.sender === "user" ? "right" : "left",
@@ -63,31 +88,54 @@ const ChatWindow = ({ messages, input, setInput, sendMessage, toggleChat, messag
   );
 
   return isMobile ? (
-    <Drawer anchor="bottom" open={true} onClose={toggleChat} 
-    PaperProps={{ sx: { 
-      backgroundColor: "transparent",
-       backdropFilter: "blur(10px)", 
-       height: "100%" 
-       } }}>
+    <Drawer
+      anchor="bottom"
+      open={true}
+      onClose={toggleChat}
+      PaperProps={{
+        sx: {
+          backgroundColor: "transparent",
+          backdropFilter: "blur(10px)",
+          height: "100%",
+        },
+      }}
+    >
       {chatContainer}
     </Drawer>
   ) : (
-    <Paper elevation={3} 
-    sx={{ 
-      position: "fixed", 
-      bottom: 80, 
-      right: 16, 
-      width: "40vw", 
-      height: "calc(80vh - 100px)", 
-      borderRadius: 2, 
-      overflow: "hidden", 
-      backdropFilter: "blur(10px)", 
-      backgroundColor: "transparent", 
-      boxShadow: 'var(--primary-color-secondary) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em' 
-      }}>
+    <Paper
+      elevation={3}
+      sx={{
+        position: "fixed",
+        bottom: 80,
+        right: 16,
+        width: "40vw",
+        height: "calc(80vh - 100px)",
+        borderRadius: 2,
+        overflow: "hidden",
+        backdropFilter: "blur(10px)",
+        backgroundColor: "transparent",
+        boxShadow:
+          "var(--primary-color-secondary) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
+      }}
+    >
       {chatContainer}
     </Paper>
   );
+};
+ChatWindow.propTypes = {
+  messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      sender: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  input: PropTypes.string.isRequired,
+  setInput: PropTypes.func.isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  toggleChat: PropTypes.func.isRequired,
+  messagesEndRef: PropTypes.object.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export default ChatWindow;

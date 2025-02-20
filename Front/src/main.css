@@ -61,16 +61,17 @@ body::-webkit-scrollbar {
   z-index: -1; /* Assicurati che lo sfondo sia dietro gli altri contenuti */
 }
 
-@font-face {
-  font-family: 'GT-Alpina'; /* Scegli un nome per il font */
-  src: url('./assets/fonts/GT-Alpina-Condensed-Thin-Trial.otf') format('opentype'); /* Percorso al file OTF */
+font-face {
+  font-family: "GT-Alpina"; /* Scegli un nome per il font */
+  src: url("./assets/fonts/GT-Alpina-Condensed-Thin-Trial.otf")
+    format("opentype"); /* Percorso al file OTF */
   font-weight: normal; /* Puoi specificare il peso se necessario */
   font-style: normal; /* Puoi specificare lo stile se necessario */
 }
 
 @font-face {
-  font-family: 'SpaceGrotesk'; /* Scegli un nome per il font */
-  src: url('./assets/fonts/SpaceGrotesk-Light.ttf') format('opentype'); /* Percorso al file OTF */
+  font-family: "SpaceGrotesk"; /* Scegli un nome per il font */
+  src: url("./assets/fonts/SpaceGrotesk-Light.ttf") format("opentype"); /* Percorso al file OTF */
   font-weight: normal; /* Puoi specificare il peso se necessario */
   font-style: normal; /* Puoi specificare lo stile se necessario */
 }

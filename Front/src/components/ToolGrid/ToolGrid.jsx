@@ -36,22 +36,31 @@ export default function ToolGrid() {
           <Panel>
             <PanelGroup direction="horizontal">
               <Panel className={styles.Panel} minSize={20} order={1}>
-                <div className={styles.PanelContent}><ListController items={items}/></div>
+                <div className={styles.PanelContent}>
+                  <ListController items={items} />
+                </div>
               </Panel>
-              <ResizeHandle className="hover-target"/>
+              <ResizeHandle className="hover-target" />
               <Panel className={styles.Panel} minSize={20} order={2}>
-                <div className={styles.PanelContent}><ComponentDetails chartType={"AxisChart"} /></div>
+                <div className={styles.PanelContent}>
+                  <ComponentDetails chartType={"AxisChart"} />
+                </div>
               </Panel>
-              <ResizeHandle className="hover-target"/>
+              <ResizeHandle className="hover-target" />
               <Panel className={styles.Panel} collapsible={true} order={2}>
                 <div className={styles.PanelContent}>right</div>
               </Panel>
-              </PanelGroup>
+            </PanelGroup>
           </Panel>
-          <ResizeHandle className="hover-target"/>
-          <Panel className={styles.Panel} minSize={20} defaultSize={40} order={1}>
+          <ResizeHandle className="hover-target" />
+          <Panel
+            className={styles.Panel}
+            minSize={20}
+            defaultSize={40}
+            order={1}
+          >
             <div className={styles.PanelContent}>bottom</div>
-          </Panel>  
+          </Panel>
         </PanelGroup>
       </div>
     </div>

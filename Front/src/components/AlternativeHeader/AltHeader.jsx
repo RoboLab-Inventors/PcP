@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./AltHeader.css";
 import logo from "../../assets/images/logoHeader.png";
-import Avatar from "@mui/material/Avatar";
+import ProfileHeaderSection from "../ProfileHeaderSection/ProfileHeaderSection";
 
 const AltHeader = () => {
   const [showHeader, setShowHeader] = useState(true);
@@ -26,9 +26,9 @@ const AltHeader = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, []); // Empty array to ensure it runs only once on mount
 
-  const [hoveredTab, setHoveredTab] = useState(null);
+  const [hoveredTab, setHoveredTab] = useState(null); // Stato per gestire il tab hoverato
   const tabs = ["Lessons", "Profiler", "Logo", "About Us", "Community"];
   const radioRefs = useRef([]);
 
@@ -102,8 +102,8 @@ const AltHeader = () => {
           }}
         ></span>
       </div>
-      <div className="avatar">
-        <Avatar />
+      <div className="profile">
+        <ProfileHeaderSection />
       </div>
       {/* <button onClick={toggleTheme}>
         {isLightMode ? "Dark Mode" : "Light Mode"}

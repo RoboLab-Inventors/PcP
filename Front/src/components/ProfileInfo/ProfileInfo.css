@@ -1,0 +1,154 @@
+.infoContainer {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.primaryInfoFlow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nameTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.container-container {
+  padding-bottom: 5%;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-insert {
+  width: 100%;
+  height: 40px;
+  padding: 0 40px 0 10px;
+  font-size: 16px;
+  border: 1px solid var(--fontColor-main);
+  color: var(--fontColor-main);
+  border-radius: 10px;
+  outline: none;
+  background: transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-insert:focus {
+  border-color: var(--primary-color-secondary);
+  box-shadow: 0 0 4px var(--primary-color-secondary);
+}
+
+.input-label {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--fontColor-main);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+
+.input-insert:focus + .input-label,
+.input-insert:not(:placeholder-shown) + .input-label {
+  top: -10px;
+  left: 8px;
+  font-size: 12px;
+  color: var(--fontColor-main);
+}
+
+.password-icon {
+  position: absolute;
+  right: 13px;
+  color: var(--fontColor-main);
+}
+
+.date-container {
+  max-width: 70%;
+}
+
+.date-insert {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px 0 10px;
+  font-size: 16px;
+  border: 1px solid var(--fontColor-main);
+  color: var(--fontColor-main);
+  border-radius: 10px;
+  outline: none;
+  background: transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  color-scheme: dark;
+}
+
+.date-insert:focus {
+  border-color: var(--primary-color-secondary);
+  box-shadow: 0 0 4px var(--primary-color-secondary);
+}
+
+.date-insert:focus + .input-label,
+.date-insert:not(:placeholder-shown) + .input-label {
+  top: -10px;
+  left: 8px;
+  font-size: 12px;
+  color: var(--fontColor-main);
+}
+
+.dobAndGenderResponsive {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gender-container {
+  max-width: 70%;
+  width: 100%; /* Ensure it takes full width */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+.gender-insert {
+  flex-shrink: 1;
+  box-sizing: border-box;
+  width: calc(100% - 20px);
+  height: 40px;
+  padding: 0 10px; /* Adjusted padding */
+  font-size: 16px;
+  border: 1px solid var(--fontColor-main);
+  color: var(--fontColor-main);
+  border-radius: 10px;
+  outline: none;
+  background: transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.gender-insert:focus {
+  border-color: var(--primary-color-secondary);
+  box-shadow: 0 0 4px var(--primary-color-secondary);
+}
+
+.gender-insert:focus + .input-label,
+.gender-insert:not(:placeholder-shown) + .input-label {
+  top: -10px;
+  left: 8px;
+  font-size: 12px;
+  color: var(--fontColor-main);
+}
+
+::-webkit-calendar-picker-indicator {
+  cursor: none;
+}
