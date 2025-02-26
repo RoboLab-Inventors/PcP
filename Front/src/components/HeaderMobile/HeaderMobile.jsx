@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
@@ -34,7 +34,17 @@ const HeaderMobile = () => {
 
   return (
     <div>
-      <IconButton ref={burgerRef} onClick={toggleMenu} sx={{ position: "fixed", top: 16, left: 16, color: theme.palette.fontColor.main }}>
+      <IconButton
+        ref={burgerRef}
+        onClick={toggleMenu}
+        sx={{
+          position: "fixed",
+          top: 16,
+          left: 16,
+          color: theme.palette.fontColor.main,
+          zIndex: 1000,
+        }}
+      >
         <MenuIcon />
       </IconButton>
       <Drawer
@@ -50,13 +60,16 @@ const HeaderMobile = () => {
           },
         }}
       >
-        {isMediumScreen &&
+        {isMediumScreen && (
           <Box sx={{ display: "flex", justifyContent: "flex-end", p: 2 }}>
-            <IconButton onClick={toggleMenu} sx={{ color: theme.palette.fontColor.main }}>
+            <IconButton
+              onClick={toggleMenu}
+              sx={{ color: theme.palette.fontColor.main }}
+            >
               <CloseIcon />
             </IconButton>
           </Box>
-        }
+        )}
         <Box
           sx={{
             display: "flex",
@@ -66,26 +79,94 @@ const HeaderMobile = () => {
             color: theme.palette.fontColor.main,
           }}
         >
-          <div onClick={() => handleMenuItemClick("/")} className="menu-item">Home</div>
-          <Divider variant="middle" sx={{ backgroundColor: theme.palette.fontColor.main, opacity: "0.7" }} />
-          <div onClick={() => handleMenuItemClick("/Tool")} className="menu-item">Tool</div>
-          <Divider variant="middle" sx={{ backgroundColor: theme.palette.fontColor.main, opacity: "0.7" }} />
-          <div onClick={() => handleMenuItemClick("/Community")} className="menu-item">Community</div>
-          <Divider variant="middle" sx={{ backgroundColor: theme.palette.fontColor.main, opacity: "0.7" }} />
-          <div onClick={() => handleMenuItemClick("/Lessons")} className="menu-item">Lezioni</div>
-          <Divider variant="middle" sx={{ backgroundColor: theme.palette.fontColor.main, opacity: "0.7" }} />
-          <div onClick={() => handleMenuItemClick("/AboutUs")} className="menu-item">About Us</div>
-          <Divider variant="middle" sx={{ backgroundColor: theme.palette.fontColor.main, opacity: "0.7" }} />
-          <div onClick={() => handleMenuItemClick("/Profile")} className="menu-item">Profilo</div>
-          <Divider variant="middle" sx={{ backgroundColor: theme.palette.fontColor.main, opacity: "0.7" }} />
+          <div onClick={() => handleMenuItemClick("/")} className="menu-item">
+            Home
+          </div>
+          <Divider
+            variant="middle"
+            sx={{
+              backgroundColor: theme.palette.fontColor.main,
+              opacity: "0.7",
+            }}
+          />
+          <div
+            onClick={() => handleMenuItemClick("/Tool")}
+            className="menu-item"
+          >
+            Tool
+          </div>
+          <Divider
+            variant="middle"
+            sx={{
+              backgroundColor: theme.palette.fontColor.main,
+              opacity: "0.7",
+            }}
+          />
+          <div
+            onClick={() => handleMenuItemClick("/Community")}
+            className="menu-item"
+          >
+            Community
+          </div>
+          <Divider
+            variant="middle"
+            sx={{
+              backgroundColor: theme.palette.fontColor.main,
+              opacity: "0.7",
+            }}
+          />
+          <div
+            onClick={() => handleMenuItemClick("/Lessons")}
+            className="menu-item"
+          >
+            Lezioni
+          </div>
+          <Divider
+            variant="middle"
+            sx={{
+              backgroundColor: theme.palette.fontColor.main,
+              opacity: "0.7",
+            }}
+          />
+          <div
+            onClick={() => handleMenuItemClick("/AboutUs")}
+            className="menu-item"
+          >
+            About Us
+          </div>
+          <Divider
+            variant="middle"
+            sx={{
+              backgroundColor: theme.palette.fontColor.main,
+              opacity: "0.7",
+            }}
+          />
+          <div
+            onClick={() => handleMenuItemClick("/Profile")}
+            className="menu-item"
+          >
+            Profilo
+          </div>
+          <Divider
+            variant="middle"
+            sx={{
+              backgroundColor: theme.palette.fontColor.main,
+              opacity: "0.7",
+            }}
+          />
         </Box>
-        {isSmallScreen &&
-          <Box sx={{ display: "flex", justifyContent: "center", bottom: 2, p: 2 }}>
-            <IconButton onClick={toggleMenu} sx={{ color: theme.palette.fontColor.main }}>
+        {isSmallScreen && (
+          <Box
+            sx={{ display: "flex", justifyContent: "center", bottom: 2, p: 2 }}
+          >
+            <IconButton
+              onClick={toggleMenu}
+              sx={{ color: theme.palette.fontColor.main }}
+            >
               <CloseIcon />
             </IconButton>
           </Box>
-        }
+        )}
       </Drawer>
     </div>
   );

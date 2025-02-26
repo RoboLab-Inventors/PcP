@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./CustomCursor.css";
 
 const CustomCursor = () => {
   const isMobileDevice = () => {
-    const uaCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
+    const uaCheck =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
     const touchCheck =
       "ontouchstart" in window ||
       navigator.maxTouchPoints > 0 ||
@@ -13,7 +14,7 @@ const CustomCursor = () => {
     const pointerCheck =
       typeof window.matchMedia === "function" &&
       window.matchMedia("(pointer: coarse)").matches;
-    
+
     // Richiedo almeno 2 controlli positivi
     const checks = [uaCheck, touchCheck, pointerCheck];
     return checks.filter(Boolean).length >= 2;
@@ -37,7 +38,7 @@ const CustomCursor = () => {
 
   useEffect(() => {
     if (isMobileState) return;
-    
+
     const handleMouseMove = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsActive(true);
@@ -63,7 +64,7 @@ const CustomCursor = () => {
   // Gestione degli elementi hover
   useEffect(() => {
     if (isMobileState) return;
-    
+
     const updateHoverElements = () => {
       const hoverElements = document.querySelectorAll(
         ".hover-target, a, button, input, label"
@@ -111,4 +112,3 @@ const CustomCursor = () => {
 };
 
 export default CustomCursor;
-
