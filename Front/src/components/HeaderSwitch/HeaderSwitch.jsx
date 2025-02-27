@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
+=======
+>>>>>>> 0b27615a0e437445f659d75e5f87bb954c3ab230
 import { useMediaQuery } from "react-responsive";
 import AltHeader from "../AlternativeHeader/AltHeader";
 import HeaderMobile from "../HeaderMobile/HeaderMobile";
 
+<<<<<<< HEAD
 // Hook personalizzato per determinare se il dispositivo è mobile
 const useIsMobile = () => {
   // Media query per dimensioni della finestra
@@ -54,6 +58,10 @@ const useIsMobile = () => {
 
 const HeaderSwitch = () => {
   const isMobile = useIsMobile();
+=======
+const HeaderSwitch = () => {
+  const isMobile = useMediaQuery({ maxWidth: 500 });
+>>>>>>> 0b27615a0e437445f659d75e5f87bb954c3ab230
 
   return isMobile ? <HeaderMobile /> : <AltHeader />;
 };
