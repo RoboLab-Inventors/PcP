@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./CustomCursor.css";
 
 const CustomCursor = () => {
-<<<<<<< HEAD
   const isMobileDevice = () => {
     const uaCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
@@ -43,29 +42,12 @@ const CustomCursor = () => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsActive(true);
       setIsFading(false);
-=======
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const [isActive, setIsActive] = useState(true); // Controlla se il cursore è visibile
-  const [isFading, setIsFading] = useState(false); // Controlla l'animazione di scomparsa
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      setIsActive(true); // Rendi visibile il cursore quando il mouse si muove
-      setIsFading(false); // Rimuovi l'effetto di scomparsa
->>>>>>> 0b27615a0e437445f659d75e5f87bb954c3ab230
     };
 
     const handleMouseOut = (e) => {
       if (!e.relatedTarget && e.toElement === null) {
-<<<<<<< HEAD
         setIsFading(true);
         setTimeout(() => setIsActive(false), 500);
-=======
-        setIsFading(true); // Attiva l'animazione di scomparsa
-        setTimeout(() => setIsActive(false), 500); // Nascondi dopo la durata dell'animazione
->>>>>>> 0b27615a0e437445f659d75e5f87bb954c3ab230
       }
     };
 
@@ -76,7 +58,6 @@ const CustomCursor = () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseout", handleMouseOut);
     };
-<<<<<<< HEAD
   }, [isMobileState]);
 
   // Gestione degli elementi hover
@@ -126,47 +107,8 @@ const CustomCursor = () => {
         display: isMobileState ? "none" : "block",
       }}
     ></div>
-=======
-  }, []);
-
-  useEffect(() => {
-    const hoverElements = document.querySelectorAll(".hover-target, a, button, input");
-    const handleMouseEnter = () => setIsHovering(true);
-    const handleMouseLeave = () => setIsHovering(false);
-
-    hoverElements.forEach((el) => {
-      el.addEventListener("mouseenter", handleMouseEnter);
-      el.addEventListener("mouseleave", handleMouseLeave);
-    });
-
-    return () => {
-      hoverElements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnter);
-        el.removeEventListener("mouseleave", handleMouseLeave);
-      });
-    };
-  }, []);
-
-  return (
-    <>
-      {isActive && (
-        <div
-          style={{
-            left: `${position.x}px`,
-            top: `${position.y}px`,
-          }}
-          className={`cursor-dot ${isFading ? "cursor-hidden" : ""} ${
-            isHovering ? "cursor-hover" : ""
-          }`}
-        />
-      )}
-    </>
->>>>>>> 0b27615a0e437445f659d75e5f87bb954c3ab230
   );
 };
 
 export default CustomCursor;
-<<<<<<< HEAD
 
-=======
->>>>>>> 0b27615a0e437445f659d75e5f87bb954c3ab230
