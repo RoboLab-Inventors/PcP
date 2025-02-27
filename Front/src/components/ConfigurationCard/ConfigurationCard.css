@@ -1,0 +1,120 @@
+.cardWrapper {
+  min-height: 40px; /* Imposta un'altezza minima per evitare salti */
+  width: 250px;
+  background-color: var(--secondary-color-main);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start; /* Mantiene tutte le card ancorate in alto */
+}
+
+.cardContainer {
+  width: 250px;
+  height: 40px;
+  background-color: var(--primary-color-main);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.cardWrapper.open .cardContainer {
+  height: auto; /* Adjust height when open */
+}
+
+.titleContainer {
+  overflow: hidden;
+  width: 206px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 10px;
+  position: relative;
+}
+
+.titleContainer .MuiTypography-root {
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: visible; /* Hides overflowing text */
+  display: inline-block;
+  max-width: 100%;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(0);
+}
+
+/* Animate text on hover */
+.titleContainer:hover .MuiTypography-root {
+  animation: slideText 3s linear infinite alternate;
+}
+
+.buttonsContainer {
+  width: 230px;
+  height: 40px;
+  background-color: var(--primary-color-main);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+@keyframes slideText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Moves text left */
+  }
+}
+
+.arrowIcon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.arrowIcon.rotate {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Section */
+.dropdownSection {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.dropdownSection.open {
+  max-height: 500px; /* Adjust based on content */
+}
+
+.descriptionContainer {
+  max-height: 100px;
+  min-height: 20px;
+  padding: 10px;
+  word-wrap: break-word; /* Ensures long words break */
+  overflow-wrap: break-word; /* Alternative for word breaking */
+  white-space: normal; /* Allows multi-line text */
+  overflow-y: auto; /* Enables vertical scrolling if content overflows */
+}
+
+/* Ensures scrollbar appears only when needed */
+.descriptionContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.descriptionContainer::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.descriptionContainer::-webkit-scrollbar-track {
+  background: transparent;
+}

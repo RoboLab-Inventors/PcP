@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import AltHeader from "../AlternativeHeader/AltHeader";
 import HeaderMobile from "../HeaderMobile/HeaderMobile";

@@ -7,7 +7,7 @@ import {
   ListItemText,
   Typography,
   Divider,
-  Grid2
+  Grid2,
 } from "@mui/material";
 import { BASE_URL } from "../../constants";
 
@@ -22,7 +22,7 @@ function LessonViewer() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-          }
+          },
         });
         const data = await response.json();
         console.log(data);

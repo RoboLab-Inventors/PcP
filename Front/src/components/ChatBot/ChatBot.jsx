@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ChatToggleButton from "./ChatToggleButton";
 import ChatWindow from "./ChatWindow";
-import chatApi from "./CharWithRTX"; // Importa la classe chatApi
+import sendMessageToBot from "./CharWithOolama"; // Importa la funzione sendMessageToBot
 
 const ChatBot = () => {
   const [open, setOpen] = useState(false);
@@ -13,18 +13,15 @@ const ChatBot = () => {
   const messagesEndRef = useRef(null);
 
   const toggleChat = () => setOpen(!open);
-
+  
   const sendMessage = async () => {
     if (!input.trim()) return;
     const newMessages = [...messages, { text: input, sender: "user" }];
     setMessages(newMessages);
     setInput("");
 
-    const port = 5000; // Specifica la porta del server RTX
-    const queueManager = new chatApi(port);
-
     try {
-      const response = await queueManager.sendMessage(input);
+      const response = await sendMessageToBot(input); // Utilizza la funzione sendMessageToBot per inviare il messaggio
       setMessages([...newMessages, { text: response, sender: "bot" }]);
     } catch (error) {
       console.error("Error:", error);
@@ -41,7 +38,6 @@ const ChatBot = () => {
     
     scrollToBottom();
   }, [messages]);
-  
 
   return (
     <>

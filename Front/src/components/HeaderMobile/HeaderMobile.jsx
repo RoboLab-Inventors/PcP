@@ -34,7 +34,7 @@ const HeaderMobile = () => {
 
   return (
     <div>
-      <IconButton ref={burgerRef} onClick={toggleMenu} sx={{ position: "fixed", top: 16, left: 16, color: theme.palette.fontColor.main }}>
+      <IconButton ref={burgerRef} onClick={toggleMenu} sx={{ position: "fixed", top: 16, left: 16, color: theme.palette.fontColor.main, zIndex: 100 }}>
         <MenuIcon />
       </IconButton>
       <Drawer

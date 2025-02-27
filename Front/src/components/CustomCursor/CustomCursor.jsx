@@ -63,19 +63,16 @@ const CustomCursor = () => {
   // Gestione degli elementi hover
   useEffect(() => {
     if (isMobileState) return;
-    
-    const updateHoverElements = () => {
-      const hoverElements = document.querySelectorAll(
-        ".hover-target, a, button, input, label"
-      );
-      const handleMouseEnter = () => setIsHovering(true);
-      const handleMouseLeave = () => setIsHovering(false);
-
+  
+    const handleMouseEnter = () => setIsHovering(true);
+    const handleMouseLeave = () => setIsHovering(false);
+  
+    const addHoverListeners = () => {
+      const hoverElements = document.querySelectorAll(".hover-target, a, button, input, label");
       hoverElements.forEach((el) => {
         el.addEventListener("mouseenter", handleMouseEnter);
         el.addEventListener("mouseleave", handleMouseLeave);
       });
-
       return () => {
         hoverElements.forEach((el) => {
           el.removeEventListener("mouseenter", handleMouseEnter);
@@ -83,15 +80,18 @@ const CustomCursor = () => {
         });
       };
     };
-
-    const observer = new MutationObserver(updateHoverElements);
+  
+    const cleanup = addHoverListeners();
+  
+    const observer = new MutationObserver(() => {
+      cleanup(); // Rimuovi vecchi listener
+      addHoverListeners(); // Aggiungi nuovi listener
+    });
+  
     observer.observe(document.body, { childList: true, subtree: true });
-
-    // Imposta i listener inizialmente
-    const cleanup = updateHoverElements();
-
+  
     return () => {
-      cleanup && cleanup();
+      cleanup();
       observer.disconnect();
     };
   }, [isMobileState]);

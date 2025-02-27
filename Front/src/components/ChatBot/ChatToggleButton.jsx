@@ -1,9 +1,12 @@
+import "./ChatBot.css";
 import IconButton from "@mui/material/IconButton";
 import ChatIcon from "@mui/icons-material/Chat";
 import theme from "../../utils/theme";
+import PropTypes from "prop-types";
 
-const ChatToggleButton = ({ open, toggleChat }) => (
+const ChatToggleButton = ({ toggleChat }) => (
   <IconButton
+    className="chatToggleButton"
     onClick={toggleChat}
     sx={{
       position: "fixed",
@@ -17,5 +20,8 @@ const ChatToggleButton = ({ open, toggleChat }) => (
     <ChatIcon />
   </IconButton>
 );
+ChatToggleButton.propTypes = {
+  toggleChat: PropTypes.func.isRequired,
+};
 
 export default ChatToggleButton;
