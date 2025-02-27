@@ -1,5 +1,5 @@
 // Section.jsx
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./SectionComponent.css";
 import CardComponent from "../CardComponent/CardComponent";
 import AccordionComponent from "../AccordionComponent/AccordionComponent";
@@ -19,20 +19,23 @@ const Section = () => {
 
   useEffect(() => {
     if (carouselRef.current) {
-      carouselRef.current.addEventListener('load', () => {
+      carouselRef.current.addEventListener("load", () => {
         if (accordionIndex === 2) {
           carouselRef.current.scrollIntoView({ behavior: "smooth" });
         }
       });
     }
   }, [accordionIndex]);
-  
+
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        setAccordionIndex(2);
-      }
-    }, { threshold: 0.6 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setAccordionIndex(2);
+        }
+      },
+      { threshold: 0.6 }
+    );
 
     if (carouselRef.current) observer.observe(carouselRef.current);
 
@@ -50,7 +53,9 @@ const Section = () => {
             onVisible={() => handleCardVisible(index)}
           />
         ))}
-       <div className="carousel-div" ref={carouselRef}><CarouselComponent/></div>
+        <div className="carousel-div" ref={carouselRef}>
+          <CarouselComponent />
+        </div>
       </div>
       <div className="right-div">
         <AccordionComponent accordionIndex={accordionIndex} />

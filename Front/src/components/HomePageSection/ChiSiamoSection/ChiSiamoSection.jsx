@@ -1,15 +1,35 @@
 import { Typography } from "@mui/material";
 import "./ChiSiamoSection.css";
+import RoboLabLogo from "../../../assets/images/RoboLabLogo.png";
+import RoboLabWall from "../../../assets/images/RoboLabWall1.jpg";
+import CardComponent from "../../AboutUsSections/CardComponent/CardComponent";
 
 const ChiSiamoSection = () => {
   return (
     <div className="chiSiamoContainer">
-      <Typography variant="h1" className="landingTitle">
-        Welcome to the best place to find your next home!
-      </Typography>
-      <Typography variant="h2" className="landingSubtitle">
-        We are here to help you find the perfect home for you and your family.
-      </Typography>
+      <div className="ChiSiamoImage">
+        <CardComponent coverImage={RoboLabWall} characterImage={RoboLabLogo} />
+      </div>
+      <div className="chiSiamoText">
+        <Typography variant="h2" color="white" className="chiSiamoTitle">
+          PCP è uno spinoff RoboLab
+        </Typography>
+        <Typography variant="p" className="chiSiamoDescription">
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
+          ab illo inventore veritatis et quasi architecto beatae vitae dicta
+          sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+          aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+          qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
+          dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
+          quia non numquam eius modi tempora incidunt ut labore et dolore magnam
+          aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+          exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex
+          ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in
+          ea voluptate velit esse quam nihil molestiae consequatur, vel illum
+          qui dolorem eum fugiat quo voluptas nulla pariatur?
+        </Typography>
+      </div>
     </div>
   );
 };
