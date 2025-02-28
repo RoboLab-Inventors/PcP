@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
+import CustomButton from '../../CustomButton/CustomButton'; // Importa il tuo CustomButton
+import theme from '../../../utils/theme';
+import './EditComponent.css';
+
 const EditComponent = ({ items, chartData }) => {
   const currentItem = items.find(item => item.label === chartData.label);
   const [selectedValue, setSelectedValue] = useState(currentItem.label);
@@ -19,9 +23,15 @@ const EditComponent = ({ items, chartData }) => {
     setSelectedValue(event.target.value);
   };
   const handleConversion = (event) =>{
-    const selectedKey = dataType.find(item => item.value === event.target.value).key;
-    setSelectConversion(event.target.value);
-    setSelectFilter(selectedKey);
+    const selectedOption = event.target.value;
+    if (selectedOption !== "") {
+      const selectedKey = dataType.find(item => item.value === event.target.value).key;
+      setSelectConversion(event.target.value);
+      setSelectFilter(selectedKey);
+    } else {
+      setSelectConversion(type);
+      setSelectFilter(currentItem.label.split(' ')[0]);
+    }
   }
 
   useEffect(()=>{
@@ -40,20 +50,19 @@ const EditComponent = ({ items, chartData }) => {
     };
     handleType();
   }, [currentItem]);
-
-  const filteredSecondDataType = items.filter(item =>
-    item.label.split(' ')[0] === selectFilter
-  );
         
   return (
-      <div className="content">
+      <div className="editContainer">
+        <div className="button-container">
+          <CustomButton label="Salva Modifiche" onClick backgroundColor = "var(--primary-color-secondary)" bgColor = "var(--secondary-color-secondary)" borderColor = "var(--background-primary)"/>
+        </div>
         <>
-          <Typography variant = "h6">TIPO</Typography>
+          <Typography variant = "h6" color = {theme.palette.primary.secondary}>TIPO</Typography>
           <div className="input-container">
             <input
               type="text"
-              id="tipo"
-              name="tipo"
+              id="type"
+              name="type"
               required
               placeholder=" "
               className="input-insert"
@@ -63,7 +72,7 @@ const EditComponent = ({ items, chartData }) => {
           </div>
         </>
         <>
-          <Typography variant = "h6">INPUT</Typography>
+          <Typography variant = "h6" color = {theme.palette.primary.secondary}>INPUT</Typography>
           <div className="input-container">
             <input
               type="text"
@@ -78,37 +87,12 @@ const EditComponent = ({ items, chartData }) => {
           </div>
         </>
         <>
-          <Typography variant = "h6">Conversione</Typography>
+          <Typography variant = "h6" color = {theme.palette.primary.secondary}>CONVERSIONE</Typography>
           <Select
             value={selectConversion}
             onChange={handleConversion}
             sx={{
               width: "100%",
-              minWidth: "160px",
-              height: "40px",
-              backgroundColor: "transparent",
-              border: "1px solid var(--fontColor-main)",
-              color: "var(--fontColor-main)",
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                border: "none",
-              }
-            }}>
-            {dataType.map(valueType => (
-              <MenuItem key={valueType.key} value={valueType.value} data-key={valueType.key}>
-                {valueType.value}
-              </MenuItem>
-            ))}
-          </Select>
-          
-        </>
-        <>       
-          <Typography variant = "h6">Pulsante di arrivo</Typography>
-          <Select
-            value={selectedValue}
-            onChange={handleChange}
-            sx={{
-              width: "100%",
-              minWidth: "160px",
               height: "40px",
               backgroundColor: "transparent",
               border: "1px solid var(--fontColor-main)",
@@ -122,11 +106,46 @@ const EditComponent = ({ items, chartData }) => {
                 style: {
                   maxHeight: 200,
                   overflowY: 'auto',
-                  backgroundColor: "transparent",
-                  color: "var(--fontColor-main)", 
                 },
               },
             }}>
+              <MenuItem key={currentItem.label.split(' ')[0]} value="" data-key={currentItem.label.split(' ')[0]}>
+                Seleziona un'opzione
+              </MenuItem>
+            {dataType.map(valueType => (
+              <MenuItem key={valueType.key} value={valueType.value} data-key={valueType.key}>
+                {valueType.value}
+              </MenuItem>
+            ))}
+          </Select>
+          
+        </>
+        <>       
+          <Typography variant = "h6" color = {theme.palette.primary.secondary}>PULSANTE DI ARRIVO</Typography>
+          <Select
+            value={selectedValue}
+            onChange={handleChange}
+            sx={{
+              width: "100%",
+              height: "40px",
+              backgroundColor: "transparent",
+              border: "1px solid var(--fontColor-main)",
+              color: "var(--fontColor-main)",
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                border: "none",
+              }
+            }}
+            MenuProps={{
+              PaperProps: {
+                style: {
+                  maxHeight: 200,
+                  overflowY: 'auto',
+                },
+              },
+            }}>
+              <MenuItem value="">
+                Seleziona un'opzione
+              </MenuItem>
             {items
             .filter(item => item.label.split(' ')[0] === selectFilter)
               .map(item => (
