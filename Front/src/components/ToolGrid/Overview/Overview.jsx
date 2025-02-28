@@ -1,7 +1,7 @@
 import "./Overview.css";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper"
-import Grid from '@mui/material/Grid2';
+import Grid2 from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -19,13 +19,13 @@ const Overview = ({items}) => {
 
   return (
     <Box className="componentDetailsContainer" sx={{ overflowY: 'auto' }}>
-      <Grid container spacing={0} className="componentDetailsGrid">
+      <Grid2 container spacing={0} className="componentDetailsGrid2">
         {items.map((item, index) => (
-          <Grid item size={2} key={index}>
+          <Grid2 size={2} key={index}>
             <Item>{item.label}:{parseFloat(item.value).toFixed(2)}</Item>
-          </Grid>
+          </Grid2>
         ))}
-      </Grid>
+      </Grid2>
     </Box>
   );
 };

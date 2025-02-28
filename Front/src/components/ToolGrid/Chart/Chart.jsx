@@ -1,31 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-} from "chart.js";
+import { Chart as ChartJS, CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend, Filler } from "chart.js";
 import theme from "../../../utils/theme";
 import "./Chart.css";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-);
+ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend, Filler);
 
-const Chart = ({ value, length, minValue, maxValue, minY, maxY, showDetails }) => {
+const Chart = memo(({ value, length, minValue, maxValue, minY, maxY, showDetails }) => {
   const [data, setData] = useState({
     labels: Array.from({ length }, (_, i) => i + 1),
     datasets: [
@@ -63,7 +44,7 @@ const Chart = ({ value, length, minValue, maxValue, minY, maxY, showDetails }) =
           ],
         };
       });
-    }, 50); // Aggiorna ogni secondo
+    }, 100);
 
     return () => clearInterval(interval);
   }, [length]);
@@ -71,36 +52,20 @@ const Chart = ({ value, length, minValue, maxValue, minY, maxY, showDetails }) =
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
+    plugins: { legend: { display: false } },
     scales: {
       y: {
         min: minY,
         max: maxY,
-        grid: {
-          color: "rgba(255, 255, 255, 0.1)",
-        },
-        ticks: {
-          color: theme.palette.fontColor.main,
-          stepSize: (maxY - minY) / 10,
-          display: showDetails,
-        },
+        grid: { color: "rgba(255, 255, 255, 0.1)" },
+        ticks: { color: theme.palette.fontColor.main, stepSize: (maxY - minY) / 10, display: showDetails },
       },
       x: {
-        grid: {
-          color: "rgba(255, 255, 255, 0.1)",
-        },
-        ticks: {
-          display: false,
-        },
+        grid: { color: "rgba(255, 255, 255, 0.1)" },
+        ticks: { display: false },
       },
     },
-    animation: {
-      duration: 0,
-    },
+    animation: { duration: 0 },
   };
 
   return (
@@ -108,6 +73,6 @@ const Chart = ({ value, length, minValue, maxValue, minY, maxY, showDetails }) =
       <Line data={data} options={options} />
     </div>
   );
-};
+});
 
 export default Chart;

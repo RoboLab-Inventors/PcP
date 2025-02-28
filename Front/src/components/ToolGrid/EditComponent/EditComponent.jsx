@@ -6,40 +6,44 @@ const EditComponent = ({ items, chartData }) => {
   const currentItem = items.find(item => item.label === chartData.label);
   const [selectedValue, setSelectedValue] = useState(currentItem.label);
   const [type, setType] = useState('');
-  const [selectConversion, setSelectConversion] = useState('');
+  const [selectConversion, setSelectConversion] = useState(type);
+  const [selectFilter, setSelectFilter] = useState(currentItem.label.split(' ')[0]);
   
-  const dataType = ['Asse', 'Pulsante', 'Direzionale', 'Trigger'];
-  
+  const dataType = [
+    { key: 'AX', value: 'Asse' },
+    { key: 'BTN', value: 'Pulsante' },
+    { key: 'DIR', value: 'Direzionale' },
+    { key: 'T', value: 'Trigger' }
+  ];
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
   const handleConversion = (event) =>{
+    const selectedKey = dataType.find(item => item.value === event.target.value).key;
     setSelectConversion(event.target.value);
+    setSelectFilter(selectedKey);
   }
 
   useEffect(()=>{
     setSelectConversion(type);
   },[type])
+
+  useEffect(() => {
+    setSelectedValue('');
+  }, [selectConversion]);
   
   useEffect(() => {
     const handleType = () => {
       const firstWord = currentItem.label.split(' ')[0];
-      switch(firstWord){
-        case 'BTN':
-          setType('Pulsante');
-          break;
-          case 'DIR': 
-          setType('Direzionale');
-          break;
-          case 'T':
-            setType('Trigger');
-            break;
-            default:
-              setType('Asse');
-            }
-          }
-          handleType();
-        }, []);
+      const typeItem = dataType.find(item => item.key === firstWord);
+      setType(typeItem ? typeItem.value : 'Asse');
+    };
+    handleType();
+  }, [currentItem]);
+
+  const filteredSecondDataType = items.filter(item =>
+    item.label.split(' ')[0] === selectFilter
+  );
         
   return (
       <div className="content">
@@ -77,6 +81,7 @@ const EditComponent = ({ items, chartData }) => {
           <Typography variant = "h6">Conversione</Typography>
           <Select
             value={selectConversion}
+            onChange={handleConversion}
             sx={{
               width: "100%",
               minWidth: "160px",
@@ -87,15 +92,12 @@ const EditComponent = ({ items, chartData }) => {
               "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                 border: "none",
               }
-            }}
-            onChange={handleConversion}
-          >
-            {dataType
-              .map(valueType => (
-                <MenuItem key={valueType} value={valueType}>
-                  {valueType}
-                </MenuItem>
-              ))}
+            }}>
+            {dataType.map(valueType => (
+              <MenuItem key={valueType.key} value={valueType.value} data-key={valueType.key}>
+                {valueType.value}
+              </MenuItem>
+            ))}
           </Select>
           
         </>
@@ -103,6 +105,7 @@ const EditComponent = ({ items, chartData }) => {
           <Typography variant = "h6">Pulsante di arrivo</Typography>
           <Select
             value={selectedValue}
+            onChange={handleChange}
             sx={{
               width: "100%",
               minWidth: "160px",
@@ -114,7 +117,6 @@ const EditComponent = ({ items, chartData }) => {
                 border: "none",
               }
             }}
-            onChange={handleChange}
             MenuProps={{
               PaperProps: {
                 style: {
@@ -124,10 +126,9 @@ const EditComponent = ({ items, chartData }) => {
                   color: "var(--fontColor-main)", 
                 },
               },
-            }}
-          >
+            }}>
             {items
-              .filter(item => item.label !== currentItem.label)
+            .filter(item => item.label.split(' ')[0] === selectFilter)
               .map(item => (
                 <MenuItem key={item.label} value={item.label}>
                   {item.label}

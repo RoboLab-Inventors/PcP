@@ -1,7 +1,7 @@
 import { Panel, PanelGroup } from "react-resizable-panels";
 import ComponentDetails from "./ComponentDetails/ComponentDetails";
 import ListController from "./ListController/ListController";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import ResizeHandle from "./ResizeHandle";
 import styles from "./styles.module.css";
 import { requestDevice, handleBluetoothInputReport01, handleBluetoothInputReport31 } from "../../ControllerLogic/readController";
@@ -9,11 +9,11 @@ import disconnectedController from "../../assets/icons/disconnectedController.sv
 import { Typography } from "@mui/material";
 import eventEmitter from "../../ControllerLogic/eventEmitter";
 import Overview from "./Overview/Overview";
-import EditComponent from "./EditComponent/EditComponent"
+import EditComponent from "./EditComponent/EditComponent";
+import { throttle } from "lodash"; 
 
 export default function ToolGrid() {
   const [isConnected, setIsConnected] = useState(false);
-  const [items, setItems] = useState([]);
   const [selectedChart, setSelectedChart] = useState(null);
   const [reportData, setReportData] = useState({
     axes: [0, 0, 0, 0, 0, 0],
@@ -25,67 +25,65 @@ export default function ToolGrid() {
   const lastReportData = useRef(reportData);
 
   useEffect(() => {
-    const handleData = (data) => {
-      // Aggiorna lo stato solo se i dati sono cambiati
+    const handleData = throttle((data) => {
       if (JSON.stringify(data) !== JSON.stringify(lastReportData.current)) {
+        lastReportData.current = data; 
         setReportData(data);
-        updateItems();
-        lastReportData.current = data;
       }
-    };
-
+    }, 100);
+  
     eventEmitter.on("bluetoothData", handleData);
-
+  
     let intervalId;
     if (isConnected) {
       intervalId = setInterval(() => {
         eventEmitter.emit("bluetoothData", lastReportData.current);
       }, 250);
     }
-
+  
     return () => {
       eventEmitter.off("bluetoothData", handleData);
+      handleData.cancel();
       if (intervalId) clearInterval(intervalId);
     };
-  }, [reportData]);
+  }, [isConnected]);  
 
-  const updateItems = () => {
-      const newItems = [
-        ...Object.entries(reportData?.axes ?? {}).map(([index, value]) => ({
-          minValue: -1,
-          maxValue: 1,
-          minY: -1.1,
-          maxY: 1.1,
-          value: -value,
-          label: `AX ${Number(index) + 1}`
-        })),
-        ...Object.entries(reportData?.buttons ?? {}).map(([key, value]) => ({
-          minValue: 0,
-          maxValue: 1,
-          minY: -0.1,
-          maxY: 1.1,
-          value: -value,
-          label: 'BTN ' + key
-        })),
-        ...Object.entries(reportData?.directional ?? {}).map(([key, value]) => ({
-          minValue: 0,
-          maxValue: 1,
-          minY: -0.1,
-          maxY: 1.1,
-          value: -value,
-          label: 'DIR ' + key
-        })),
-        ...Object.entries(reportData?.trigger ?? {}).map(([key, value]) => ({
-          minValue: 0,
-          maxValue: 1,
-          minY: -0.1,
-          maxY: 1.1,
-          value: -value,
-          label: 'T ' + key
-        })),
-      ];
-      setItems(newItems);
-  };
+  const items = useMemo(() => {
+    return [
+      ...Object.entries(reportData?.axes ?? {}).map(([index, value]) => ({
+        minValue: -1,
+        maxValue: 1,
+        minY: -1.1,
+        maxY: 1.1,
+        value: -value,
+        label: `AX ${Number(index) + 1}`
+      })),
+      ...Object.entries(reportData?.buttons ?? {}).map(([key, value]) => ({
+        minValue: 0,
+        maxValue: 1,
+        minY: -0.1,
+        maxY: 1.1,
+        value: -value,
+        label: 'BTN ' + key
+      })),
+      ...Object.entries(reportData?.directional ?? {}).map(([key, value]) => ({
+        minValue: 0,
+        maxValue: 1,
+        minY: -0.1,
+        maxY: 1.1,
+        value: -value,
+        label: 'DIR ' + key
+      })),
+      ...Object.entries(reportData?.trigger ?? {}).map(([key, value]) => ({
+        minValue: 0,
+        maxValue: 1,
+        minY: -0.1,
+        maxY: 1.1,
+        value: -value,
+        label: 'T ' + key
+      })),
+    ];
+  }, [lastReportData.current]);
 
   return (
     <div className={styles.Container}>
