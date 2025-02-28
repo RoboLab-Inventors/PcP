@@ -54,7 +54,7 @@ const EditComponent = ({ items, chartData }) => {
   return (
       <div className="editContainer">
         <div className="button-container">
-          <CustomButton label="Salva Modifiche" onClick backgroundColor = "var(--primary-color-secondary)" bgColor = "var(--secondary-color-secondary)" borderColor = "var(--background-primary)"/>
+          <CustomButton label="Salva Modifiche" backgroundColor = "var(--primary-color-secondary)" bgColor = "var(--secondary-color-secondary)" borderColor = "var(--background-primary)"/>
         </div>
         <>
           <Typography variant = "h6" color = {theme.palette.primary.secondary}>TIPO</Typography>
