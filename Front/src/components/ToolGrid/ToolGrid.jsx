@@ -23,7 +23,7 @@ export default function ToolGrid() {
   });
 
   const lastReportData = useRef(reportData);
-
+  
   useEffect(() => {
     const handleData = throttle((data) => {
       if (JSON.stringify(data) !== JSON.stringify(lastReportData.current)) {
@@ -56,7 +56,7 @@ export default function ToolGrid() {
         minY: -1.1,
         maxY: 1.1,
         value: -value,
-        label: `AX ${Number(index) + 1}`
+        label: `AX ${Number(index) + 1}`,
       })),
       ...Object.entries(reportData?.buttons ?? {}).map(([key, value]) => ({
         minValue: 0,
@@ -64,7 +64,7 @@ export default function ToolGrid() {
         minY: -0.1,
         maxY: 1.1,
         value: -value,
-        label: 'BTN ' + key
+        label: 'BTN ' + key,
       })),
       ...Object.entries(reportData?.directional ?? {}).map(([key, value]) => ({
         minValue: 0,
@@ -72,7 +72,7 @@ export default function ToolGrid() {
         minY: -0.1,
         maxY: 1.1,
         value: -value,
-        label: 'DIR ' + key
+        label: 'DIR ' + key,
       })),
       ...Object.entries(reportData?.trigger ?? {}).map(([key, value]) => ({
         minValue: 0,
@@ -80,7 +80,7 @@ export default function ToolGrid() {
         minY: -0.1,
         maxY: 1.1,
         value: -value,
-        label: 'T ' + key
+        label: 'T ' + key,
       })),
     ];
   }, [lastReportData.current]);
@@ -115,7 +115,7 @@ export default function ToolGrid() {
                   <ResizeHandle className="hover-target" />
                   <Panel className={styles.Panel} collapsible={true} order={3}>
                     <div className={styles.PanelContent}>
-                      {selectedChart && <EditComponent items={items} chartData={selectedChart}  />}
+                      {selectedChart && <EditComponent items={items} chartData={selectedChart}/>}
                     </div>
                   </Panel>
                 </PanelGroup>

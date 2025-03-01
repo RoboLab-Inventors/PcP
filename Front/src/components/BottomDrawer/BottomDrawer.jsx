@@ -1,14 +1,49 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
-import ExImButton from "../ExImButton/ExImButton";
+import CustomButton from "../CustomButton/CustomButton";
+import { BASE_URL } from "../../constants";
+import { ConfStringContext } from "../ToolGrid/EditComponent/ConfStringContext";
 
 const ResponsiveBottomDrawer = () => {
   const [isFullOpen, setIsFullOpen] = useState(false);
+  const { confString } = useContext(ConfStringContext);
 
   const toggleDrawer = () => {
     setIsFullOpen(!isFullOpen);
+  };
+
+  const exportConfiguration = async () => {
+    console.log(localStorage.getItem("email") + "\n" + confString);
+    const response = await fetch(`${BASE_URL}/exportConfiguration`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        email: localStorage.getItem("email"),
+        nome: "",
+        descrizione: "",
+        stato: "Pubblico", // TODO: Vedi come risolvere stato, descrizione, nome
+        configurazione: confString,
+        username: localStorage.getItem("username"),
+      }),
+    });
+
+    if (response.ok) {
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${localStorage.getItem("username")}_config.txt`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } else {
+      console.error("Errore durante il download della configurazione");
+    }
   };
 
   return (
@@ -109,8 +144,8 @@ const ResponsiveBottomDrawer = () => {
               transition: "opacity 0.3s ease-in-out",
             }}
           >
-            <ExImButton primaryContent="Export" secondaryContent="Size: 12kt" />
-            <ExImButton primaryContent="Import" secondaryContent="Import" />
+            <CustomButton label="Export" onClick={exportConfiguration} />
+            <CustomButton label="Import" />
           </Box>
         </Box>
       </Drawer>
