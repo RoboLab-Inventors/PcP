@@ -6,9 +6,11 @@ import PopUp from "../PopUp/PopUp";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { BASE_URL } from "../../constants";
+import { useNavigate } from "react-router-dom";
 const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
@@ -33,6 +35,37 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
     }
     publishConfiguration();
   }
+  const handleModifyConfiguration = () => {
+    const modifyConfiguration = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/modifyConfiguration`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            nome: nome, // Assicurati che 'nome' sia definito correttamente
+            email: localStorage.getItem("email"),
+          }),
+        });
+  
+        // Controlla se la risposta è OK
+        if (response.ok) {
+          const data = await response.json(); // Aggiungi 'await' per risolvere la promessa
+          // console.log(data.configurazione)
+          localStorage.setItem("str", data.configurazione); // Salva nel localStorage come stringa JSON
+          navigate('/Tool')
+        } else {
+          console.error("Errore durante la modifica della configurazione:", response.statusText);
+        }
+      } catch (error) {
+        alert("Errore: " + error.message); // Gestione degli errori
+      }
+    };
+  
+    modifyConfiguration();
+  };
   //TODO: Aggiornare logica scarica configurazione profilo 
   const handleDownloadConfiguration = () => {
     async function downloadConfiguration() {
@@ -95,7 +128,7 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
         <div className="descriptionContainer">
           <Typography variant="body2">{descrizione}</Typography>
         </div>
-        <div className="profileButtonsContainer">
+        <div className="profileButtonsContainer" onClick={handleModifyConfiguration}>
           <div className="reactionButton">
             <span className="profileTooltip">Modifica</span>
             <EditNote />

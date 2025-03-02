@@ -18,6 +18,11 @@ const EditComponent = ({ items, chartData }) => {
     key: item.label,
     value: ['', '']
   })));
+  
+  useEffect(() => {
+    if(localStorage.getItem("str")){
+      setLocalConfString(JSON.parse(localStorage.getItem("str")));}    
+  }, [localStorage.getItem("str")]);
 
   const dataType = [
     { key: 'AX', value: 'Asse' },

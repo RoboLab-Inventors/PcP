@@ -1,7 +1,7 @@
 import { Panel, PanelGroup } from "react-resizable-panels";
 import ComponentDetails from "./ComponentDetails/ComponentDetails";
 import ListController from "./ListController/ListController";
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, useContext } from 'react';
 import ResizeHandle from "./ResizeHandle";
 import styles from "./styles.module.css";
 import { requestDevice, handleBluetoothInputReport01, handleBluetoothInputReport31 } from "../../ControllerLogic/readController";
@@ -11,6 +11,7 @@ import eventEmitter from "../../ControllerLogic/eventEmitter";
 import Overview from "./Overview/Overview";
 import EditComponent from "./EditComponent/EditComponent";
 import { throttle } from "lodash"; 
+import { ConfStringContext } from "./EditComponent/ConfStringContext";
 
 export default function ToolGrid() {
   const [isConnected, setIsConnected] = useState(false);
@@ -23,7 +24,8 @@ export default function ToolGrid() {
   });
 
   const lastReportData = useRef(reportData);
-  
+  const { confString, setConfString } = useContext(ConfStringContext);
+
   useEffect(() => {
     const handleData = throttle((data) => {
       if (JSON.stringify(data) !== JSON.stringify(lastReportData.current)) {
@@ -83,7 +85,7 @@ export default function ToolGrid() {
         label: 'T ' + key,
       })),
     ];
-  }, [lastReportData.current]);
+  }, [reportData]);
 
   return (
     <div className={styles.Container}>
@@ -109,13 +111,13 @@ export default function ToolGrid() {
                   <ResizeHandle className="hover-target" />
                   <Panel className={styles.Panel} minSize={20} order={2}>
                     <div className={styles.PanelContent}>
-                    {selectedChart && <ComponentDetails items={items} chartData={selectedChart}  />}
+                      {selectedChart && <ComponentDetails items={items} chartData={selectedChart} />}
                     </div>
                   </Panel>
                   <ResizeHandle className="hover-target" />
                   <Panel className={styles.Panel} collapsible={true} order={3}>
                     <div className={styles.PanelContent}>
-                      {selectedChart && <EditComponent items={items} chartData={selectedChart}/>}
+                      {selectedChart && <EditComponent items={items} chartData={selectedChart} />}
                     </div>
                   </Panel>
                 </PanelGroup>

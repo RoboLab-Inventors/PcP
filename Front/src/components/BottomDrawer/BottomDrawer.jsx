@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
@@ -9,11 +9,57 @@ import { ConfStringContext } from "../ToolGrid/EditComponent/ConfStringContext";
 const ResponsiveBottomDrawer = () => {
   const [isFullOpen, setIsFullOpen] = useState(false);
   const { confString } = useContext(ConfStringContext);
+  const fileInputRef = useRef(null);
 
   const toggleDrawer = () => {
     setIsFullOpen(!isFullOpen);
   };
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Gestisci il file selezionato
+      console.log("File selezionato:", file);
+      // Puoi aggiungere qui il codice per caricare il file al server
+    }
+  };
 
+  //Soluzione con file dinamico (scelto perchè è compatibile con tutti i browser, l'alernativa è usare API File System Access ma non è compatibile con tutti i browser)
+  let str = ""; // Stringa iniziale
+  const importConfiguration = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".txt";
+  
+    input.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+  
+      if (file) {
+        const reader = new FileReader();
+  
+        reader.onload = (e) => {
+          // Il contenuto del file è disponibile in e.target.result
+          const fileContent = e.target.result;
+          console.log("Contenuto del file:", fileContent);
+  
+          // Salva il contenuto del file in localStorage
+          localStorage.setItem("str", fileContent);
+  
+          // Imposta il confString nel contesto
+        };
+  
+        reader.onerror = (error) => {
+          console.error("Errore durante la lettura del file:", error);
+        };
+  
+        // Leggi il file come testo
+        reader.readAsText(file);
+      }
+    });
+  
+    input.click();
+  };
+  
+  
   const exportConfiguration = async () => {
     console.log(localStorage.getItem("email") + "\n" + confString);
     const response = await fetch(`${BASE_URL}/exportConfiguration`, {
@@ -144,13 +190,12 @@ const ResponsiveBottomDrawer = () => {
               transition: "opacity 0.3s ease-in-out",
             }}
           >
-            <CustomButton label="Export" onClick={exportConfiguration} />
-            <CustomButton label="Import" />
+            <CustomButton label="Export" onClick={exportConfiguration}/>
+            <CustomButton label="Import" onClick={importConfiguration}/>
           </Box>
         </Box>
       </Drawer>
     </>
   );
 };
-
 export default ResponsiveBottomDrawer;
