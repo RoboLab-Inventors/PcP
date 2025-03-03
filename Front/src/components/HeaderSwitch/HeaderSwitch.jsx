@@ -1,3 +1,16 @@
+/**
+ * Hook personalizzato per determinare se il dispositivo è mobile.
+ * Utilizza una combinazione di media query, controlli del puntatore, supporto agli eventi touch e user agent.
+ *
+ * @returns {boolean} - Ritorna true se il dispositivo è considerato mobile, altrimenti false.
+ */
+
+/**
+ * Componente che seleziona e rende il componente Header appropriato in base al tipo di dispositivo.
+ * Se il dispositivo è mobile, rende il componente HeaderMobile, altrimenti rende AltHeader.
+ *
+ * @returns {JSX.Element} - Il componente Header appropriato in base al tipo di dispositivo.
+ */
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import AltHeader from "../AlternativeHeader/AltHeader";

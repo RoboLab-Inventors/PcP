@@ -1,7 +1,37 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
+/**
+ * Componente EditComponent
+ * 
+ * Questo componente permette di modificare le configurazioni di un elemento selezionato.
+ * 
+ * @component
+ * @param {Object} props - Le proprietà passate al componente.
+ * @param {Array} props.items - Lista degli elementi disponibili.
+ * @param {Object} props.chartData - Dati del grafico corrente.
+ * 
+ * @returns {JSX.Element} Il componente EditComponent.
+ * 
+ * @example
+ * <EditComponent items={items} chartData={chartData} />
+ * 
+ * @description
+ * Il componente utilizza vari hook di stato e di effetto per gestire e aggiornare le configurazioni locali e globali.
+ * 
+ * - `useContext(ConfStringContext)`: Recupera e imposta la stringa di configurazione globale.
+ * - `useState`: Gestisce vari stati locali come `currentItem`, `selectedValue`, `type`, `selectConversion`, `selectFilter`, e `localConfString`.
+ * - `useEffect`: Effetti per recuperare dati dal localStorage e aggiornare gli stati in base alle modifiche.
+ * 
+ * @function handleChange
+ * Gestisce il cambiamento del valore selezionato nel Select di selezione del pulsante di arrivo.
+ * 
+ * @function handleConversion
+ * Gestisce il cambiamento del valore selezionato nel Select di selezione del tipo di conversione.
+ * 
+ * @function handleSave
+ * Gestisce il salvataggio delle configurazioni aggiornate.
+ */
+import { useState, useEffect, useContext } from 'react';
+import {Select, MenuItem, Typography} from '@mui/material';
+import PropTypes from 'prop-types';
 import CustomButton from '../../CustomButton/CustomButton';
 import { ConfStringContext } from './ConfStringContext';
 import theme from '../../../utils/theme';
@@ -19,24 +49,28 @@ const EditComponent = ({ items, chartData }) => {
     value: ['', '']
   })));
   
+  // Effetto per recuperare la stringa di configurazione locale dal localStorage
   useEffect(() => {
     if(localStorage.getItem("str")){
       setLocalConfString(JSON.parse(localStorage.getItem("str")));}    
   }, [localStorage.getItem("str")]);
 
+  // Definizione dei tipi di dati disponibili
   const dataType = [
     { key: 'AX', value: 'Asse' },
     { key: 'BTN', value: 'Pulsante' },
     { key: 'DIR', value: 'Direzionale' },
     { key: 'T', value: 'Trigger' }
   ];
-  
+  // Gestore per il cambiamento del valore selezionato nel Select di selezione del pulsante di arrivo
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
+  // Gestore per il cambiamento del valore selezionato nel Select di selezione del tipo di conversione
   const handleConversion = (event) =>{
     const selectedOption = event.target.value;
     if (selectedOption !== "") {
+      // Trova la chiave corrispondente al valore selezionato
       const selectedKey = dataType.find(item => item.value === event.target.value).key;
       setSelectConversion(event.target.value);
       setSelectFilter(selectedKey);
@@ -52,6 +86,7 @@ const EditComponent = ({ items, chartData }) => {
   
   //Aggiornamento del CurrentItem in base alla selezione nella item list
   useEffect(() => {setCurrentItem(items.find(item => item.label === chartData.label))}, [chartData]);
+  
   useEffect(() => {
     const handleType = () => {
       const firstWord = currentItem.label.split(' ')[0];
@@ -66,7 +101,7 @@ const EditComponent = ({ items, chartData }) => {
       if (savedConfig) {
         // Se ci sono valori salvati in localConfString, ripristinali
         setSelectConversion(savedConfig.value[0] || typeItem.value);
-        setSelectedValue(savedConfig.value[1] || '');
+        setSelectedValue(savedConfig.value[1] || currentItem.label);
         
         // Seleziona il filtro corretto basandosi sul valore salvato
         const foundKey = dataType.find(item => item.value === savedConfig.value[0])?.key || firstWord;
@@ -75,13 +110,14 @@ const EditComponent = ({ items, chartData }) => {
         // Se non ci sono valori salvati, imposta i valori di default
         setSelectConversion(typeItem.value);
         setSelectFilter(firstWord);
-        setSelectedValue('');
+        setSelectedValue(currentItem.label);
       }
     };
   
     handleType();
   }, [currentItem, localConfString]); 
 
+// Funzione per gestire il salvataggio delle configurazioni
   const handleSave = () => {
     const currentConf = localConfString.find(item => item.key === currentItem.label);
     currentConf.value = [selectConversion, selectedValue];
@@ -198,5 +234,14 @@ const EditComponent = ({ items, chartData }) => {
       </div>
   );
 };
+
+EditComponent.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.shape({
+      label: PropTypes.string.isRequired
+    })).isRequired,
+    chartData: PropTypes.shape({
+      label: PropTypes.string.isRequired
+    }).isRequired
+  };
 
 export default EditComponent;

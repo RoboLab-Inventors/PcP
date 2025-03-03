@@ -1,3 +1,13 @@
+/**
+ * Componente ProfileConfigurationCard
+ *
+ * @param {Object} props - Le proprietà del componente.
+ * @param {number} props.idConfigurazione - L'ID della configurazione.
+ * @param {string} props.nome - Il nome della configurazione.
+ * @param {string} props.descrizione - La descrizione della configurazione.
+ *
+ * @returns {JSX.Element} Il componente ProfileConfigurationCard.
+ */
 import "./ProfileConfigurationCard.css";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -20,6 +30,13 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
     setShowDeletePopup(true);
   };
 
+  /**
+   * Gestisce la visibilità della configurazione.
+   * 
+   * La funzione interna `publishConfiguration` invia una richiesta PUT al server per condividere la configurazione.
+   * Utilizza l'email e il nome memorizzati nel localStorage per creare il corpo della richiesta.
+   * Se la risposta del server ha uno stato 200, la pagina viene ricaricata.
+   */
   const handleConfigurationVisibility = () => {
     async function publishConfiguration() {
       const response = await fetch(`${BASE_URL}/shareConfiguration`, {
@@ -35,6 +52,18 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
     }
     publishConfiguration();
   }
+  /**
+   * Funzione per gestire la modifica della configurazione dell'utente.
+   * 
+   * Questa funzione invia una richiesta POST al server per modificare la configurazione
+   * dell'utente. Utilizza il token di autenticazione memorizzato nel localStorage per
+   * autorizzare la richiesta. Se la modifica è avvenuta con successo, la nuova configurazione
+   * viene salvata nel localStorage e l'utente viene reindirizzato alla pagina '/Tool'.
+   * 
+   * @function handleModifyConfiguration
+   * @async
+   * @throws {Error} Se si verifica un errore durante la richiesta o la modifica della configurazione.
+   */
   const handleModifyConfiguration = () => {
     const modifyConfiguration = async () => {
       try {
@@ -66,6 +95,19 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
     modifyConfiguration();
   };
   //TODO: Aggiornare logica scarica configurazione profilo 
+  /**
+   * Funzione che gestisce il download della configurazione del profilo.
+   * 
+   * Questa funzione invia una richiesta POST al server per scaricare la configurazione del profilo
+   * dell'utente. Utilizza l'email e il nome dell'utente memorizzati nel localStorage per creare
+   * il corpo della richiesta. Se la risposta è positiva, crea un URL per il blob ricevuto e
+   * avvia il download del file di configurazione.
+   * 
+   * @async
+   * @function handleDownloadConfiguration
+   * @returns {void}
+   * @throws {Error} Se si verifica un errore durante il download della configurazione.
+   */
   const handleDownloadConfiguration = () => {
     async function downloadConfiguration() {
       try {
@@ -96,6 +138,16 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
     }
     downloadConfiguration();
   }
+  /**
+   * Gestisce la chiusura del popup di eliminazione configurazione.
+   * 
+   * Questa funzione interna `deleteConfiguration` invia una richiesta POST 
+   * per eliminare una configurazione specifica. Se la richiesta ha successo 
+   * (status 200), la pagina viene ricaricata. Dopo aver chiamato `deleteConfiguration`,
+   * il popup di eliminazione viene nascosto impostando `setShowDeletePopup` a false.
+   * 
+   * @function handleClosePopup
+   */
   const handleClosePopup = () => {
     async function deleteConfiguration() {
       const response = await fetch(`${BASE_URL}/deleteConfiguration`, {

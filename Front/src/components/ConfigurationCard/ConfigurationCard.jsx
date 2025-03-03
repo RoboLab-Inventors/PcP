@@ -1,3 +1,14 @@
+/**
+ * Componente ConfigurationCard
+ * 
+ * @param {Object} props - Proprietà del componente
+ * @param {number} props.idConfigurazione - ID della configurazione
+ * @param {string} props.nome - Nome della configurazione
+ * @param {string} props.descrizione - Descrizione della configurazione
+ * @param {string} props.username - Nome utente che ha caricato la configurazione
+ * 
+ * @returns {JSX.Element} - Ritorna il componente ConfigurationCard
+ */
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -13,6 +24,14 @@ function ConfigurationCard({ idConfigurazione, nome, descrizione, username }) {
     setIsOpen((prev) => !prev);
   };
   
+  /**
+   * Scarica la configurazione dal server e salva il file localmente.
+   * 
+   * @async
+   * @function downloadConfiguration
+   * @returns {Promise<void>} - Una promessa che si risolve quando il download è completato.
+   * @throws {Error} - Se si verifica un errore durante il download della configurazione.
+   */
   const downloadConfiguration = async () => {
     try {
       const response = await fetch(`${BASE_URL}/downloadConfiguration`, {
@@ -25,8 +44,8 @@ function ConfigurationCard({ idConfigurazione, nome, descrizione, username }) {
       });
 
       if (response.ok) {
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
+        const blob = await response.blob(); // Convert the response to a blob
+        const url = window.URL.createObjectURL(blob); // Create a URL for the blob
         const a = document.createElement("a");
         a.href = url;
         a.download = `${nome}_config.txt`;

@@ -1,3 +1,10 @@
+/**
+ * Componente CustomCursor
+ * 
+ * Questo componente crea un cursore personalizzato che segue il movimento del mouse.
+ * 
+ * @returns {JSX.Element} Il componente CustomCursor.
+ */
 import React, { useState, useEffect } from "react";
 import "./CustomCursor.css";
 
@@ -43,14 +50,24 @@ const CustomCursor = () => {
   useEffect(() => {
     if (isMobileState) return;
     
-    // Funzione per gestire il movimento del cursore
+    /**
+     * Gestisce il movimento del mouse aggiornando la posizione del cursore.
+     *
+     * @param {MouseEvent} e - L'evento del mouse che contiene le coordinate del cursore.
+     */
     const handleMouseMove = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsActive(true);
       setIsFading(false);
     };
     
-    // Funzione per gestire l'uscita del cursore dalla finestra
+    /**
+     * Gestisce l'evento mouseout.
+     * Se il cursore lascia la finestra del browser (e.relatedTarget è null e e.toElement è null),
+     * imposta lo stato di fading a true e, dopo un timeout di 500ms, imposta lo stato di attivazione a false.
+     *
+     * @param {MouseEvent} e - L'evento mouseout.
+     */
     const handleMouseOut = (e) => {
       if (!e.relatedTarget && e.toElement === null) {
         setIsFading(true);
@@ -76,13 +93,19 @@ const CustomCursor = () => {
     const handleMouseEnter = () => setIsHovering(true);
     const handleMouseLeave = () => setIsHovering(false);
   
-    // Funzione per aggiungere i listener agli elementi di mia scelta
+    /**
+     * Aggiunge listener di hover agli elementi con le classi specificate.
+     * Aggiunge i listener per gli eventi "mouseenter" e "mouseleave" per gestire l'hover.
+     * 
+     * @returns {Function} Una funzione di cleanup che rimuove i listener di hover dagli elementi.
+     */
     const addHoverListeners = () => {
       const hoverElements = document.querySelectorAll(".hover-target, a, button, input, label");
       hoverElements.forEach((el) => {
         el.addEventListener("mouseenter", handleMouseEnter);
         el.addEventListener("mouseleave", handleMouseLeave);
       });
+      // Cleanup dei listener
       return () => {
         hoverElements.forEach((el) => {
           el.removeEventListener("mouseenter", handleMouseEnter);

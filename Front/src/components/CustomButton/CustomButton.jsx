@@ -1,3 +1,17 @@
+/**
+ * Componente CustomButton
+ * 
+ * @param {Object} props - Proprietà del componente
+ * @param {string} props.label - Testo dell'etichetta del pulsante
+ * @param {string} [props.labelColor="var(--fontColor)"] - Colore del testo dell'etichetta
+ * @param {string} [props.borderColor="var(--secondary-color-main)"] - Colore del bordo del pulsante
+ * @param {string} [props.backgroundColor="var(--primary-color-main)"] - Colore di sfondo del pulsante
+ * @param {string} [props.bgColor="var(--background-primary)"] - Colore di sfondo dell'elemento di sfondo mobile
+ * @param {string} [props.hoverLabelColor="var(--fontColor)"] - Colore del testo dell'etichetta quando il pulsante è in hover
+ * @param {function} props.onClick - Funzione da chiamare al click del pulsante
+ * 
+ * @returns {JSX.Element} - Ritorna un elemento JSX che rappresenta un pulsante personalizzato
+ */
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "./CustomButton.css";
@@ -13,7 +27,12 @@ const CustomButton = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Funzione per gestire il movimento del cursore
+  /**
+   * Gestisce il movimento del mouse sull'elemento del pulsante.
+   * Sposta l'elemento di sfondo in base alla posizione del cursore.
+   *
+   * @param {MouseEvent} e - L'evento del mouse.
+   */
   const handleMouseMove = (e) => {
     const btn = e.currentTarget; // Elemento su cui è stato effettuato il click
     const bg = btn.querySelector(".bg"); // Elemento di sfondo che si muove
@@ -25,6 +44,11 @@ const CustomButton = ({
     bg.style.transform = "translate(-50%, -50%) scale(1)";
   };
 
+  /**
+   * Ripristina la scala dell'elemento di sfondo (.bg) all'interno dell'elemento corrente.
+   *
+   * @param {Event} e - L'evento che ha attivato la funzione.
+   */
   const resetScale = (e) => {
     const bg = e.currentTarget.querySelector(".bg");
     bg.style.transform = "translate(-50%, -50%) scale(0)";

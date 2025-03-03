@@ -1,3 +1,17 @@
+/**
+ * Componente ChatWindow.
+ *
+ * @param {Object} props - Le proprietà del componente.
+ * @param {Array} props.messages - Array di messaggi da visualizzare nella chat.
+ * @param {string} props.input - Testo attualmente inserito dall'utente.
+ * @param {Function} props.setInput - Funzione per aggiornare il testo inserito dall'utente.
+ * @param {Function} props.sendMessage - Funzione per inviare un messaggio.
+ * @param {Function} props.toggleChat - Funzione per aprire/chiudere la finestra della chat.
+ * @param {Object} props.messagesEndRef - Riferimento all'elemento DOM per scorrere automaticamente alla fine dei messaggi.
+ * @param {boolean} props.isMobile - Indica se il dispositivo è mobile.
+ *
+ * @returns {JSX.Element} Il componente ChatWindow.
+ */
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Paper from "@mui/material/Paper";

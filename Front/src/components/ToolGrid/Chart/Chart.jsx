@@ -1,3 +1,18 @@
+/**
+ * Chart component that renders a real-time line chart using react-chartjs-2 and Chart.js.
+ * 
+ * @component
+ * @param {Object} props - Component props
+ * @param {number} props.value - The current value to be displayed on the chart
+ * @param {number} props.length - The number of data points to display on the chart
+ * @param {number} props.minValue - The minimum value for the chart data
+ * @param {number} props.maxValue - The maximum value for the chart data
+ * @param {number} props.minY - The minimum value for the y-axis
+ * @param {number} props.maxY - The maximum value for the y-axis
+ * @param {boolean} props.showDetails - Flag to show or hide details on the y-axis
+ * 
+ * @returns {JSX.Element} The rendered Chart component
+ */
 import React, { useState, useEffect, useRef, memo } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend, Filler } from "chart.js";
@@ -7,6 +22,7 @@ import "./Chart.css";
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend, Filler);
 
 const Chart = memo(({ value, length, minValue, maxValue, minY, maxY, showDetails }) => {
+  // Dati del grafico
   const [data, setData] = useState({
     labels: Array.from({ length }, (_, i) => i + 1),
     datasets: [
@@ -29,6 +45,7 @@ const Chart = memo(({ value, length, minValue, maxValue, minY, maxY, showDetails
     lastValueRef.current = value;
   }, [value]);
 
+  // Aggiorna i dati del grafico ogni 100 millisecondi
   useEffect(() => {
     const interval = setInterval(() => {
       setData((prevData) => {
@@ -49,6 +66,7 @@ const Chart = memo(({ value, length, minValue, maxValue, minY, maxY, showDetails
     return () => clearInterval(interval);
   }, [length]);
 
+  // Opzioni di configurazione per il grafico
   const options = {
     responsive: true,
     maintainAspectRatio: false,

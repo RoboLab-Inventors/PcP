@@ -1,3 +1,21 @@
+/**
+ * Componente ProfileInfo
+ * 
+ * Questo componente visualizza e consente di modificare le informazioni del profilo utente.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} Il componente ProfileInfo.
+ * 
+ * @example
+ * return (
+ *   <ProfileInfo />
+ * )
+ * 
+ * @description
+ * Il componente utilizza vari stati per gestire le informazioni dell'utente, la modalità di modifica e la visibilità della password.
+ * Recupera i dati dell'utente al montaggio del componente e consente di modificarli e salvarli.
+ */
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import { Typography, Select, MenuItem } from "@mui/material";
@@ -6,6 +24,7 @@ import CustomButton from "../CustomButton/CustomButton";
 import { styled } from "@mui/material/styles";
 import { BASE_URL } from "../../constants";
 
+// Definisce un componente MenuItem personalizzato con stili specifici
 const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
   color: "var(--fontColor-main)",
   backgroundColor: "var(--background-primary)",
@@ -16,11 +35,16 @@ const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
 
 const ProfileInfo = () => {
   const [gender, setGender] = useState("");
+  // Funzione per gestire il cambiamento del genere
   const handleChangeGender = (event) => {
     setGender(event.target.value);
   };
+
+  // Stato per gestire la modalità di modifica
   const [isEditing, setIsEditing] = useState(false);
+   // Stato per mostrare o nascondere la password
   const [showPassword, setShowPassword] = useState(false);
+  // Funzione per gestire il click per mostrare/nascondere la password
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const [user, setUser] = useState({
     nome: "",
@@ -32,8 +56,22 @@ const ProfileInfo = () => {
     sesso: ""
   });
 
+  // Effetto per recuperare i dati dell'utente al montaggio del componente
   useEffect(() => {
+    /**
+     * Recupera i dati dell'utente dal server.
+     * 
+     * Questa funzione esegue una richiesta POST al server per ottenere i dati dell'utente
+     * utilizzando l'email e lo username memorizzati nel localStorage. I dati ricevuti
+     * vengono poi elaborati e memorizzati nello stato del componente.
+     * 
+     * @async
+     * @function fetchUserData
+     * @returns {Promise<void>} Una promessa che si risolve quando i dati dell'utente sono stati recuperati e memorizzati.
+     * @throws {Error} Se si verifica un errore durante il recupero dei dati dell'utente.
+     */
     const fetchUserData = async () => {
+      //Recupera l'email e lo username dall'archivio locale
       const email = localStorage.getItem("email");
       const username = localStorage.getItem("username");
       try {
@@ -59,10 +97,20 @@ const ProfileInfo = () => {
     fetchUserData();
   }, []);
 
+  /**
+   * Gestisce l'evento di modifica impostando lo stato di modifica su vero.
+   */
   const handleEdit = () => {
     setIsEditing(true);
   };
 
+  /**
+   * Gestisce il salvataggio delle informazioni dell'utente.
+   * Disabilita la modalità di modifica e invia una richiesta PUT per aggiornare i dati dell'utente.
+   *
+   * @function handleSave
+   * @returns {void}
+   */
   const handleSave = () => {
     setIsEditing(false);
     const response = fetch(`${BASE_URL}/modifyUser`, {
@@ -84,6 +132,11 @@ const ProfileInfo = () => {
     });
   };
 
+  /**
+   * Gestisce il logout dell'utente.
+   * Rimuove il token, l'email e il nome utente dal localStorage
+   * e reindirizza l'utente alla pagina home.
+   */
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
@@ -91,6 +144,13 @@ const ProfileInfo = () => {
     window.location.href = "/home";
   };
 
+  /**
+   * Gestisce il cambiamento degli input aggiornando lo stato dell'utente.
+   *
+   * @param {Object} e - L'evento di cambiamento.
+   * @param {string} e.target.name - Il nome dell'input che è cambiato.
+   * @param {string} e.target.value - Il nuovo valore dell'input.
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));

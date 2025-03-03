@@ -1,3 +1,13 @@
+/**
+ * Componente per il pulsante di attivazione/disattivazione della chat.
+ *
+ * @component
+ * @param {Object} props - Le proprietà del componente.
+ * @param {Function} props.toggleChat - Funzione chiamata quando il pulsante viene cliccato per attivare/disattivare la chat.
+ *
+ * @example
+ * <ChatToggleButton toggleChat={handleToggleChat} />
+ */
 import "./ChatBot.css";
 import IconButton from "@mui/material/IconButton";
 import ChatIcon from "@mui/icons-material/Chat";

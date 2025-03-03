@@ -1,9 +1,21 @@
+/**
+ * Componente CardComponent che visualizza un'immagine di copertina e un'immagine di un personaggio.
+ * Utilizza IntersectionObserver per aggiungere una classe CSS quando il componente è visibile nella viewport.
+ *
+ * @param {Object} props - Le proprietà del componente.
+ * @param {string} props.coverImage - L'URL dell'immagine di copertina.
+ * @param {string} props.characterImage - L'URL dell'immagine del personaggio.
+ * @param {Function} [props.onVisible] - Funzione callback opzionale che viene chiamata quando il componente diventa visibile.
+ *
+ * @returns {JSX.Element} Il componente CardComponent.
+ */
 import React, { useEffect, useRef } from "react";
 import "./CardComponent.css";
 
 const CardComponent = ({ coverImage, characterImage, onVisible }) => {
   const cardRef = useRef(null);
 
+  // Aggiunge una classe CSS quando il componente è visibile nella viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

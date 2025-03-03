@@ -1,3 +1,13 @@
+/**
+ * ComponentDetails component renders a chart and details for a specific item.
+ *
+ * @param {Object} props - The component props.
+ * @param {Array} props.items - The list of items to search through.
+ * @param {Object} props.chartData - The data used to find the current item.
+ * @param {string} props.chartData.label - The label used to match the current item.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 import React from "react";
 import Chart from "../Chart/Chart";
 import "./ComponentDetails.css";

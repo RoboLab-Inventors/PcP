@@ -1,18 +1,51 @@
+/**
+ * Componente LoginCard per gestire il login degli utenti.
+ *
+ * @component
+ * @param {Object} props - Proprietà passate al componente.
+ * @param {Function} props.switchToRegister - Funzione per passare alla schermata di registrazione.
+ *
+ * @returns {JSX.Element} Il componente LoginCard.
+ *
+ * @example
+ * <LoginCard switchToRegister={handleSwitchToRegister} />
+ *
+ * @description
+ * Questo componente visualizza un modulo di login con campi per email e password.
+ * La password viene crittografata utilizzando bcryptjs prima di essere inviata al server.
+ * Se il login ha successo, il token e le informazioni dell'utente vengono salvati nel localStorage.
+ */
 import React, { useState } from 'react';
 import { Typography, Button, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import CustomButton from '../CustomButton/CustomButton';
 import './LoginRegister.css';
 import { BASE_URL } from '../../constants';
+import bcrypt from 'bcryptjs';
 const LoginCard = ({ switchToRegister }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   
+  /**
+   * Gestisce l'invio del modulo di login.
+   * @param {Event} e - L'evento di submit del modulo.
+   * @returns {Promise<void>} - Una Promise che si risolve quando l'operazione di login è completata.
+   * @async
+   * @function
+   * 
+   * @description
+   * Questa funzione viene chiamata quando il modulo di login viene inviato. 
+   * Previene il comportamento predefinito del modulo, recupera i valori di email e password, 
+   * cripta la password utilizzando bcrypt, e invia una richiesta POST al server per autenticare l'utente.
+   * Se la risposta contiene un token, salva il token e altre informazioni dell'utente nel localStorage 
+   * e ricarica la pagina. Infine, mostra un messaggio di risposta.
+   */
   const submit = async (e) => {
     e.preventDefault();
     const password = document.getElementById("password");
     const email = document.getElementById("email");
+    const hashedPassword = bcrypt.hashSync(password.value, 10);
     const response= await fetch(`${BASE_URL}/loginUser`, {
       method: "POST",
       headers: {
@@ -20,7 +53,7 @@ const LoginCard = ({ switchToRegister }) => {
       },
       body: JSON.stringify({
         usmail: email.value,
-        password: password.value,
+        password: hashedPassword,
       })
     });
     const responseData=await response.json();

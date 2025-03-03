@@ -1,3 +1,29 @@
+/**
+ * Componente HeaderMobile.
+ * 
+ * Questo componente rappresenta un header mobile con un menu a scomparsa.
+ * Utilizza Material-UI per il drawer e i pulsanti icona.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} Il componente HeaderMobile.
+ * 
+ * @example
+ * // Esempio di utilizzo:
+ * <HeaderMobile />
+ * 
+ * @description
+ * Il componente utilizza gli hook di React useState e useRef per gestire lo stato e i riferimenti del DOM.
+ * Utilizza useNavigate di react-router-dom per la navigazione.
+ * Utilizza useMediaQuery e useTheme di Material-UI per gestire la reattività e i temi.
+ * 
+ * @function toggleMenu
+ * Funzione per aprire e chiudere il menu.
+ * 
+ * @function handleMenuItemClick
+ * Funzione per gestire il click sugli elementi del menu.
+ * @param {string} path - Il percorso verso cui navigare.
+ */
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";

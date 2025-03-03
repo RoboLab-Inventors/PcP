@@ -1,3 +1,14 @@
+/**
+ * Componente per la registrazione degli utenti.
+ *
+ * @component
+ * @param {Object} props - Le proprietà del componente.
+ * @param {Function} props.switchToLogin - Funzione per passare alla schermata di login.
+ * @returns {JSX.Element} Il componente RegisterCard.
+ *
+ * @example
+ * <RegisterCard switchToLogin={handleSwitchToLogin} />
+ */
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Typography, Select, MenuItem } from "@mui/material";
@@ -5,7 +16,22 @@ import CustomButton from "../CustomButton/CustomButton";
 import "./LoginRegister.css";
 import { BASE_URL } from "../../constants";
 import { styled } from "@mui/material/styles";
+import bcrypt from "bcryptjs";
+import { useNavigate } from "react-router-dom";
 
+/**
+ * Componente CustomMenuItem stilizzato utilizzando il tema fornito.
+ * 
+ * @component
+ * 
+ * @example
+ * <CustomMenuItem>Voce di menu</CustomMenuItem>
+ * 
+ * @param {object} props - Le proprietà passate al componente.
+ * @param {object} props.theme - Il tema utilizzato per stilizzare il componente.
+ * 
+ * @returns {JSX.Element} Un elemento MenuItem stilizzato.
+ */
 const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
   color: "var(--fontColor-main)",
   backgroundColor: "var(--background-primary)",
@@ -15,6 +41,7 @@ const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const RegisterCard = ({ switchToLogin }) => {
+  const navigate = useNavigate();
   const [gender, setGender] = useState("");
   const handleChangeGender = (event) => {
     setGender(event.target.value);
@@ -28,6 +55,14 @@ const RegisterCard = ({ switchToLogin }) => {
     firstName: "",
     lastName: "",
   });
+  /**
+   * Gestisce il cambiamento degli input del modulo.
+   * Aggiorna lo stato del form con il nuovo valore dell'input.
+   *
+   * @param {Object} event - L'evento di cambiamento dell'input.
+   * @param {string} event.target.name - Il nome dell'input che è cambiato.
+   * @param {string} event.target.value - Il nuovo valore dell'input.
+   */
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
@@ -39,15 +74,39 @@ const RegisterCard = ({ switchToLogin }) => {
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
+  /**
+   * Gestisce l'invio del modulo di registrazione.
+   * @param {Event} e - L'evento di submit del modulo.
+   * @returns {Promise<void>} - Una Promise che risolve quando l'operazione è completata.
+   * @async
+   */
   const submit = async (e) => {
     e.preventDefault();
-    await fetch(`${BASE_URL}/registerUser`, {
+    const hashedPassword = await bcrypt.hash(formData.password, 10);
+    // setFormData((prevState) => ({
+    //   ...prevState,
+    //   password: hashedPassword,
+    // }));
+    console.log(formData);
+    const reponse= await fetch(`${BASE_URL}/registerUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({
+        email: formData.email,
+        username: formData.username,
+        password: hashedPassword,
+        birthDate: formData.birthDate,
+        gender:formData.gender,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+      }),
     });
+    if(reponse.ok)
+    {
+      navigate("/login");
+    }
   };
 
   return (
@@ -172,22 +231,6 @@ const RegisterCard = ({ switchToLogin }) => {
                   />
                 </svg>
               )}
-              <svg
-                className="error-icon hover-target"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="9"></circle>
-                <path d="M12 8v4"></path>
-                <path d="M12 16h.01"></path>
-              </svg>
-              <span className="tooltip">Required!</span>
             </div>
           </div>
           <div className="container-container">
