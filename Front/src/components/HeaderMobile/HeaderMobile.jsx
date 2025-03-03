@@ -24,7 +24,7 @@
  * Funzione per gestire il click sugli elementi del menu.
  * @param {string} path - Il percorso verso cui navigare.
  */
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
@@ -50,6 +50,10 @@ const HeaderMobile = () => {
   };
 
   const handleMenuItemClick = (path) => {
+    if (path === "/Profile" && !localStorage.getItem("token")) {
+      alert("Devi accedere al sito per accedere al tuo profilo.");
+      return;
+    }
     setTimeout(() => {
       navigate(path);
     }, 1000);

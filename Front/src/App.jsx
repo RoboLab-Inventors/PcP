@@ -5,9 +5,6 @@ import CustomCursor from "./components/CustomCursor/CustomCursor.jsx";
 import { ThemeProvider } from "@mui/material/styles";
 import NET from "vanta/dist/vanta.net.min";
 import theme from "./utils/theme"; // Import theme from a separate file
-import * as THREE from "../node_modules/three/build/three.module.js";
-import { OrbitControls } from "../node_modules/three/examples/jsm/controls/OrbitControls.js";
-console.log(THREE, OrbitControls);
 
 const App = () => {
   const vantaRef = useRef(null);

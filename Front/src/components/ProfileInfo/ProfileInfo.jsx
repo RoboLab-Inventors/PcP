@@ -118,6 +118,8 @@ const ProfileInfo = () => {
    */
   const handleSave = () => {
     setIsEditing(false);
+    {
+      /* 
     const encryptionKey = "a";
     const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
     const hashedPassword = CryptoJS.AES.encrypt(
@@ -125,6 +127,8 @@ const ProfileInfo = () => {
       CryptoJS.enc.Utf8.parse(encryptionKey),
       { iv: iv }
     ).toString();
+    */
+    }
     const response = fetch(`${BASE_URL}/modifyUser`, {
       method: "PUT",
       headers: {

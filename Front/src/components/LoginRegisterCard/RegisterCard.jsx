@@ -31,7 +31,7 @@ import CryptoJS from "crypto-js";
  *
  * @returns {JSX.Element} Un elemento MenuItem stilizzato.
  */
-const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
+const CustomMenuItem = styled(MenuItem)(() => ({
   color: "var(--fontColor-main)",
   backgroundColor: "var(--background-primary)",
   "&:hover": {

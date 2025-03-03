@@ -25,14 +25,14 @@ function LessonViewer() {
   useEffect(() => {
     const fetchLessons = async () => {
       /**
-     * Funzione asincrona per recuperare le lezioni dal server.
-     * Effettua una richiesta GET all'endpoint `${BASE_URL}/lesson` e aggiorna lo stato con i dati ricevuti.
-     * Seleziona la prima lezione per impostazione predefinita.
-     * 
-     * @async
-     * @function fetchLessons
-     * @throws {Error} Se si verifica un errore durante il recupero delle lezioni.
-     */
+       * Funzione asincrona per recuperare le lezioni dal server.
+       * Effettua una richiesta GET all'endpoint `${BASE_URL}/lesson` e aggiorna lo stato con i dati ricevuti.
+       * Seleziona la prima lezione per impostazione predefinita.
+       *
+       * @async
+       * @function fetchLessons
+       * @throws {Error} Se si verifica un errore durante il recupero delle lezioni.
+       */
       try {
         const response = await fetch(`${BASE_URL}/lesson`, {
           method: "GET",
@@ -41,7 +41,6 @@ function LessonViewer() {
           },
         });
         const data = await response.json();
-        console.log(data);
         setLessons(data);
         setSelectedLesson(data[0]); // Select the first lesson by default
       } catch (error) {
@@ -61,7 +60,7 @@ function LessonViewer() {
         bottom: 0,
         left: 0,
         width: "100%",
-        height: "calc(100vh - 134px)", 
+        height: "calc(100vh - 134px)",
       }}
     >
       {/* Sidebar */}

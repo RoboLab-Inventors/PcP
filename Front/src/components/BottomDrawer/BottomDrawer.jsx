@@ -14,7 +14,7 @@
  * Il componente utilizza il contesto `ConfStringContext` per ottenere la stringa di configurazione (`confString`).
  * Include due pulsanti personalizzati per l'importazione e l'esportazione della configurazione.
  */
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useContext } from "react";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
@@ -25,77 +25,70 @@ import { ConfStringContext } from "../ToolGrid/EditComponent/ConfStringContext";
 const ResponsiveBottomDrawer = () => {
   const [isFullOpen, setIsFullOpen] = useState(false);
   const { confString } = useContext(ConfStringContext);
-  const fileInputRef = useRef(null);
- /** 
-  * @function toggleDrawer
-  * @description Funzione per aprire e chiudere il cassetto. 
-  */
+  /**
+   * @function toggleDrawer
+   * @description Funzione per aprire e chiudere il cassetto.
+   */
   const toggleDrawer = () => {
     setIsFullOpen(!isFullOpen);
   };
-  /** 
-  * @function handleFileChange
-  * @description Funzione per gestire il cambiamento del file selezionato.
-  * @param {Event} event - L'evento di cambiamento del file.
-  */
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-  };
+  /**
+   * @function handleFileChange
+   * @description Funzione per gestire il cambiamento del file selezionato.
+   * @param {Event} event - L'evento di cambiamento del file.
+   */
 
-  //Soluzione con file dinamico (scelto perchè è compatibile con tutti i browser, l'alernativa è usare API File System Access ma non è compatibile con tutti i browser)
-  let str = ""; // Stringa iniziale
   /**
    * Funzione per importare una configurazione da un file di testo.
    * Crea un elemento input di tipo file, permette all'utente di selezionare un file .txt,
    * legge il contenuto del file e lo salva in localStorage.
-   * 
+   *
    * @function
    * @name importConfiguration
-   * 
+   *
    * @example
    * importConfiguration();
-   * 
+   *
    * @returns {void}
    */
   const importConfiguration = () => {
     const input = document.createElement("input");
     input.type = "file";
     input.accept = ".txt";
-  
+
     input.addEventListener("change", (event) => {
       const file = event.target.files[0];
-  
+
       if (file) {
         const reader = new FileReader();
-  
+
         reader.onload = (e) => {
           // Il contenuto del file è disponibile in e.target.result
-          const fileContent = e.target.result;  
+          const fileContent = e.target.result;
           // Salva il contenuto del file in localStorage
           localStorage.setItem("str", fileContent);
-  
+
           // Imposta il confString nel contesto
         };
-  
+
         reader.onerror = (error) => {
           console.error("Errore durante la lettura del file:", error);
         };
-  
+
         // Leggi il file come testo
         reader.readAsText(file);
       }
     });
-  
+
     input.click();
   };
-  
-  
+
   /**
    * Esporta la configurazione corrente come file di testo.
-   * 
+   *
    * Questa funzione invia una richiesta POST al server per esportare la configurazione
    * corrente. Se la richiesta ha successo, scarica il file di configurazione come file di testo.
-   * 
+   *
    * @async
    * @function exportConfiguration
    * @returns {Promise<void>} Una promessa che si risolve quando il file è stato scaricato o si verifica un errore.
@@ -230,8 +223,8 @@ const ResponsiveBottomDrawer = () => {
               transition: "opacity 0.3s ease-in-out",
             }}
           >
-            <CustomButton label="Export" onClick={exportConfiguration}/>
-            <CustomButton label="Import" onClick={importConfiguration}/>
+            <CustomButton label="Export" onClick={exportConfiguration} />
+            <CustomButton label="Import" onClick={importConfiguration} />
           </Box>
         </Box>
       </Drawer>

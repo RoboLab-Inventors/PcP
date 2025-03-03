@@ -1,19 +1,18 @@
 /**
  * Componente HeroSection.
- * 
+ *
  * Questo componente rappresenta una sezione "Hero" della pagina "Chi siamo".
  * Include una descrizione e un pulsante personalizzato che, al click, scorre
  * la pagina fino a un elemento con la classe "left-div".
- * 
+ *
  * @component
  * @example
  * return (
  *   <HeroSection />
  * )
- * 
+ *
  * @returns {JSX.Element} La sezione Hero con descrizione e pulsante.
  */
-import React from "react";
 import "./HeroSection.css";
 import Typography from "@mui/material/Typography";
 import CustomButton from "../../CustomButton/CustomButton";
@@ -23,11 +22,9 @@ import CustomButton from "../../CustomButton/CustomButton";
  * Se l'elemento non viene trovato, viene stampato un messaggio di errore nella console.
  */
 const handleClick = () => {
-  const leftDiv = document.querySelector('.left-div');
+  const leftDiv = document.querySelector(".left-div");
   if (leftDiv) {
     leftDiv.scrollIntoView({ behavior: "smooth" });
-  } else {
-    console.log('Elemento .left-div non trovato al click del pulsante');
   }
 };
 

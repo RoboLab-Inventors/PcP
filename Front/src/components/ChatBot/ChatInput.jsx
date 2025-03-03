@@ -11,6 +11,7 @@
 import Box from "@mui/material/Box";
 import SendIcon from "@mui/icons-material/Send";
 import "./ChatBot.css";
+import PropTypes from "prop-types";
 
 const ChatInput = ({ input, setInput, sendMessage }) => {
   const handleKeyPress = (event) => {
@@ -27,13 +28,16 @@ const ChatInput = ({ input, setInput, sendMessage }) => {
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyPress}
       />
-      <button className="sendButton" onClick={sendMessage} variant="contained" sx={{ marginLeft: 1 }}>
+      <button className="sendButton" onClick={sendMessage}>
         <SendIcon />
       </button>
     </Box>
   );
 };
+ChatInput.propTypes = {
+  input: PropTypes.string.isRequired,
+  setInput: PropTypes.func.isRequired,
+  sendMessage: PropTypes.func.isRequired,
+};
 
 export default ChatInput;
-
-

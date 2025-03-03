@@ -16,7 +16,7 @@
  * Quando una carta diventa visibile, l'indice della fisarmonica viene aggiornato.
  * Utilizza IntersectionObserver per osservare quando il componente Carousel è visibile e aggiorna l'indice della fisarmonica di conseguenza.
  */
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./SectionComponent.css";
 import CardComponent from "../CardComponent/CardComponent";
 import AccordionComponent from "../AccordionComponent/AccordionComponent";

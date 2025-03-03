@@ -176,7 +176,6 @@ export default function ToolGrid() {
         <div
           className={styles.CenteredDiv}
           onClick={() => {
-            console.log("Requesting device connection");
             requestDevice(setIsConnected);
           }}
         >

@@ -1,28 +1,28 @@
 /**
  * Componente Community che mostra una lista di configurazioni della community.
- * 
+ *
  * @component
- * 
+ *
  * @returns {JSX.Element} Il componente Community.
- * 
+ *
  * @example
  * <Community />
- * 
+ *
  * @description
  * Il componente utilizza gli hook useState e useEffect per gestire lo stato delle configurazioni e per recuperare i dati dal server.
  * Include una barra di ricerca per filtrare le configurazioni in base al nome o alla descrizione.
  * Evidenzia la sottostringa di ricerca nei risultati filtrati.
- * 
+ *
  * @function
  * @name CommunityViewer
- * 
+ *
  * @property {Array} configurations - Stato che contiene tutte le configurazioni recuperate dal server.
  * @property {Array} filteredConfigurations - Stato che contiene le configurazioni filtrate in base alla stringa di ricerca.
  * @property {string} searchString - Stato che contiene la stringa di ricerca inserita dall'utente.
  * @property {Object|null} selectedConfig - Stato che contiene la configurazione selezionata dall'utente.
- * 
+ *
  */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./CommunityViewer.css";
 import SearchBar from "../SearchBar/SearchBar";
 import ConfigurationCard from "../ConfigurationCard/ConfigurationCard";
@@ -31,14 +31,14 @@ import { BASE_URL } from "../../constants";
 function CommunityViewer() {
   const [configurations, setConfigurations] = useState([]);
   const [filteredConfigurations, setFilteredConfigurations] = useState([]);
-  const [searchString, setSearchString] = useState("");  // Stato per la stringa di ricerca
+  const [searchString, setSearchString] = useState(""); // Stato per la stringa di ricerca
   const [selectedConfig, setSelectedConfig] = useState(null); // Stato per la configurazione selezionata
 
   useEffect(() => {
     /**
      * Recupera la lista delle configurazioni della community dal server.
      * Effettua una richiesta GET all'endpoint `/getCommunityConfiguration` e aggiorna lo stato con i dati ricevuti.
-     * 
+     *
      * @async
      * @function getConfigurationList
      * @returns {Promise<void>} - Una promessa che si risolve quando i dati sono stati recuperati e lo stato è stato aggiornato.
@@ -87,8 +87,8 @@ function CommunityViewer() {
    */
   const highlightSubstring = (text) => {
     if (!searchString) return text; // Se non c'è una stringa di ricerca, ritorna il testo normale
-  
-    const parts = text.split(new RegExp(`(${searchString})`, 'gi')); // Dividi il testo in parti, separando la sottostringa
+
+    const parts = text.split(new RegExp(`(${searchString})`, "gi")); // Dividi il testo in parti, separando la sottostringa
     return parts.map((part, index) =>
       part.toLowerCase() === searchString.toLowerCase() ? (
         <mark key={index}>{part}</mark> // Evidenzia la sottostringa
@@ -101,7 +101,9 @@ function CommunityViewer() {
   return (
     <>
       <div className="searchbarContainer">
-        <SearchBar onChange={(e) => handleFilterConfigurations(e.target.value)} />
+        <SearchBar
+          onChange={(e) => handleFilterConfigurations(e.target.value)}
+        />
       </div>
       <div className="gridContainer">
         {filteredConfigurations.map((config) => (

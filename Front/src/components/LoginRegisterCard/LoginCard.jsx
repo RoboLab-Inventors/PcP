@@ -20,7 +20,7 @@ import { Typography } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import "./LoginRegister.css";
 import { BASE_URL } from "../../constants";
-import CryptoJS from "crypto-js";
+// import CryptoJS from "crypto-js";
 import PropTypes from "prop-types";
 const LoginCard = ({ switchToRegister }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +29,8 @@ const LoginCard = ({ switchToRegister }) => {
   const submit = async (e) => {
     e.preventDefault();
     const password = document.getElementById("password").value;
-    console.log(password);
+    {
+      /* 
     const encryptionKey = "a";
     const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000"); // IV fisso
     const hashedPassword = CryptoJS.AES.encrypt(
@@ -37,7 +38,8 @@ const LoginCard = ({ switchToRegister }) => {
       CryptoJS.enc.Utf8.parse(encryptionKey),
       { iv: iv }
     ).toString();
-    console.log(hashedPassword);
+    */
+    }
     const email = document.getElementById("email");
     const response = await fetch(`${BASE_URL}/loginUser`, {
       method: "POST",
