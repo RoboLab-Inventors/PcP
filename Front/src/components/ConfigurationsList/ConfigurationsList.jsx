@@ -29,8 +29,7 @@ const ConfigurationsList = () => {
           body: JSON.stringify({ email: localStorage.getItem("email") }),
         });
         const data = await response.json();
-        console.log(data.data);
-        setConfigurations(data.data); // Aggiorna lo stato con le configurazioni ricevute
+        setConfigurations(data.data);
       } catch (error) {
         console.error("Error fetching configurations:", error);
       }

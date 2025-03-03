@@ -62,7 +62,6 @@ const EditComponent = ({ items, chartData }) => {
       setType(typeItem.value);
   
       const savedConfig = localConfString.find(item => item.key === currentItem.label);
-      console.log(savedConfig.value);
       
       if (savedConfig) {
         // Se ci sono valori salvati in localConfString, ripristinali
@@ -88,7 +87,6 @@ const EditComponent = ({ items, chartData }) => {
     currentConf.value = [selectConversion, selectedValue];
     setLocalConfString([...localConfString]);
     setConfString([...localConfString]);
-    console.log(currentConf.value);
   };
   
   return (

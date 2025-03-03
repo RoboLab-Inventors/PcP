@@ -13,12 +13,13 @@ const CustomButton = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  // Funzione per gestire il movimento del cursore
   const handleMouseMove = (e) => {
-    const btn = e.currentTarget;
-    const bg = btn.querySelector(".bg");
+    const btn = e.currentTarget; // Elemento su cui è stato effettuato il click
+    const bg = btn.querySelector(".bg"); // Elemento di sfondo che si muove
   
-    const { clientX, clientY } = e;
-    const rect = btn.getBoundingClientRect();
+    const { clientX, clientY } = e; // Coordinate del cursore
+    const rect = btn.getBoundingClientRect(); // Dimensioni dell'elemento
     bg.style.left = `${clientX - rect.left}px`;
     bg.style.top = `${clientY - rect.top}px`;
     bg.style.transform = "translate(-50%, -50%) scale(1)";

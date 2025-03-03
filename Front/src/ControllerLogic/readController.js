@@ -141,32 +141,7 @@ class DualSenseHid {
     let reportString = hex8(reportId);
     for (let i = 0; i < report.byteLength; ++i)
       reportString += ' ' + hex8(report.getUint8(i));
-
     handleBluetoothInputReport31(report)
-
-
-    
-		// if (this.connectionType_ == 'usb') {
-    //   if (reportId == 0x01){
-    //     this.handleUsbInputReport01(report);
-    //   }
-    //   else
-    //     return;
-    // } else if (this.connectionType_ == 'bluetooth') {
-    //   console.log("Porcoddio")
-    //   if (reportId == 0x01){
-    //     console.log("dfjkdv")
-    //     handleBluetoothInputReport01(report);
-    //   }
-    //   else if (reportId == 0x31){
-    //     console.log("Espresso macchiato")
-    //     handleBluetoothInputReport31(report);
-    //   }
-    //   else
-    //     return;
-    // } else {
-    //   return;
-    // }
   }
 
   async sendOutputReport() {
@@ -422,7 +397,6 @@ export function handleBluetoothInputReport01(report) {
   };
 
   eventEmitter.emit("bluetoothData", reportData);
-  console.log(reportData);
   
 }
 
@@ -477,7 +451,6 @@ export function handleBluetoothInputReport31(report) {
     trigger: { l2, r2 },
   };
 
-  // console.log("📡 Emitting bluetoothData:", reportData);
   eventEmitter.emit("bluetoothData", reportData);  
   // let touch0active = !(touch00 & 0x80);
   // let touch0id = (touch00 & 0x7F);

@@ -25,7 +25,6 @@ function LessonViewer() {
           },
         });
         const data = await response.json();
-        console.log(data);
         setLessons(data);
         setSelectedLesson(data[0]); // Select the first lesson by default
       } catch (error) {

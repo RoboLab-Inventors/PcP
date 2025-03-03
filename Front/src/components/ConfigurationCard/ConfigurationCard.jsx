@@ -12,11 +12,7 @@ function ConfigurationCard({ idConfigurazione, nome, descrizione, username }) {
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
-
-  const handleCardClick = () => {
-    console.log("Username:", username);
-  };
-
+  
   const downloadConfiguration = async () => {
     try {
       const response = await fetch(`${BASE_URL}/downloadConfiguration`, {
@@ -46,7 +42,7 @@ function ConfigurationCard({ idConfigurazione, nome, descrizione, username }) {
   };
 
   return (
-    <div className={`cardWrapper ${isOpen ? "open" : ""}`} onClick={handleCardClick}>
+    <div className={`cardWrapper ${isOpen ? "open" : ""}`}>
       <div className="cardContainer" onClick={toggleDropdown}>
         <div className="titleContainer">
           <Typography variant="h6">{nome}</Typography>

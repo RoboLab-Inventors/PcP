@@ -16,11 +16,6 @@ const ResponsiveBottomDrawer = () => {
   };
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (file) {
-      // Gestisci il file selezionato
-      console.log("File selezionato:", file);
-      // Puoi aggiungere qui il codice per caricare il file al server
-    }
   };
 
   //Soluzione con file dinamico (scelto perchè è compatibile con tutti i browser, l'alernativa è usare API File System Access ma non è compatibile con tutti i browser)
@@ -38,9 +33,7 @@ const ResponsiveBottomDrawer = () => {
   
         reader.onload = (e) => {
           // Il contenuto del file è disponibile in e.target.result
-          const fileContent = e.target.result;
-          console.log("Contenuto del file:", fileContent);
-  
+          const fileContent = e.target.result;  
           // Salva il contenuto del file in localStorage
           localStorage.setItem("str", fileContent);
   
@@ -61,7 +54,6 @@ const ResponsiveBottomDrawer = () => {
   
   
   const exportConfiguration = async () => {
-    console.log(localStorage.getItem("email") + "\n" + confString);
     const response = await fetch(`${BASE_URL}/exportConfiguration`, {
       method: "POST",
       headers: {

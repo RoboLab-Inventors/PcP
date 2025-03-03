@@ -53,7 +53,6 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
         // Controlla se la risposta è OK
         if (response.ok) {
           const data = await response.json(); // Aggiungi 'await' per risolvere la promessa
-          // console.log(data.configurazione)
           localStorage.setItem("str", data.configurazione); // Salva nel localStorage come stringa JSON
           navigate('/Tool')
         } else {

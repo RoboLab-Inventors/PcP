@@ -46,7 +46,6 @@ const ProfileInfo = () => {
           body: JSON.stringify({ email, username }),
         });
         const data = await response.json();
-        // console.log(data); 
         if (data.data && data.data.dataNascita) {
           data.data.dataNascita = new Date(data.data.dataNascita).toISOString().split('T')[0];
         }
@@ -86,7 +85,6 @@ const ProfileInfo = () => {
   };
 
   const handleLogout = () => {
-    console.log("User logged out");
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     localStorage.removeItem("username");

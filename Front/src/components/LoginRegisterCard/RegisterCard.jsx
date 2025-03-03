@@ -41,7 +41,6 @@ const RegisterCard = ({ switchToLogin }) => {
 
   const submit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     await fetch(`${BASE_URL}/registerUser`, {
       method: "POST",
       headers: {
