@@ -1,16 +1,27 @@
+/**
+ * Componente CustomCursor
+ *
+ * Questo componente crea un cursore personalizzato che segue il movimento del mouse.
+ *
+ * @returns {JSX.Element} Il componente CustomCursor.
+ */
 import { useState, useEffect } from "react";
 import "./CustomCursor.css";
 
 const CustomCursor = () => {
+  // Funzione per determinare se il dispositivo è mobile
   const isMobileDevice = () => {
+    // Controlla l'user agent per dispositivi mobili
     const uaCheck =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
       );
+    // Controlla se il dispositivo supporta il touch
     const touchCheck =
       "ontouchstart" in window ||
       navigator.maxTouchPoints > 0 ||
       navigator.msMaxTouchPoints > 0;
+    // Controlla se il dispositivo ha un puntatore
     const pointerCheck =
       typeof window.matchMedia === "function" &&
       window.matchMedia("(pointer: coarse)").matches;
@@ -26,7 +37,7 @@ const CustomCursor = () => {
   const [isActive, setIsActive] = useState(true);
   const [isFading, setIsFading] = useState(false);
 
-  // Ascolta il resize per aggiornare il rilevamento del dispositivo mobile
+  // useEffect per controllare se il dispositivo è mobile
   useEffect(() => {
     const handleResize = () => {
       setIsMobileState(isMobileDevice());
@@ -36,15 +47,28 @@ const CustomCursor = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // useEffect per gestire il movimento del cursore
   useEffect(() => {
     if (isMobileState) return;
 
+    /**
+     * Gestisce il movimento del mouse aggiornando la posizione del cursore.
+     *
+     * @param {MouseEvent} e - L'evento del mouse che contiene le coordinate del cursore.
+     */
     const handleMouseMove = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsActive(true);
       setIsFading(false);
     };
 
+    /**
+     * Gestisce l'evento mouseout.
+     * Se il cursore lascia la finestra del browser (e.relatedTarget è null e e.toElement è null),
+     * imposta lo stato di fading a true e, dopo un timeout di 500ms, imposta lo stato di attivazione a false.
+     *
+     * @param {MouseEvent} e - L'evento mouseout.
+     */
     const handleMouseOut = (e) => {
       if (!e.relatedTarget && e.toElement === null) {
         setIsFading(true);
@@ -52,9 +76,11 @@ const CustomCursor = () => {
       }
     };
 
+    // Aggiunta dei listener per il movimento del cursore e l'uscita dalla finestra
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseout", handleMouseOut);
 
+    // Cleanup dei listener
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseout", handleMouseOut);
@@ -65,18 +91,24 @@ const CustomCursor = () => {
   useEffect(() => {
     if (isMobileState) return;
 
-    const updateHoverElements = () => {
+    const handleMouseEnter = () => setIsHovering(true);
+    const handleMouseLeave = () => setIsHovering(false);
+
+    /**
+     * Aggiunge listener di hover agli elementi con le classi specificate.
+     * Aggiunge i listener per gli eventi "mouseenter" e "mouseleave" per gestire l'hover.
+     *
+     * @returns {Function} Una funzione di cleanup che rimuove i listener di hover dagli elementi.
+     */
+    const addHoverListeners = () => {
       const hoverElements = document.querySelectorAll(
         ".hover-target, a, button, input, label"
       );
-      const handleMouseEnter = () => setIsHovering(true);
-      const handleMouseLeave = () => setIsHovering(false);
-
       hoverElements.forEach((el) => {
         el.addEventListener("mouseenter", handleMouseEnter);
         el.addEventListener("mouseleave", handleMouseLeave);
       });
-
+      // Cleanup dei listener
       return () => {
         hoverElements.forEach((el) => {
           el.removeEventListener("mouseenter", handleMouseEnter);
@@ -85,14 +117,17 @@ const CustomCursor = () => {
       };
     };
 
-    const observer = new MutationObserver(updateHoverElements);
+    const cleanup = addHoverListeners();
+
+    const observer = new MutationObserver(() => {
+      cleanup(); // Rimuovi vecchi listener
+      addHoverListeners(); // Aggiungi nuovi listener
+    });
+
     observer.observe(document.body, { childList: true, subtree: true });
 
-    // Imposta i listener inizialmente
-    const cleanup = updateHoverElements();
-
     return () => {
-      cleanup && cleanup();
+      cleanup();
       observer.disconnect();
     };
   }, [isMobileState]);

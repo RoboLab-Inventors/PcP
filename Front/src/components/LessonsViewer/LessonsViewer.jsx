@@ -1,3 +1,10 @@
+/**
+ * Componente principale per visualizzare le lezioni.
+ * Utilizza gli hook `useState` e `useEffect` per gestire lo stato e recuperare i dati dal server.
+ *
+ * @component
+ * @returns {JSX.Element} Il componente LessonViewer.
+ */
 import { useState, useEffect } from "react";
 import {
   Box,
@@ -17,6 +24,15 @@ function LessonViewer() {
 
   useEffect(() => {
     const fetchLessons = async () => {
+      /**
+     * Funzione asincrona per recuperare le lezioni dal server.
+     * Effettua una richiesta GET all'endpoint `${BASE_URL}/lesson` e aggiorna lo stato con i dati ricevuti.
+     * Seleziona la prima lezione per impostazione predefinita.
+     * 
+     * @async
+     * @function fetchLessons
+     * @throws {Error} Se si verifica un errore durante il recupero delle lezioni.
+     */
       try {
         const response = await fetch(`${BASE_URL}/lesson`, {
           method: "GET",
@@ -41,11 +57,11 @@ function LessonViewer() {
       sx={{
         flexGrow: 1,
         display: "flex",
-        position: "fixed", // Fix the position
-        bottom: 0, // Align to the bottom of the viewport
-        left: 0, // Align to the left of the viewport
-        width: "100%", // Full width
-        height: "calc(100vh - 134px)", // Adjust height as needed
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        width: "100%",
+        height: "calc(100vh - 134px)", 
       }}
     >
       {/* Sidebar */}

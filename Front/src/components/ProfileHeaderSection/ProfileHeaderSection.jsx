@@ -1,3 +1,17 @@
+/**
+ * Componente ProfileHeaderSection
+ *
+ * Questo componente visualizza l'header del profilo utente. Se l'utente è loggato, viene mostrato un avatar che, se cliccato,
+ * reindirizza alla pagina del profilo. Se l'utente non è loggato, vengono mostrati i pulsanti per accedere o registrarsi.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ProfileHeaderSection />
+ * )
+ *
+ * @returns {JSX.Element} La sezione dell'header del profilo utente.
+ */
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ProfileHeaderSection.css";

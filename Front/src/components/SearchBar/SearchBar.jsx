@@ -5,7 +5,7 @@ import "./SearchBar.css";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 
-const SearchBar = ({ setSearchQuery }) => (
+const SearchBar = ({ onChange }) => (
   <form>
     <Box
       sx={{

@@ -1,3 +1,20 @@
+/**
+ * Componente RoutesPath
+ * 
+ * Questo componente definisce le rotte dell'applicazione utilizzando il componente Routes di react-router-dom.
+ * 
+ * Rotte definite:
+ * - "/" : Home
+ * - "*" : Home (rotta di fallback)
+ * - "/Tool" : ToolPage
+ * - "/Lessons" : Lessons
+ * - "/Community" : Community
+ * - "/AboutUs" : AboutUs
+ * - "/LoginRegister" : LoginRegisterPage
+ * - "/Profile" : Profile
+ * 
+ * @component
+ */
 import Home from "../pages/Homepage/Home";
 import ToolPage from "../pages/ToolPage/ToolPage";
 import AboutUs from "../pages/AboutUs/AboutUs";

@@ -1,10 +1,20 @@
+/**
+ * Un componente funzionale che rende una maniglia di ridimensionamento per un pannello.
+ * Utilizza il componente `PanelResizeHandle` dalla libreria `react-resizable-panels`.
+ *
+ * @param {Object} props - L'oggetto delle proprietà.
+ * @param {string} [props.className=""] - Un nome di classe aggiuntivo opzionale da applicare alla maniglia di ridimensionamento esterna.
+ * @param {string} [props.id] - Un id opzionale da applicare alla maniglia di ridimensionamento.
+ *
+ * @returns {JSX.Element} Il componente della maniglia di ridimensionamento renderizzato.
+ */
 import { PanelResizeHandle } from "react-resizable-panels";
 
 import styles from "./styles.module.css";
 
 export default function ResizeHandle({
   className = "",
-  id
+  id,
 }: {
   className?: string;
   id?: string;

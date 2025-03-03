@@ -1,3 +1,13 @@
+/**
+ * Componente ChatInput
+ *
+ * @param {Object} props - Le proprietà del componente.
+ * @param {string} props.input - Il valore corrente dell'input.
+ * @param {Function} props.setInput - Funzione per aggiornare il valore dell'input.
+ * @param {Function} props.sendMessage - Funzione per inviare il messaggio.
+ *
+ * @returns {JSX.Element} - Il componente ChatInput.
+ */
 import Box from "@mui/material/Box";
 import SendIcon from "@mui/icons-material/Send";
 import "./ChatBot.css";

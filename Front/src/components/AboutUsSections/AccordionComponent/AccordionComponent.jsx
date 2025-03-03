@@ -1,3 +1,23 @@
+/**
+ * Componente AccordionComponent
+ * 
+ * Questo componente visualizza una serie di sezioni a fisarmonica (accordion) che possono essere espanse o compresse.
+ * 
+ * @component
+ * @param {Object} props - Le proprietà passate al componente.
+ * @param {number} props.accordionIndex - L'indice della sezione dell'accordion che dovrebbe essere espansa inizialmente.
+ * 
+ * @returns {JSX.Element} Il componente AccordionComponent.
+ * 
+ * @example
+ * <AccordionComponent accordionIndex={0} />
+ * 
+ * @description
+ * Il componente utilizza lo stato `expanded` per gestire quale sezione dell'accordion è attualmente espansa.
+ * Quando una sezione viene cliccata, la funzione `handleAccordionClick` viene chiamata per gestire lo scroll
+ * verso la sezione specifica. Se l'indice della sezione è 2, viene eseguito uno scroll aggiuntivo verso un
+ * elemento con la classe `carousel-div`.
+ */
 import React, { useState, useEffect } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -16,6 +36,12 @@ const accordionStyle = {
 const AccordionComponent = ({ accordionIndex }) => {
   const [expanded, setExpanded] = useState(false);
 
+  /**
+   * Gestisce il click sull'accordion.
+   * Scorre la vista fino alla card selezionata e, se l'indice è 2, scorre anche fino alla div del carosello.
+   *
+   * @param {number} index - L'indice della card selezionata.
+   */
   const handleAccordionClick = (index) => {
     const card = document.querySelector(`.card:nth-child(${index+1})`);
     if (card) {
@@ -29,7 +55,7 @@ const AccordionComponent = ({ accordionIndex }) => {
     }
   };
 
-
+  // Espande l'accordion quando l'indice cambia
   useEffect(() => {
     setExpanded(accordionIndex !== null);
   }, [accordionIndex]);

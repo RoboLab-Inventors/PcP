@@ -1,5 +1,22 @@
-// Section.jsx
-import { useState, useEffect, useRef } from "react";
+/**
+ * Componente Section che visualizza una griglia con una sezione di carte e una sezione di fisarmoniche.
+ * Utilizza vari componenti come CardComponent, AccordionComponent e CarouselComponent.
+ *
+ * @component
+ *
+ * @example
+ * return (
+ *   <Section />
+ * )
+ *
+ * @returns {JSX.Element} Il componente Section.
+ *
+ * @description
+ * Il componente Section gestisce lo stato dell'indice della fisarmonica e utilizza un riferimento per il componente Carousel.
+ * Quando una carta diventa visibile, l'indice della fisarmonica viene aggiornato.
+ * Utilizza IntersectionObserver per osservare quando il componente Carousel è visibile e aggiorna l'indice della fisarmonica di conseguenza.
+ */
+import React, { useState, useEffect, useRef } from "react";
 import "./SectionComponent.css";
 import CardComponent from "../CardComponent/CardComponent";
 import AccordionComponent from "../AccordionComponent/AccordionComponent";
@@ -17,6 +34,7 @@ const Section = () => {
     setAccordionIndex(index);
   };
 
+  // Scrolla al componente Carousel quando
   useEffect(() => {
     if (carouselRef.current) {
       carouselRef.current.addEventListener("load", () => {
@@ -27,6 +45,7 @@ const Section = () => {
     }
   }, [accordionIndex]);
 
+  // Aggiorna l'indice della fisarmonica quando il componente Carousel è visibile
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

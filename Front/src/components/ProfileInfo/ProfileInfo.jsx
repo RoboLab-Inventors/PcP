@@ -1,10 +1,31 @@
-import { useState } from "react";
+/**
+ * Componente ProfileInfo
+ *
+ * Questo componente visualizza e consente di modificare le informazioni del profilo utente.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} Il componente ProfileInfo.
+ *
+ * @example
+ * return (
+ *   <ProfileInfo />
+ * )
+ *
+ * @description
+ * Il componente utilizza vari stati per gestire le informazioni dell'utente, la modalità di modifica e la visibilità della password.
+ * Recupera i dati dell'utente al montaggio del componente e consente di modificarli e salvarli.
+ */
+import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import { Typography, Select, MenuItem } from "@mui/material";
 import "./ProfileInfo.css";
 import CustomButton from "../CustomButton/CustomButton";
 import { styled } from "@mui/material/styles";
+import { BASE_URL } from "../../constants";
+import CryptoJS from "crypto-js";
 
+// Definisce un componente MenuItem personalizzato con stili specifici
 const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
   color: "var(--fontColor-main)",
   backgroundColor: "var(--background-primary)",
@@ -15,43 +36,139 @@ const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
 
 const ProfileInfo = () => {
   const [gender, setGender] = useState("");
+  // Funzione per gestire il cambiamento del genere
+  const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+  const encryptionKey = CryptoJS.enc.Utf8.parse("a");
+
   const handleChangeGender = (event) => {
     setGender(event.target.value);
   };
+  // Stato per gestire la modalità di modifica
   const [isEditing, setIsEditing] = useState(false);
+  // Stato per mostrare o nascondere la password
   const [showPassword, setShowPassword] = useState(false);
+  // Funzione per gestire il click per mostrare/nascondere la password
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const [user, setUser] = useState({
-    username: "johndoe",
-    name: "John",
-    surname: "Doe",
-    email: "johndoe@example.com",
-    password: "palle",
-    gender: "Male",
-    dob: "1990-01-01",
+    nome: "",
+    cognome: "",
+    email: "",
+    username: "",
+    password: "",
+    dataNascita: "",
+    sesso: "",
   });
 
+  // Effetto per recuperare i dati dell'utente al montaggio del componente
+  useEffect(() => {
+    /**
+     * Recupera i dati dell'utente dal server.
+     *
+     * Questa funzione esegue una richiesta POST al server per ottenere i dati dell'utente
+     * utilizzando l'email e lo username memorizzati nel localStorage. I dati ricevuti
+     * vengono poi elaborati e memorizzati nello stato del componente.
+     *
+     * @async
+     * @function fetchUserData
+     * @returns {Promise<void>} Una promessa che si risolve quando i dati dell'utente sono stati recuperati e memorizzati.
+     * @throws {Error} Se si verifica un errore durante il recupero dei dati dell'utente.
+     */
+    const fetchUserData = async () => {
+      //Recupera l'email e lo username dall'archivio locale
+      const email = localStorage.getItem("email");
+      const username = localStorage.getItem("username");
+      try {
+        const response = await fetch(`${BASE_URL}/getUserData`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ email, username }),
+        });
+        const data = await response.json();
+        if (data.data && data.data.dataNascita) {
+          data.data.dataNascita = new Date(data.data.dataNascita)
+            .toISOString()
+            .split("T")[0];
+        }
+
+        setUser(data.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  /**
+   * Gestisce l'evento di modifica impostando lo stato di modifica su vero.
+   */
   const handleEdit = () => {
     setIsEditing(true);
   };
 
+  /**
+   * Gestisce il salvataggio delle informazioni dell'utente.
+   * Disabilita la modalità di modifica e invia una richiesta PUT per aggiornare i dati dell'utente.
+   *
+   * @function handleSave
+   * @returns {void}
+   */
   const handleSave = () => {
     setIsEditing(false);
-    // Here you would usually send updated data to the backend
+    const encryptionKey = "a";
+    const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+    const hashedPassword = CryptoJS.AES.encrypt(
+      user.password,
+      CryptoJS.enc.Utf8.parse(encryptionKey),
+      { iv: iv }
+    ).toString();
+    const response = fetch(`${BASE_URL}/modifyUser`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        username: user.username,
+        birthDate: user.dataNascita,
+        gender: user.sesso,
+        nome: user.nome,
+        cognome: user.cognome,
+        emailAttuale: localStorage.getItem("email"),
+      }),
+    });
   };
 
+  /**
+   * Gestisce il logout dell'utente.
+   * Rimuove il token, l'email e il nome utente dal localStorage
+   * e reindirizza l'utente alla pagina home.
+   */
   const handleLogout = () => {
-    console.log("User logged out");
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     localStorage.removeItem("username");
     window.location.href = "/home";
   };
 
+  /**
+   * Gestisce il cambiamento degli input aggiornando lo stato dell'utente.
+   *
+   * @param {Object} e - L'evento di cambiamento.
+   * @param {string} e.target.name - Il nome dell'input che è cambiato.
+   * @param {string} e.target.value - Il nuovo valore dell'input.
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
+
+  const decryptedPassword = CryptoJS.AES.decrypt(user.password, encryptionKey, {
+    iv,
+  }).toString(CryptoJS.enc.Utf8);
 
   return (
     <div className="infoContainer">
@@ -64,15 +181,15 @@ const ProfileInfo = () => {
                   <div className="input-container">
                     <input
                       type="text"
-                      name="name"
-                      id="name"
+                      name="nome"
+                      id="nome"
                       required
                       placeholder=" "
                       className="input-insert"
-                      value={user.name}
+                      value={user.nome}
                       onChange={handleChange}
                     />
-                    <label htmlFor="name" className="input-label">
+                    <label htmlFor="nome" className="input-label">
                       Nome
                     </label>
                   </div>
@@ -80,7 +197,7 @@ const ProfileInfo = () => {
               </>
             ) : (
               <Typography variant="h1" color="white">
-                {user.name}
+                {user.nome}
               </Typography>
             )}
           </div>
@@ -91,15 +208,15 @@ const ProfileInfo = () => {
                   <div className="input-container">
                     <input
                       type="text"
-                      name="surname"
-                      id="surname"
+                      name="cognome"
+                      id="cognome"
                       required
                       placeholder=" "
                       className="input-insert"
-                      value={user.surname}
+                      value={user.cognome}
                       onChange={handleChange}
                     />
-                    <label htmlFor="surname" className="input-label">
+                    <label htmlFor="cognome" className="input-label">
                       Cognome
                     </label>
                   </div>
@@ -107,7 +224,7 @@ const ProfileInfo = () => {
               </>
             ) : (
               <Typography variant="h1" color="white">
-                {user.surname}
+                {user.cognome}
               </Typography>
             )}
           </div>
@@ -120,7 +237,7 @@ const ProfileInfo = () => {
                   <input
                     type="text"
                     name="email"
-                    id="name"
+                    id="email"
                     required
                     placeholder=" "
                     className="input-insert"
@@ -183,7 +300,7 @@ const ProfileInfo = () => {
                   required
                   placeholder=" "
                   className="input-insert"
-                  value={user.password}
+                  value={decryptedPassword}
                   onChange={handleChange}
                 />
                 <label htmlFor="password" className="input-label">
@@ -266,7 +383,7 @@ const ProfileInfo = () => {
                 PASSWORD
               </Typography>
               <Typography variant="body1" color="white">
-                {"•".repeat(user.password.length)}
+                {"•".repeat(decryptedPassword.length + 1)}
               </Typography>
             </>
           )}
@@ -280,10 +397,10 @@ const ProfileInfo = () => {
                 <label>Sesso</label>
                 <Select
                   labelId="gender-label"
-                  id="gender"
-                  name="gender"
+                  id="sesso"
+                  name="sesso"
                   label="Sesso"
-                  value={gender}
+                  value={user.sesso}
                   onChange={(e) => {
                     handleChangeGender(e);
                     handleChange(e);
@@ -323,7 +440,7 @@ const ProfileInfo = () => {
                 GENDER
               </Typography>
               <Typography variant="body1" color="white">
-                {user.gender}
+                {user.sesso}
               </Typography>
             </>
           )}
@@ -335,11 +452,11 @@ const ProfileInfo = () => {
                 <label>Data di Nascita</label>
                 <input
                   type="date"
-                  id="dob"
-                  name="dob"
+                  id="dataNascita"
+                  name="dataNascita"
                   required
                   className="date-insert"
-                  value={user.dob}
+                  value={user.dataNascita}
                   onChange={handleChange}
                 />
               </div>
@@ -350,7 +467,7 @@ const ProfileInfo = () => {
                 DATE OF BIRTH
               </Typography>
               <Typography variant="body1" color="white">
-                {user.dob}
+                {user.dataNascita}
               </Typography>
             </>
           )}

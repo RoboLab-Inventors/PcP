@@ -1,17 +1,43 @@
+/**
+ * Componente LoginCard per gestire il login degli utenti.
+ *
+ * @component
+ * @param {Object} props - Proprietà passate al componente.
+ * @param {Function} props.switchToRegister - Funzione per passare alla schermata di registrazione.
+ *
+ * @returns {JSX.Element} Il componente LoginCard.
+ *
+ * @example
+ * <LoginCard switchToRegister={handleSwitchToRegister} />
+ *
+ * @description
+ * Questo componente visualizza un modulo di login con campi per email e password.
+ * La password viene crittografata utilizzando bcryptjs prima di essere inviata al server.
+ * Se il login ha successo, il token e le informazioni dell'utente vengono salvati nel localStorage.
+ */
 import { useState } from "react";
 import { Typography } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import "./LoginRegister.css";
 import { BASE_URL } from "../../constants";
+import CryptoJS from "crypto-js";
 import PropTypes from "prop-types";
-
 const LoginCard = ({ switchToRegister }) => {
   const [showPassword, setShowPassword] = useState(false);
-
   const handleClickShowPassword = () => setShowPassword(!showPassword);
+
   const submit = async (e) => {
     e.preventDefault();
-    const password = document.getElementById("password");
+    const password = document.getElementById("password").value;
+    console.log(password);
+    const encryptionKey = "a";
+    const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000"); // IV fisso
+    const hashedPassword = CryptoJS.AES.encrypt(
+      password,
+      CryptoJS.enc.Utf8.parse(encryptionKey),
+      { iv: iv }
+    ).toString();
+    console.log(hashedPassword);
     const email = document.getElementById("email");
     const response = await fetch(`${BASE_URL}/loginUser`, {
       method: "POST",

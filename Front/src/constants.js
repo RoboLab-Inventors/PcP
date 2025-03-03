@@ -1,2 +1,2 @@
-export const BASE_URL = "http://172.20.10.2:3000";
-export const API_URL = `127.0.0.1:2550`;
+export const BASE_URL = "http://localhost:3000";
+export const BOT_URL = `http://100.124.127.28:5000`;
