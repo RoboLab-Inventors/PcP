@@ -16,8 +16,7 @@ import CustomButton from "../CustomButton/CustomButton";
 import "./LoginRegister.css";
 import { BASE_URL } from "../../constants";
 import { styled } from "@mui/material/styles";
-import bcrypt from "bcryptjs";
-import { useNavigate } from "react-router-dom";
+import CryptoJS from 'crypto-js';
 
 /**
  * Componente CustomMenuItem stilizzato utilizzando il tema fornito.
@@ -41,7 +40,6 @@ const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const RegisterCard = ({ switchToLogin }) => {
-  const navigate = useNavigate();
   const [gender, setGender] = useState("");
   const handleChangeGender = (event) => {
     setGender(event.target.value);
@@ -55,6 +53,7 @@ const RegisterCard = ({ switchToLogin }) => {
     firstName: "",
     lastName: "",
   });
+
   /**
    * Gestisce il cambiamento degli input del modulo.
    * Aggiorna lo stato del form con il nuovo valore dell'input.
@@ -82,13 +81,10 @@ const RegisterCard = ({ switchToLogin }) => {
    */
   const submit = async (e) => {
     e.preventDefault();
-    const hashedPassword = await bcrypt.hash(formData.password, 10);
-    // setFormData((prevState) => ({
-    //   ...prevState,
-    //   password: hashedPassword,
-    // }));
-    console.log(formData);
-    const reponse= await fetch(`${BASE_URL}/registerUser`, {
+    const encryptionKey='a';
+    const iv = CryptoJS.enc.Hex.parse('00000000000000000000000000000000');
+    const hashedPassword = CryptoJS.AES.encrypt(formData.password, CryptoJS.enc.Utf8.parse(encryptionKey), { iv: iv }).toString();   
+    await fetch(`${BASE_URL}/registerUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,15 +94,11 @@ const RegisterCard = ({ switchToLogin }) => {
         username: formData.username,
         password: hashedPassword,
         birthDate: formData.birthDate,
-        gender:formData.gender,
+        gender: formData.gender,
         firstName: formData.firstName,
         lastName: formData.lastName,
       }),
     });
-    if(reponse.ok)
-    {
-      navigate("/login");
-    }
   };
 
   return (
@@ -231,6 +223,22 @@ const RegisterCard = ({ switchToLogin }) => {
                   />
                 </svg>
               )}
+              <svg
+                className="error-icon hover-target"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 8v4"></path>
+                <path d="M12 16h.01"></path>
+              </svg>
+              <span className="tooltip">Required!</span>
             </div>
           </div>
           <div className="container-container">
@@ -411,6 +419,7 @@ const RegisterCard = ({ switchToLogin }) => {
     </div>
   );
 };
+
 RegisterCard.propTypes = {
   switchToLogin: PropTypes.func.isRequired,
 };

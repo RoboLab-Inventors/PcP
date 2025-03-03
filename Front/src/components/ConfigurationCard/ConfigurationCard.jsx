@@ -23,7 +23,7 @@ function ConfigurationCard({ idConfigurazione, nome, descrizione, username }) {
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
-  
+
   /**
    * Scarica la configurazione dal server e salva il file localmente.
    * 
@@ -44,8 +44,8 @@ function ConfigurationCard({ idConfigurazione, nome, descrizione, username }) {
       });
 
       if (response.ok) {
-        const blob = await response.blob(); // Convert the response to a blob
-        const url = window.URL.createObjectURL(blob); // Create a URL for the blob
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
         a.download = `${nome}_config.txt`;

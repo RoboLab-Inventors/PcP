@@ -94,7 +94,6 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
   
     modifyConfiguration();
   };
-  //TODO: Aggiornare logica scarica configurazione profilo 
   /**
    * Funzione che gestisce il download della configurazione del profilo.
    * 
@@ -119,7 +118,6 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
           },
           body: JSON.stringify({ email: localStorage.getItem("email"), name: nome }),
         });
-  
         if (response.ok) {
           const blob = await response.blob();
           const url = window.URL.createObjectURL(blob);
@@ -138,16 +136,7 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
     }
     downloadConfiguration();
   }
-  /**
-   * Gestisce la chiusura del popup di eliminazione configurazione.
-   * 
-   * Questa funzione interna `deleteConfiguration` invia una richiesta POST 
-   * per eliminare una configurazione specifica. Se la richiesta ha successo 
-   * (status 200), la pagina viene ricaricata. Dopo aver chiamato `deleteConfiguration`,
-   * il popup di eliminazione viene nascosto impostando `setShowDeletePopup` a false.
-   * 
-   * @function handleClosePopup
-   */
+
   const handleClosePopup = () => {
     async function deleteConfiguration() {
       const response = await fetch(`${BASE_URL}/deleteConfiguration`, {
@@ -179,8 +168,8 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione}) => {
         <div className="descriptionContainer">
           <Typography variant="body2">{descrizione}</Typography>
         </div>
-        <div className="profileButtonsContainer" onClick={handleModifyConfiguration}>
-          <div className="reactionButton">
+        <div className="profileButtonsContainer">
+          <div className="reactionButton" onClick={handleModifyConfiguration}>
             <span className="profileTooltip">Modifica</span>
             <EditNote />
           </div>

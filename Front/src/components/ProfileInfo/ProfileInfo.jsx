@@ -1,17 +1,17 @@
 /**
  * Componente ProfileInfo
- * 
+ *
  * Questo componente visualizza e consente di modificare le informazioni del profilo utente.
- * 
+ *
  * @component
- * 
+ *
  * @returns {JSX.Element} Il componente ProfileInfo.
- * 
+ *
  * @example
  * return (
  *   <ProfileInfo />
  * )
- * 
+ *
  * @description
  * Il componente utilizza vari stati per gestire le informazioni dell'utente, la modalità di modifica e la visibilità della password.
  * Recupera i dati dell'utente al montaggio del componente e consente di modificarli e salvarli.
@@ -23,6 +23,7 @@ import "./ProfileInfo.css";
 import CustomButton from "../CustomButton/CustomButton";
 import { styled } from "@mui/material/styles";
 import { BASE_URL } from "../../constants";
+import CryptoJS from "crypto-js";
 
 // Definisce un componente MenuItem personalizzato con stili specifici
 const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
@@ -36,13 +37,15 @@ const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
 const ProfileInfo = () => {
   const [gender, setGender] = useState("");
   // Funzione per gestire il cambiamento del genere
+  const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+  const encryptionKey = CryptoJS.enc.Utf8.parse("a");
+
   const handleChangeGender = (event) => {
     setGender(event.target.value);
   };
-
   // Stato per gestire la modalità di modifica
   const [isEditing, setIsEditing] = useState(false);
-   // Stato per mostrare o nascondere la password
+  // Stato per mostrare o nascondere la password
   const [showPassword, setShowPassword] = useState(false);
   // Funzione per gestire il click per mostrare/nascondere la password
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -53,18 +56,18 @@ const ProfileInfo = () => {
     username: "",
     password: "",
     dataNascita: "",
-    sesso: ""
+    sesso: "",
   });
 
   // Effetto per recuperare i dati dell'utente al montaggio del componente
   useEffect(() => {
     /**
      * Recupera i dati dell'utente dal server.
-     * 
+     *
      * Questa funzione esegue una richiesta POST al server per ottenere i dati dell'utente
      * utilizzando l'email e lo username memorizzati nel localStorage. I dati ricevuti
      * vengono poi elaborati e memorizzati nello stato del componente.
-     * 
+     *
      * @async
      * @function fetchUserData
      * @returns {Promise<void>} Una promessa che si risolve quando i dati dell'utente sono stati recuperati e memorizzati.
@@ -85,7 +88,9 @@ const ProfileInfo = () => {
         });
         const data = await response.json();
         if (data.data && data.data.dataNascita) {
-          data.data.dataNascita = new Date(data.data.dataNascita).toISOString().split('T')[0];
+          data.data.dataNascita = new Date(data.data.dataNascita)
+            .toISOString()
+            .split("T")[0];
         }
 
         setUser(data.data);
@@ -113,22 +118,27 @@ const ProfileInfo = () => {
    */
   const handleSave = () => {
     setIsEditing(false);
+    const encryptionKey = "a";
+    const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+    const hashedPassword = CryptoJS.AES.encrypt(
+      user.password,
+      CryptoJS.enc.Utf8.parse(encryptionKey),
+      { iv: iv }
+    ).toString();
     const response = fetch(`${BASE_URL}/modifyUser`, {
       method: "PUT",
       headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-      email: user.email,
-      username: user.username,
-      password: user.password,
-      birthDate: user.dataNascita,
-      gender: user.sesso,
-      nome: user.nome,
-      cognome: user.cognome,
-      emailAttuale: localStorage.getItem("email")
-      })
+        username: user.username,
+        birthDate: user.dataNascita,
+        gender: user.sesso,
+        nome: user.nome,
+        cognome: user.cognome,
+        emailAttuale: localStorage.getItem("email"),
+      }),
     });
   };
 
@@ -155,6 +165,10 @@ const ProfileInfo = () => {
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
+
+  const decryptedPassword = CryptoJS.AES.decrypt(user.password, encryptionKey, {
+    iv,
+  }).toString(CryptoJS.enc.Utf8);
 
   return (
     <div className="infoContainer">
@@ -286,7 +300,7 @@ const ProfileInfo = () => {
                   required
                   placeholder=" "
                   className="input-insert"
-                  value={user.password}
+                  value={decryptedPassword}
                   onChange={handleChange}
                 />
                 <label htmlFor="password" className="input-label">
@@ -369,7 +383,7 @@ const ProfileInfo = () => {
                 PASSWORD
               </Typography>
               <Typography variant="body1" color="white">
-                {"•".repeat(user.password.length)}
+                {"•".repeat(decryptedPassword.length + 1)}
               </Typography>
             </>
           )}

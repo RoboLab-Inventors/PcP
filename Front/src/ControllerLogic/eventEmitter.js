@@ -1,8 +1,3 @@
-/**
- * An instance of EventTarget used to handle and dispatch events.
- * 
- * @type {EventTarget}
- */
 const eventTarget = new EventTarget();
 const listeners = new Map();
 

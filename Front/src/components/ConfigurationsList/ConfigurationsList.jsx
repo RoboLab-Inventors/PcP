@@ -25,6 +25,7 @@
 import "./ConfigurationsList.css";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
 import ProfileConfigurationCard from "../ProfileConfigurationCard/ProfileConfigurationCard";
 import { styled } from "@mui/material/styles";
 import { useEffect, useState } from "react";
@@ -75,6 +76,7 @@ const ConfigurationsList = () => {
   return (
     <div className="listContainer">
       <div className="configurationCard">
+      {configurations && configurations.length > 0 ? 
         <CustomList>
           {configurations.map((config) => (
             <ListItem key={config.idConfigurazione} sx={{ padding: 0, borderRadius: 0 }}>
@@ -87,6 +89,11 @@ const ConfigurationsList = () => {
             </ListItem>
           ))}
         </CustomList>
+        :
+        <Typography variant="h6" align="center">
+          No configurations found 
+        </Typography>
+      }
       </div>
     </div>
   );
