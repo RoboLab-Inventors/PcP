@@ -8,7 +8,7 @@
  *
  * @returns {JSX.Element} The rendered component.
  */
-import React from "react";
+import PropTypes from "prop-types";
 import Chart from "../Chart/Chart";
 import "./ComponentDetails.css";
 const ComponentDetails = ({ items, chartData }) => {
@@ -30,6 +30,21 @@ const ComponentDetails = ({ items, chartData }) => {
       <p>Value: {currentItem.value}</p>
     </div>
   );
+};
+ComponentDetails.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+      minValue: PropTypes.number,
+      maxValue: PropTypes.number,
+      minY: PropTypes.number,
+      maxY: PropTypes.number,
+    })
+  ).isRequired,
+  chartData: PropTypes.shape({
+    label: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ComponentDetails;

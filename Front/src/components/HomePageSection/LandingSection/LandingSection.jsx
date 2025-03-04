@@ -2,9 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Typography } from "@mui/material";
 import ScrollDownButton from "../ScrollDownButton/ScrollDownButton";
 import "./LandingSection.css";
-import * as THREE from "../../../../node_modules/three/build/three.module.js";
-import { OrbitControls } from "../../../../node_modules/three/examples/jsm/controls/OrbitControls.js";
-console.log(THREE, OrbitControls);
 import GLOBE from "vanta/dist/vanta.globe.min";
 
 const LandingSection = () => {

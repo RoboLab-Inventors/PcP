@@ -17,6 +17,7 @@
  */
 import { styled } from "@mui/material/styles";
 import { Paper, Grid2, Box } from "@mui/material";
+import PropTypes from "prop-types";
 
 import "./Overview.css";
 
@@ -45,6 +46,14 @@ const Overview = ({ items }) => {
       </Grid2>
     </Box>
   );
+};
+Overview.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Overview;

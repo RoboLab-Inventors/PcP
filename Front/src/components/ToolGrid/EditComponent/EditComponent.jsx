@@ -218,7 +218,7 @@ const EditComponent = ({ items, chartData }) => {
             value=""
             data-key={currentItem.label.split(" ")[0]}
           >
-            Seleziona un'opzione
+            Seleziona un&apos;opzione
           </MenuItem>
           {dataType.map((valueType) => (
             <MenuItem
@@ -257,7 +257,7 @@ const EditComponent = ({ items, chartData }) => {
             },
           }}
         >
-          <MenuItem value="">Seleziona un'opzione</MenuItem>
+          <MenuItem value="">Seleziona un&apos;opzione</MenuItem>
           {items
             .filter((item) => item.label.split(" ")[0] === selectFilter)
             .map((item) => (

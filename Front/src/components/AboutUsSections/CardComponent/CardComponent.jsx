@@ -9,7 +9,8 @@
  *
  * @returns {JSX.Element} Il componente CardComponent.
  */
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import "./CardComponent.css";
 
 const CardComponent = ({ coverImage, characterImage, onVisible }) => {
@@ -42,6 +43,11 @@ const CardComponent = ({ coverImage, characterImage, onVisible }) => {
       <img src={characterImage} alt="character" className="character" />
     </div>
   );
+};
+CardComponent.propTypes = {
+  coverImage: PropTypes.string.isRequired,
+  characterImage: PropTypes.string.isRequired,
+  onVisible: PropTypes.func,
 };
 
 export default CardComponent;
