@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import LoginCard from '../../components/LoginRegisterCard/LoginCard';
-import RegisterCard from '../../components/LoginRegisterCard/RegisterCard';
-import HeaderSwitch from '../../components/HeaderSwitch/HeaderSwitch';
-import './LoginRegisterPage.css';
+import { useState } from "react";
+import LoginCard from "../../components/LoginRegisterCard/LoginCard";
+import RegisterCard from "../../components/LoginRegisterCard/RegisterCard";
+import HeaderSwitch from "../../components/HeaderSwitch/HeaderSwitch";
+import "./LoginRegisterPage.css";
 
 const LoginRegisterPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,7 +12,7 @@ const LoginRegisterPage = () => {
 
   return (
     <>
-      <HeaderSwitch/>
+      <HeaderSwitch />
       {isLogin ? (
         <LoginCard switchToRegister={switchToRegister} />
       ) : (

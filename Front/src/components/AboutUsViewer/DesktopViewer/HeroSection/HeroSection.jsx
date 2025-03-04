@@ -1,16 +1,16 @@
 /**
  * Componente HeroSection.
- * 
+ *
  * Questo componente rappresenta una sezione "Hero" della pagina "Chi siamo".
  * Include una descrizione e un pulsante personalizzato che, al click, scorre
  * la pagina fino a un elemento con la classe "left-div".
- * 
+ *
  * @component
  * @example
  * return (
  *   <HeroSection />
  * )
- * 
+ *
  * @returns {JSX.Element} La sezione Hero con descrizione e pulsante.
  */
 import "./HeroSection.css";

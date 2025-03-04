@@ -37,54 +37,53 @@ const ResponsiveBottomDrawer = () => {
    * Funzione per importare una configurazione da un file di testo.
    * Crea un elemento input di tipo file, permette all'utente di selezionare un file .txt,
    * legge il contenuto del file e lo salva in localStorage.
-   * 
+   *
    * @function
    * @name importConfiguration
-   * 
+   *
    * @example
    * importConfiguration();
-   * 
+   *
    * @returns {void}
    */
   const importConfiguration = () => {
     const input = document.createElement("input");
     input.type = "file";
     input.accept = ".txt";
-  
+
     input.addEventListener("change", (event) => {
       const file = event.target.files[0];
-  
+
       if (file) {
         const reader = new FileReader();
-  
+
         reader.onload = (e) => {
           // Il contenuto del file è disponibile in e.target.result
-          const fileContent = e.target.result;  
+          const fileContent = e.target.result;
           // Salva il contenuto del file in localStorage
           localStorage.setItem("str", fileContent);
-  
+
           // Imposta il confString nel contesto
         };
-  
+
         reader.onerror = (error) => {
           console.error("Errore durante la lettura del file:", error);
         };
-  
+
         // Leggi il file come testo
         reader.readAsText(file);
       }
     });
-  
+
     input.click();
   };
-  
-  
+
   /**
    * Esporta la configurazione corrente come file di testo.
-   * 
+   *
    * Questa funzione invia una richiesta POST al server per esportare la configurazione
    * corrente. Se la richiesta ha successo, scarica il file di configurazione come file di testo.
-   * 
+   *
    * @async
    * @function exportConfiguration
    * @returns {Promise<void>} Una promessa che si risolve quando il file è stato scaricato o si verifica un errore.
@@ -219,8 +218,8 @@ const ResponsiveBottomDrawer = () => {
               transition: "opacity 0.3s ease-in-out",
             }}
           >
-            <CustomButton label="Export" onClick={exportConfiguration}/>
-            <CustomButton label="Import" onClick={importConfiguration}/>
+            <CustomButton label="Export" onClick={exportConfiguration} />
+            <CustomButton label="Import" onClick={importConfiguration} />
           </Box>
         </Box>
       </Drawer>

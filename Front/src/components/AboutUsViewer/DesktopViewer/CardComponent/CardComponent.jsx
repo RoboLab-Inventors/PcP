@@ -51,7 +51,6 @@ const CardComponent = ({ coverImage, characterImage, onVisible }) => {
     </div>
   );
 };
-
 CardComponent.propTypes = {
   coverImage: PropTypes.string.isRequired,
   characterImage: PropTypes.string.isRequired,

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -126,6 +127,14 @@ const Chart = ({ length, minValue, maxValue, minY, maxY, showDetails }) => {
       {showDetails && <p>Value: {currentValue.toFixed(2)}</p>}
     </div>
   );
+};
+Chart.propTypes = {
+  length: PropTypes.number.isRequired,
+  minValue: PropTypes.number.isRequired,
+  maxValue: PropTypes.number.isRequired,
+  minY: PropTypes.number.isRequired,
+  maxY: PropTypes.number.isRequired,
+  showDetails: PropTypes.bool.isRequired,
 };
 
 export default Chart;

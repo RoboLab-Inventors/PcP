@@ -11,34 +11,34 @@ const useIsMobile = () => {
   const mediaQueryMobile = useMediaQuery({ maxWidth: 768 });
   const [isMobile, setIsMobile] = useState(mediaQueryMobile);
 
-  // Funzione che combina più controlli
-  const checkMobile = () => {
-    // Controllo del puntatore "coarse" (tipico dei dispositivi touch)
-    const pointerMobile =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(pointer: coarse)").matches;
-
-    // Controllo per il supporto agli eventi touch
-    const touchCheck =
-      typeof window !== "undefined" &&
-      ("ontouchstart" in window || navigator.maxTouchPoints > 0);
-
-    // Controllo dello user agent
-    const uaCheck =
-      typeof navigator !== "undefined" &&
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
-
-    // Combiniamo i controlli: ad esempio, se almeno 2 su 4 sono veri, consideriamo il dispositivo mobile
-    const checks = [mediaQueryMobile, pointerMobile, touchCheck, uaCheck];
-    const positiveChecks = checks.filter(Boolean).length;
-
-    return positiveChecks >= 2;
-  };
-
   useEffect(() => {
+    // Funzione che combina più controlli
+    const checkMobile = () => {
+      // Controllo del puntatore "coarse" (tipico dei dispositivi touch)
+      const pointerMobile =
+        typeof window !== "undefined" &&
+        window.matchMedia &&
+        window.matchMedia("(pointer: coarse)").matches;
+
+      // Controllo per il supporto agli eventi touch
+      const touchCheck =
+        typeof window !== "undefined" &&
+        ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+
+      // Controllo dello user agent
+      const uaCheck =
+        typeof navigator !== "undefined" &&
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+
+      // Combiniamo i controlli: ad esempio, se almeno 2 su 4 sono veri, consideriamo il dispositivo mobile
+      const checks = [mediaQueryMobile, pointerMobile, touchCheck, uaCheck];
+      const positiveChecks = checks.filter(Boolean).length;
+
+      return positiveChecks >= 2;
+    };
+
     // Aggiorna lo stato ogni volta che la finestra cambia dimensione (o altri parametri potrebbero cambiare)
     const handleResize = () => {
       setIsMobile(checkMobile());

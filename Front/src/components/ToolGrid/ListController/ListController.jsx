@@ -11,7 +11,6 @@
  *
  * <ListController items={items} onItemClick={handleItemClick} />
  */
-import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ListItem from "./ListControllerItem";
 import "./ListController.css";

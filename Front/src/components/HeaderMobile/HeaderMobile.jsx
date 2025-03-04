@@ -50,6 +50,10 @@ const HeaderMobile = () => {
   };
 
   const handleMenuItemClick = (path) => {
+    if (path === "/Profile" && !localStorage.getItem("token")) {
+      alert("Devi accedere al sito per accedere al tuo profilo.");
+      return;
+    }
     setTimeout(() => {
       navigate(path);
     }, 1000);
