@@ -16,19 +16,20 @@ import CustomButton from "../CustomButton/CustomButton";
 import "./LoginRegister.css";
 import { BASE_URL } from "../../constants";
 import { styled } from "@mui/material/styles";
-import CryptoJS from "crypto-js";
+import CryptoJS from 'crypto-js';
+
 
 /**
  * Componente CustomMenuItem stilizzato utilizzando il tema fornito.
- *
+ * 
  * @component
- *
+ * 
  * @example
  * <CustomMenuItem>Voce di menu</CustomMenuItem>
- *
+ * 
  * @param {object} props - Le proprietà passate al componente.
  * @param {object} props.theme - Il tema utilizzato per stilizzare il componente.
- *
+ * 
  * @returns {JSX.Element} Un elemento MenuItem stilizzato.
  */
 const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
@@ -38,7 +39,7 @@ const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
     backgroundColor: "var(--background-secondary)",
   },
 }));
-
+  
 const RegisterCard = ({ switchToLogin }) => {
   const [gender, setGender] = useState("");
   const handleChangeGender = (event) => {
@@ -53,6 +54,15 @@ const RegisterCard = ({ switchToLogin }) => {
     firstName: "",
     lastName: "",
   });
+    const deriveKeyAndIV = (password) => {
+      const key = CryptoJS.PBKDF2(password, CryptoJS.SHA256(password), {
+        keySize: 256 / 32,
+        iterations: 1000,
+      });
+  
+      const iv = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex).slice(0, 16);
+      return { key, iv: CryptoJS.enc.Hex.parse(iv) };
+    };
 
   /**
    * Gestisce il cambiamento degli input del modulo.
@@ -73,6 +83,12 @@ const RegisterCard = ({ switchToLogin }) => {
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
+  // const encryptPassword = (password) => {
+  //   const encryptionKey = 'your-encryption-key';
+  //   const iv = CryptoJS.enc.Hex.parse('00000000000000000000000000000000');
+  //   return CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(encryptionKey), { iv: iv }).toString();
+  // };
+
   /**
    * Gestisce l'invio del modulo di registrazione.
    * @param {Event} e - L'evento di submit del modulo.
@@ -80,15 +96,10 @@ const RegisterCard = ({ switchToLogin }) => {
    * @async
    */
   const submit = async (e) => {
-    e.preventDefault();
-    const encryptionKey = "a";
-    const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
-    const hashedPassword = CryptoJS.AES.encrypt(
-      formData.password,
-      CryptoJS.enc.Utf8.parse(encryptionKey),
-      { iv: iv }
-    ).toString();
-    await fetch(`${BASE_URL}/registerUser`, {
+
+    const { key, iv } = deriveKeyAndIV(formData.password);
+    const encryptedPassword = CryptoJS.AES.encrypt(formData.password, key, { iv }).toString();
+    const response= await fetch(`${BASE_URL}/registerUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -96,13 +107,18 @@ const RegisterCard = ({ switchToLogin }) => {
       body: JSON.stringify({
         email: formData.email,
         username: formData.username,
-        password: hashedPassword,
+        password: encryptedPassword,
         birthDate: formData.birthDate,
         gender: formData.gender,
         firstName: formData.firstName,
         lastName: formData.lastName,
       }),
     });
+    if(response.ok)
+    {
+      const data = await response.json();
+      alert("Daje")
+    }
   };
 
   return (
@@ -227,22 +243,6 @@ const RegisterCard = ({ switchToLogin }) => {
                   />
                 </svg>
               )}
-              <svg
-                className="error-icon hover-target"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="9"></circle>
-                <path d="M12 8v4"></path>
-                <path d="M12 16h.01"></path>
-              </svg>
-              <span className="tooltip">Required!</span>
             </div>
           </div>
           <div className="container-container">

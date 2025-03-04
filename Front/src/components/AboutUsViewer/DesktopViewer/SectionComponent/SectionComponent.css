@@ -5,7 +5,7 @@
   }
   
   .left-div {
-    height: 300vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

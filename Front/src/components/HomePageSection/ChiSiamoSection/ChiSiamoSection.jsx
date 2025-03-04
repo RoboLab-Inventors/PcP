@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import "./ChiSiamoSection.css";
 import RoboLabLogo from "../../../assets/images/RoboLabLogo.png";
 import RoboLabWall from "../../../assets/images/RoboLabWall1.jpg";
-import CardComponent from "../../AboutUsSections/CardComponent/CardComponent";
+import CardComponent from "../../AboutUsViewer/DesktopViewer/CardComponent/CardComponent";
 
 const ChiSiamoSection = () => {
   return (

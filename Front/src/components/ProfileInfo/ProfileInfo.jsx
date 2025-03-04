@@ -1,21 +1,3 @@
-/**
- * Componente ProfileInfo
- *
- * Questo componente visualizza e consente di modificare le informazioni del profilo utente.
- *
- * @component
- *
- * @returns {JSX.Element} Il componente ProfileInfo.
- *
- * @example
- * return (
- *   <ProfileInfo />
- * )
- *
- * @description
- * Il componente utilizza vari stati per gestire le informazioni dell'utente, la modalità di modifica e la visibilità della password.
- * Recupera i dati dell'utente al montaggio del componente e consente di modificarli e salvarli.
- */
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import { Typography, Select, MenuItem } from "@mui/material";
@@ -23,7 +5,6 @@ import "./ProfileInfo.css";
 import CustomButton from "../CustomButton/CustomButton";
 import { styled } from "@mui/material/styles";
 import { BASE_URL } from "../../constants";
-import CryptoJS from "crypto-js";
 
 // Definisce un componente MenuItem personalizzato con stili specifici
 const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
@@ -35,19 +16,9 @@ const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const ProfileInfo = () => {
-  const [gender, setGender] = useState("");
-  // Funzione per gestire il cambiamento del genere
-  const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
-  const encryptionKey = CryptoJS.enc.Utf8.parse("a");
 
-  const handleChangeGender = (event) => {
-    setGender(event.target.value);
-  };
-  // Stato per gestire la modalità di modifica
   const [isEditing, setIsEditing] = useState(false);
-  // Stato per mostrare o nascondere la password
   const [showPassword, setShowPassword] = useState(false);
-  // Funzione per gestire il click per mostrare/nascondere la password
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const [user, setUser] = useState({
     nome: "",
@@ -59,22 +30,8 @@ const ProfileInfo = () => {
     sesso: "",
   });
 
-  // Effetto per recuperare i dati dell'utente al montaggio del componente
   useEffect(() => {
-    /**
-     * Recupera i dati dell'utente dal server.
-     *
-     * Questa funzione esegue una richiesta POST al server per ottenere i dati dell'utente
-     * utilizzando l'email e lo username memorizzati nel localStorage. I dati ricevuti
-     * vengono poi elaborati e memorizzati nello stato del componente.
-     *
-     * @async
-     * @function fetchUserData
-     * @returns {Promise<void>} Una promessa che si risolve quando i dati dell'utente sono stati recuperati e memorizzati.
-     * @throws {Error} Se si verifica un errore durante il recupero dei dati dell'utente.
-     */
     const fetchUserData = async () => {
-      //Recupera l'email e lo username dall'archivio locale
       const email = localStorage.getItem("email");
       const username = localStorage.getItem("username");
       try {
@@ -102,51 +59,41 @@ const ProfileInfo = () => {
     fetchUserData();
   }, []);
 
-  /**
-   * Gestisce l'evento di modifica impostando lo stato di modifica su vero.
-   */
   const handleEdit = () => {
     setIsEditing(true);
   };
 
-  /**
-   * Gestisce il salvataggio delle informazioni dell'utente.
-   * Disabilita la modalità di modifica e invia una richiesta PUT per aggiornare i dati dell'utente.
-   *
-   * @function handleSave
-   * @returns {void}
-   */
-  const handleSave = () => {
+  const handleSave = async () => {
     setIsEditing(false);
-    const encryptionKey = "a";
-    const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
-    const hashedPassword = CryptoJS.AES.encrypt(
-      user.password,
-      CryptoJS.enc.Utf8.parse(encryptionKey),
-      { iv: iv }
-    ).toString();
-    const response = fetch(`${BASE_URL}/modifyUser`, {
+    const emailAttuale=localStorage.getItem("email");
+    if(localStorage.getItem("email") !== user.email){
+      localStorage.setItem("email", user.email);
+    }
+    if(localStorage.getItem("username") !== user.username){
+      localStorage.setItem("username", user.username);
+    } 
+    const response = await fetch(`${BASE_URL}/modifyUser`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
+        email: user.email,
         username: user.username,
         birthDate: user.dataNascita,
         gender: user.sesso,
         nome: user.nome,
         cognome: user.cognome,
-        emailAttuale: localStorage.getItem("email"),
+        emailAttuale: emailAttuale !== "" ? emailAttuale : user.email,
       }),
     });
+
+      if (response.ok) {
+        window.location.reload();
+      }
   };
 
-  /**
-   * Gestisce il logout dell'utente.
-   * Rimuove il token, l'email e il nome utente dal localStorage
-   * e reindirizza l'utente alla pagina home.
-   */
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
@@ -154,21 +101,10 @@ const ProfileInfo = () => {
     window.location.href = "/home";
   };
 
-  /**
-   * Gestisce il cambiamento degli input aggiornando lo stato dell'utente.
-   *
-   * @param {Object} e - L'evento di cambiamento.
-   * @param {string} e.target.name - Il nome dell'input che è cambiato.
-   * @param {string} e.target.value - Il nuovo valore dell'input.
-   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
-
-  const decryptedPassword = CryptoJS.AES.decrypt(user.password, encryptionKey, {
-    iv,
-  }).toString(CryptoJS.enc.Utf8);
 
   return (
     <div className="infoContainer">
@@ -300,7 +236,7 @@ const ProfileInfo = () => {
                   required
                   placeholder=" "
                   className="input-insert"
-                  value={decryptedPassword}
+                  value={"Palle"}
                   onChange={handleChange}
                 />
                 <label htmlFor="password" className="input-label">
@@ -383,7 +319,7 @@ const ProfileInfo = () => {
                 PASSWORD
               </Typography>
               <Typography variant="body1" color="white">
-                {"•".repeat(decryptedPassword.length + 1)}
+                {"•".repeat('*',5)}
               </Typography>
             </>
           )}

@@ -13,10 +13,9 @@
  * 
  * @returns {JSX.Element} La sezione Hero con descrizione e pulsante.
  */
-import React from "react";
 import "./HeroSection.css";
 import Typography from "@mui/material/Typography";
-import CustomButton from "../../CustomButton/CustomButton";
+import CustomButton from "../../../CustomButton/CustomButton";
 
 /**
  * Gestisce il click del pulsante per scorrere alla vista dell'elemento con la classe 'left-div'.
@@ -24,10 +23,13 @@ import CustomButton from "../../CustomButton/CustomButton";
  */
 const handleClick = () => {
   const leftDiv = document.querySelector('.left-div');
+  const sectionContainer = document.querySelector('.section-container');
   if (leftDiv) {
     leftDiv.scrollIntoView({ behavior: "smooth" });
+  } else if (sectionContainer) {
+    sectionContainer.scrollIntoView({ behavior: "smooth" });
   } else {
-    console.log('Elemento .left-div non trovato al click del pulsante');
+    console.error("Elemento non trovato.");
   }
 };
 

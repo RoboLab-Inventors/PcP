@@ -9,8 +9,10 @@
  *
  * @returns {JSX.Element} Il componente CardComponent.
  */
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./CardComponent.css";
+
+import PropTypes from "prop-types";
 
 const CardComponent = ({ coverImage, characterImage, onVisible }) => {
   const cardRef = useRef(null);
@@ -20,10 +22,14 @@ const CardComponent = ({ coverImage, characterImage, onVisible }) => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          cardRef.current.classList.add("visible");
-          if (onVisible) onVisible();
+          if (cardRef.current) {
+            cardRef.current.classList.add("visible");
+            if (onVisible) onVisible();
+          }
         } else {
-          cardRef.current.classList.remove("visible");
+          if (cardRef.current) {
+            cardRef.current.classList.remove("visible");
+          }
         }
       },
       { threshold: 0.6 }
@@ -35,13 +41,21 @@ const CardComponent = ({ coverImage, characterImage, onVisible }) => {
   }, [onVisible]);
 
   return (
-    <div className="card" ref={cardRef}>
-      <div className="wrapper">
-        <img src={coverImage} alt="cover" className="cover-image" />
+    <div className="card-container">
+      <div className="card" ref={cardRef}>
+        <div className="wrapper">
+          <img src={coverImage} alt="cover" className="cover-image" />
+        </div>
+        <img src={characterImage} alt="character" className="character" />
       </div>
-      <img src={characterImage} alt="character" className="character" />
     </div>
   );
+};
+
+CardComponent.propTypes = {
+  coverImage: PropTypes.string.isRequired,
+  characterImage: PropTypes.string.isRequired,
+  onVisible: PropTypes.func,
 };
 
 export default CardComponent;

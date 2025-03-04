@@ -18,7 +18,7 @@
  * verso la sezione specifica. Se l'indice della sezione è 2, viene eseguito uno scroll aggiuntivo verso un
  * elemento con la classe `carousel-div`.
  */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -43,16 +43,19 @@ const AccordionComponent = ({ accordionIndex }) => {
    * @param {number} index - L'indice della card selezionata.
    */
   const handleAccordionClick = (index) => {
-    const card = document.querySelector(`.card:nth-child(${index+1})`);
-    if (card) {
-      card.scrollIntoView({ behavior: "smooth" });
-    }
-    if (index === 2) {
-      const carouselDiv = document.querySelector('.carousel-div');
-      if (carouselDiv) {
-        carouselDiv.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      const cards = document.querySelectorAll(".left-div .card");
+      
+      if (index < cards.length) {
+        cards[index].scrollIntoView({ behavior: "smooth" });
+      } else {
+        console.warn(`Card with index ${index} not found, scrolling to carousel.`);
+        const carouselDiv = document.querySelector(".carousel-div");
+        if (carouselDiv) {
+          carouselDiv.scrollIntoView({ behavior: "smooth" });
+        }
       }
-    }
+    }, 50);
   };
 
   // Espande l'accordion quando l'indice cambia

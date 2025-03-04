@@ -1,14 +1,12 @@
 import "./AboutUs.css";
 import HeaderSwitch from "../../components/HeaderSwitch/HeaderSwitch";
-import HeroSection from "../../components/AboutUsSections/HeroSection/HeroSection";
-import SectionComponent from "../../components/AboutUsSections/SectionComponent/SectionComponent";
+import AboutUsViewer from "../../components/AboutUsViewer/AboutUsViewer";
 
 function AbousUs() {
   return (
     <>
       <HeaderSwitch />
-      <HeroSection />
-      <SectionComponent />
+      <AboutUsViewer />
     </>
   );
 }

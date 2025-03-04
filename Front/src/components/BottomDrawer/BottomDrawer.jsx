@@ -14,7 +14,7 @@
  * Il componente utilizza il contesto `ConfStringContext` per ottenere la stringa di configurazione (`confString`).
  * Include due pulsanti personalizzati per l'importazione e l'esportazione della configurazione.
  */
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useContext } from "react";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
@@ -25,7 +25,7 @@ import { ConfStringContext } from "../ToolGrid/EditComponent/ConfStringContext";
 const ResponsiveBottomDrawer = () => {
   const [isFullOpen, setIsFullOpen] = useState(false);
   const { confString } = useContext(ConfStringContext);
-  const fileInputRef = useRef(null);
+
  /** 
   * @function toggleDrawer
   * @description Funzione per aprire e chiudere il cassetto. 
@@ -33,17 +33,6 @@ const ResponsiveBottomDrawer = () => {
   const toggleDrawer = () => {
     setIsFullOpen(!isFullOpen);
   };
-  /** 
-  * @function handleFileChange
-  * @description Funzione per gestire il cambiamento del file selezionato.
-  * @param {Event} event - L'evento di cambiamento del file.
-  */
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-  };
-
-  //Soluzione con file dinamico (scelto perchè è compatibile con tutti i browser, l'alernativa è usare API File System Access ma non è compatibile con tutti i browser)
-  let str = ""; // Stringa iniziale
   /**
    * Funzione per importare una configurazione da un file di testo.
    * Crea un elemento input di tipo file, permette all'utente di selezionare un file .txt,
