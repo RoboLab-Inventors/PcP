@@ -1,9 +1,6 @@
 .headerLoginButton {
+  position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
-}
-.headerButtonsContainer {
-  display: flex;
-  align-items: center; /* Align items vertically */
-  gap: 10px; /* Add some space between the buttons */
 }

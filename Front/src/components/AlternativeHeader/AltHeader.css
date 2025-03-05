@@ -14,26 +14,26 @@
   overflow: hidden;
   border-radius: 99px;
   top: 40px;
-  justify-content: center; /* Center the content horizontally */
-  width: 100%; /* Ensure it takes the full width */
-  transition: transform 0.3s ease-in-out; /* Smooth transition for showing/hiding */
-  z-index: 1000; /* Assicurati che l'header sia sopra gli altri componenti */
+  justify-content: center;
+  width: 100%;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
 }
 
 .container.hidden {
-  transition: transform 0.3s ease-in-out; /* Ensure transition is applied */
+  transition: transform 0.3s ease-in-out; 
   transform: translateY(calc(-100% - 40px));
 }
 
 .container.visible {
-  transition: transform 0.3s ease-in-out; /* Ensure transition is applied */
+  transition: transform 0.3s ease-in-out;
   transform: translateY(0);
 }
 
 .logo-image {
-  width: 120%; /* L'immagine sarà più grande del tab */
+  width: 120%; 
   height: auto;
-  transition: transform 0.3s ease-in-out; /* Aggiungi una transizione per l'hover */
+  transition: transform 0.3s ease-in-out;
 }
 
 .logo-container {
@@ -46,11 +46,11 @@
 }
 
 .container.hidden {
-  transform: translateY(-300%); /* Move the header out of view */
+  transform: translateY(-300%);
 }
 
 .container.visible {
-  transform: translateY(0); /* Bring the header into view */
+  transform: translateY(0);
 }
 .tabs * {
   z-index: 2;
@@ -119,4 +119,5 @@
   justify-content: center;
   align-items: center;
   right: 3vw;
+  height: 100%;
 }

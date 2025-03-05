@@ -11,11 +11,14 @@
     padding: 10px 0 10px 0;
     border-top: 1px solid var(--secondary-color-main);
     border-bottom: 1px solid var(--secondary-color-main);
-    backdrop-filter: brightness(0.5);
   }
   
   .list-item:hover {
-    backdrop-filter: brightness(0.8);
+    background-color: var(--primary-color-secondary-opacity);
+  }
+
+  .list-item.selected {
+    background-color: var(--primary-color-secondary-opacity);
   }
   
   .mini-chart {

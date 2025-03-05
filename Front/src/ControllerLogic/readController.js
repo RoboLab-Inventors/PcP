@@ -506,7 +506,7 @@ export function handleBluetoothInputReport31(report) {
   // let batteryCharging = !!(battery1 & 0x08);
 }
 
-export const requestDevice = async (setIsConnected) => {
+export const requestDevice = async (setIsLinked) => {
     let requestOptions = {
       filters: [
         { vendorId: VENDOR_ID_SONY, productId: PRODUCT_ID_DUAL_SENSE,
@@ -524,13 +524,12 @@ export const requestDevice = async (setIsConnected) => {
   
     if (!device.opened) {
       await device.open();
-      setIsConnected(true);   
       if (!device.opened) {
         console.log('Failed to open ' + device.productName);
         return;
       }
     }
-    
+    setIsLinked(true);
     console.log('Opened DualSense');
     window.dshid = new DualSenseHid(device);
     window.dshid.initialize();
