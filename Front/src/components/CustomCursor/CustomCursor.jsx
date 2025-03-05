@@ -34,6 +34,7 @@ const CustomCursor = () => {
   const [isMobileState, setIsMobileState] = useState(isMobileDevice());
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isHoveringIframe, setIsHoveringIframe] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [isFading, setIsFading] = useState(false);
 
@@ -93,26 +94,38 @@ const CustomCursor = () => {
 
     const handleMouseEnter = () => setIsHovering(true);
     const handleMouseLeave = () => setIsHovering(false);
+    const handleIframeEnter = () => setIsHoveringIframe(true);
+    const handleIframeLeave = () => setIsHoveringIframe(false);
 
     /**
      * Aggiunge listener di hover agli elementi con le classi specificate.
      * Aggiunge i listener per gli eventi "mouseenter" e "mouseleave" per gestire l'hover.
+     * Aggiunge i listener per gli eventi "mouseenter" e "mouseleave" per gestire l'hover su gli iframe.
      *
      * @returns {Function} Una funzione di cleanup che rimuove i listener di hover dagli elementi.
      */
     const addHoverListeners = () => {
       const hoverElements = document.querySelectorAll(
-        ".hover-target, a, button, input, label"
+        ".hover-target, a, button, input, label, iframe"
       );
       hoverElements.forEach((el) => {
         el.addEventListener("mouseenter", handleMouseEnter);
         el.addEventListener("mouseleave", handleMouseLeave);
+      });
+      const iframes = document.querySelectorAll("iframe");
+      iframes.forEach((iframe) => {
+        iframe.addEventListener("mouseenter", handleIframeEnter);
+        iframe.addEventListener("mouseleave", handleIframeLeave);
       });
       // Cleanup dei listener
       return () => {
         hoverElements.forEach((el) => {
           el.removeEventListener("mouseenter", handleMouseEnter);
           el.removeEventListener("mouseleave", handleMouseLeave);
+        });
+        iframes.forEach((iframe) => {
+          iframe.removeEventListener("mouseenter", handleIframeEnter);
+          iframe.removeEventListener("mouseleave", handleIframeLeave);
         });
       };
     };
@@ -135,7 +148,7 @@ const CustomCursor = () => {
   return (
     <div
       className={`custom-cursor ${isActive ? "active" : ""} ${
-        isFading ? "fading" : ""
+        isFading || isHoveringIframe ? "fading" : ""
       } ${isHovering ? "hovering" : ""}`}
       style={{
         left: `${position.x}px`,
