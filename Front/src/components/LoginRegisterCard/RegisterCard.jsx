@@ -16,20 +16,19 @@ import CustomButton from "../CustomButton/CustomButton";
 import "./LoginRegister.css";
 import { BASE_URL } from "../../constants";
 import { styled } from "@mui/material/styles";
-import CryptoJS from 'crypto-js';
-
+import CryptoJS from "crypto-js";
 
 /**
  * Componente CustomMenuItem stilizzato utilizzando il tema fornito.
- * 
+ *
  * @component
- * 
+ *
  * @example
  * <CustomMenuItem>Voce di menu</CustomMenuItem>
- * 
+ *
  * @param {object} props - Le proprietà passate al componente.
  * @param {object} props.theme - Il tema utilizzato per stilizzare il componente.
- * 
+ *
  * @returns {JSX.Element} Un elemento MenuItem stilizzato.
  */
 const CustomMenuItem = styled(MenuItem)(() => ({
@@ -39,7 +38,7 @@ const CustomMenuItem = styled(MenuItem)(() => ({
     backgroundColor: "var(--background-secondary)",
   },
 }));
-  
+
 const RegisterCard = ({ switchToLogin }) => {
   const [gender, setGender] = useState("");
   const handleChangeGender = (event) => {
@@ -54,15 +53,17 @@ const RegisterCard = ({ switchToLogin }) => {
     firstName: "",
     lastName: "",
   });
-    const deriveKeyAndIV = (password) => {
-      const key = CryptoJS.PBKDF2(password, CryptoJS.SHA256(password), {
-        keySize: 256 / 32,
-        iterations: 1000,
-      });
-  
-      const iv = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex).slice(0, 16);
-      return { key, iv: CryptoJS.enc.Hex.parse(iv) };
-    };
+  const deriveKeyAndIV = (password) => {
+    const key = CryptoJS.PBKDF2(password, CryptoJS.SHA256(password), {
+      keySize: 256 / 32,
+      iterations: 1000,
+    });
+
+    const iv = CryptoJS.SHA256(password)
+      .toString(CryptoJS.enc.Hex)
+      .slice(0, 16);
+    return { key, iv: CryptoJS.enc.Hex.parse(iv) };
+  };
 
   /**
    * Gestisce il cambiamento degli input del modulo.
@@ -96,10 +97,11 @@ const RegisterCard = ({ switchToLogin }) => {
    * @async
    */
   const submit = async (e) => {
-
     const { key, iv } = deriveKeyAndIV(formData.password);
-    const encryptedPassword = CryptoJS.AES.encrypt(formData.password, key, { iv }).toString();
-    const response= await fetch(`${BASE_URL}/registerUser`, {
+    const encryptedPassword = CryptoJS.AES.encrypt(formData.password, key, {
+      iv,
+    }).toString();
+    const response = await fetch(`${BASE_URL}/registerUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -114,10 +116,9 @@ const RegisterCard = ({ switchToLogin }) => {
         lastName: formData.lastName,
       }),
     });
-    if(response.ok)
-    {
+    if (response.ok) {
       const data = await response.json();
-      alert("Daje")
+      alert("Daje");
     }
   };
 
@@ -372,8 +373,8 @@ const RegisterCard = ({ switchToLogin }) => {
                 MenuProps={{
                   PaperProps: {
                     sx: {
-                      backgroundColor: "var(--background-primary)",
-                      color: "var(--fontColor-main)",
+                      backgroundColor: "var(--text)",
+                      color: "var(--darkgrey)",
                     },
                   },
                 }}
@@ -382,8 +383,12 @@ const RegisterCard = ({ switchToLogin }) => {
                   minWidth: "160px",
                   height: "40px",
                   backgroundColor: "transparent",
-                  border: "1px solid var(--fontColor-main)",
-                  color: "var(--fontColor-main)",
+                  border: "1px solid var(--text)!important",
+                  color: "var(--background)!important",
+                  "& .MuiSelect-icon": {
+                    // Targeting the dropdown arrow icon
+                    color: "var(--background)!important", // Set the color of the arrow icon here
+                  },
                   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                     border: "none",
                   },
@@ -403,7 +408,7 @@ const RegisterCard = ({ switchToLogin }) => {
             <span>Oppure</span>
             <div></div>
           </div>
-          <p>
+          <p style={{ color: "var(--text)" }}>
             Hai già un account?{" "}
             <a href="#" onClick={switchToLogin} className="linkTo">
               Accedi ora

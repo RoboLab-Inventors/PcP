@@ -19,10 +19,10 @@ const LandingSection = () => {
           minWidth: 200.0,
           scale: 1.0,
           scaleMobile: 1.0,
-          color: 0xffffff,
-          color2: 0x0,
+          color: 0x7c0000,
+          color2: 0xf4e8dc,
           size: 0.6,
-          backgroundColor: 0xffc868,
+          backgroundColor: 0x1a1a1a,
         })
       );
     }

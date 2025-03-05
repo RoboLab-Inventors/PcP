@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   height: auto;
-  border: 1px solid var(--primary-color-secondary);
+  border: 1px solid var(--accent);
 }
 
 .login-register-card form {
@@ -43,8 +43,8 @@
   height: 40px;
   padding: 0 40px 0 10px;
   font-size: 16px;
-  border: 1px solid var(--fontColor-main);
-  color: var(--fontColor-main);
+  border: 1px solid var(--text) !important;
+  color: var(--background) !important;
   border-radius: 10px;
   outline: none;
   background: transparent;
@@ -52,8 +52,8 @@
 }
 
 .input-insert:focus {
-  border-color: var(--primary-color-secondary);
-  box-shadow: 0 0 4px var(--primary-color-secondary);
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 4px var(--primary) !important;
 }
 
 .input-label {
@@ -62,7 +62,7 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
-  color: var(--fontColor-main);
+  color: var(--background) !important;
   transition: all 0.3s;
   pointer-events: none;
 }
@@ -72,7 +72,7 @@
   top: -10px;
   left: 8px;
   font-size: 12px;
-  color: var(--fontColor-main);
+  color: var(--text) !important;
 }
 
 .icon {
@@ -80,7 +80,7 @@
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--fontColor-main);
+  color: var(--text) !important;
 }
 
 .error-icon {
@@ -88,15 +88,15 @@
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--fontColor-main);
+  color: var(--text) !important;
 }
 
 .tooltip {
   position: absolute;
   right: 0;
   top: -30px;
-  background: var(--background-primary);
-  color: var(--fontColor-main);
+  background: var(--background) !important;
+  color: var(--darkgrey) !important;
   padding: 2px 5px;
   font-size: 12px;
   border-radius: 4px;
@@ -111,7 +111,7 @@
 .password-icon {
   position: absolute;
   right: 40px;
-  color: var(--fontColor-main);
+  color: var(--text) !important;
 }
 .button-group {
   display: flex;
@@ -135,8 +135,8 @@
   height: 40px;
   padding: 0 10px 0 10px;
   font-size: 16px;
-  border: 1px solid var(--fontColor-main);
-  color: var(--fontColor-main);
+  border: 1px solid var(--text) !important;
+  color: var(--background) !important;
   border-radius: 10px;
   outline: none;
   background: transparent;
@@ -145,8 +145,8 @@
 }
 
 .date-insert:focus {
-  border-color: var(--primary-color-secondary);
-  box-shadow: 0 0 4px var(--primary-color-secondary);
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 4px var(--primary) !important;
 }
 
 .date-insert:focus + .input-label,
@@ -154,7 +154,7 @@
   top: -10px;
   left: 8px;
   font-size: 12px;
-  color: var(--fontColor-main);
+  color: var(--text) !important;
 }
 
 .gender-container {
@@ -170,8 +170,8 @@
   height: 40px;
   padding: 0 40px 0 10px;
   font-size: 16px;
-  border: 1px solid var(--fontColor-main);
-  color: var(--fontColor-main);
+  border: 1px solid var(--text) !important;
+  color: var(--background) !important;
   border-radius: 10px;
   outline: none;
   background: transparent;
@@ -179,8 +179,8 @@
 }
 
 .gender-insert:focus {
-  border-color: var(--primary-color-secondary);
-  box-shadow: 0 0 4px var(--primary-color-secondary);
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 4px var(--primary) !important;
 }
 
 .gender-insert:focus + .input-label,
@@ -188,7 +188,7 @@
   top: -10px;
   left: 8px;
   font-size: 12px;
-  color: var(--fontColor-main);
+  color: var(--text) !important;
 }
 
 ::-webkit-calendar-picker-indicator {
@@ -235,15 +235,15 @@
   width: 100%;
   height: 1px;
   border-radius: 5px;
-  background-color: var(--fontColor-main);
+  background-color: var(--text) !important;
 }
 
 .separator > span {
-  color: var(--fontColor-main);
-  font-family: var(--fontColor-main);
+  color: var(--text) !important;
+  font-family: var(--text) !important;
   font-weight: 600;
 }
 
 .login-register-card .linkTo {
-  color: var(--primary-color-secondary);
+  color: var(--primary) !important;
 }

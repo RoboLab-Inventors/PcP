@@ -2,7 +2,6 @@ import { useState } from "react";
 import LoginCard from "../../components/LoginRegisterCard/LoginCard";
 import RegisterCard from "../../components/LoginRegisterCard/RegisterCard";
 import HeaderSwitch from "../../components/HeaderSwitch/HeaderSwitch";
-import "./LoginRegisterPage.css";
 
 const LoginRegisterPage = () => {
   const [isLogin, setIsLogin] = useState(true);

@@ -51,7 +51,7 @@ const ChatWindow = ({
           backgroundColor: "rgba(213, 161, 40, 0.5)",
           backdropFilter: "blur(10px)",
           boxShadow:
-            "var(--primary-color-secondary) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
+            "var(--accent) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
         }}
       >
         <Typography variant="h4" sx={{ color: theme.palette.background.main }}>
@@ -130,7 +130,7 @@ const ChatWindow = ({
         backdropFilter: "blur(10px)",
         backgroundColor: "transparent",
         boxShadow:
-          "var(--primary-color-secondary) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
+          "var(--accent) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
       }}
     >
       {chatContainer}

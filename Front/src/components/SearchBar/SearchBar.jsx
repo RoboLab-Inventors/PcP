@@ -5,43 +5,43 @@ import "./SearchBar.css";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 
-const SearchBar = ({ onChange, setSearchQuery }) => (
+const SearchBar = ({ setSearchQuery }) => (
   <form>
     <Box
       sx={{
         display: "flex",
         alignItems: "center",
-        width: "90vh",
+        width: "90vw",
         position: "relative",
+        maxWidth: "600px",
       }}
     >
       <IconButton
         type="submit"
         aria-label="search"
         sx={{
-          color: "customTextColor.secondary",
-          border: "1px solid #fa1e4e",
+          color: "var(--secondary)",
+          border: "1px solid var(--secondary)",
           "&:hover": {
-            boxShadow: "0px 0px 15px #fa1e4e",
-            backgroundColor: "#000000",
+            color: "var(--background)",
+            boxShadow: "0px 0px 15px var(--secondary)",
+            backgroundColor: "var(--secondary)",
           },
           borderRadius: "5px",
           height: "3.5rem",
           margin: 1,
-          backgroundColor: "#ffffff",
+          backgroundColor: "var(--background)",
           borderTopRightRadius: 0,
           borderBottomRightRadius: 0,
           padding: "0.5rem", // Padding per allineare il contenuto
           marginRight: "-1px",
-          borderTop: "1px solid #e7edf1",
-          borderLeft: "1px solid #e7edf1",
-          borderBottom: "1px solid #e7edf1",
+          borderTop: "1px solid var(--secondary)",
+          borderLeft: "1px solid var(--secondary)",
+          borderBottom: "1px solid var(--secondary)",
           borderRight: 0,
         }}
       >
-        <SearchIcon
-          style={{ fill: "customTextColor.secondary", fontSize: "2rem" }}
-        />
+        <SearchIcon style={{ fontSize: "2rem" }} />
       </IconButton>
       <TextField
         id="search-bar"
@@ -56,19 +56,19 @@ const SearchBar = ({ onChange, setSearchQuery }) => (
         sx={{
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: "customTextColor.secondary",
+              borderColor: "var(--primary)",
               borderTopLeftRadius: 0,
               borderBottomLeftRadius: 0,
               borderLeft: 0,
             },
             "&:hover fieldset": {
-              borderColor: "customTextColor.secondary",
+              borderColor: "var(--secondary)",
             },
             "&.Mui-focused fieldset": {
-              borderColor: "customTextColor.secondary",
+              borderColor: "var(--secondary)",
             },
             "& input": {
-              color: "customTextColor.secondary",
+              color: "var(--text)",
               height: "3.5rem",
               fontSize: "1rem",
               padding: "10px 14px",
@@ -77,10 +77,10 @@ const SearchBar = ({ onChange, setSearchQuery }) => (
             },
           },
           "& .MuiInputLabel-outlined": {
-            color: "customTextColor.secondary",
+            color: "var(--text)",
           },
           "& .MuiInputLabel-outlined.Mui-focused": {
-            color: "customTextColor.secondary",
+            color: "var(--text)",
           },
           width: "100%",
         }}

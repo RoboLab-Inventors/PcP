@@ -1,7 +1,7 @@
 .cardWrapper {
   min-height: 40px; /* Imposta un'altezza minima per evitare salti */
   width: 250px;
-  background-color: var(--secondary-color-main);
+  background-color: var(--background);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
 .cardContainer {
   width: 250px;
   height: 40px;
-  background-color: var(--primary-color-main);
+  background-color: var(--secondary);
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@
 .buttonsContainer {
   width: 230px;
   height: 40px;
-  background-color: var(--primary-color-main);
+  background-color: var(--secondary);
   border-radius: 15px;
   display: flex;
   align-items: center;

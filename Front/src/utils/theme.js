@@ -6,20 +6,20 @@ const getCssVariable = (name) =>
 
 const palette = {
   primary: {
-    main: getCssVariable("--primary-color-main"),
-    secondary: getCssVariable("--primary-color-secondary"),
+    main: getCssVariable("--primary"),
+    secondary: getCssVariable("--secondary"),
   },
   secondary: {
-    main: getCssVariable("--secondary-color-main"),
-    secondary: getCssVariable("--secondary-color-secondary"),
+    main: getCssVariable("--accent"),
+    secondary: getCssVariable("--background"),
   },
   fontColor: {
-    main: getCssVariable("--fontColor-main"),
-    hovered: getCssVariable("--fontColor-hovered"),
+    main: getCssVariable("--text"),
+    hovered: getCssVariable("--background"),
   },
   background: {
-    primary: getCssVariable("--background-primary"),
-    secondary: getCssVariable("--background-secondary"),
+    primary: getCssVariable("--background"),
+    secondary: getCssVariable("--text"),
   },
 };
 
@@ -30,11 +30,23 @@ const heading = {
     fontWeight: "normal",
   },
 };
+
+const body = {
+  fontFamily: "SpaceGrotesk",
+  fontWeight: 1000,
+  "@media (max-width:600px)": {
+    fontWeight: "normal",
+  },
+};
+
 const typography = {
   fontFamily: "SpaceGrotesk",
   h1: heading,
   h2: heading,
   h3: heading,
+  body1: body,
+  body2: body,
+  p: body,
 };
 
 const theme = responsiveFontSizes(

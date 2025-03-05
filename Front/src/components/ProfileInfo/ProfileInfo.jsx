@@ -16,7 +16,6 @@ const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const ProfileInfo = () => {
-
   const [isEditing, setIsEditing] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -65,13 +64,13 @@ const ProfileInfo = () => {
 
   const handleSave = async () => {
     setIsEditing(false);
-    const emailAttuale=localStorage.getItem("email");
-    if(localStorage.getItem("email") !== user.email){
+    const emailAttuale = localStorage.getItem("email");
+    if (localStorage.getItem("email") !== user.email) {
       localStorage.setItem("email", user.email);
     }
-    if(localStorage.getItem("username") !== user.username){
+    if (localStorage.getItem("username") !== user.username) {
       localStorage.setItem("username", user.username);
-    } 
+    }
     const response = await fetch(`${BASE_URL}/modifyUser`, {
       method: "PUT",
       headers: {
@@ -89,9 +88,9 @@ const ProfileInfo = () => {
       }),
     });
 
-      if (response.ok) {
-        window.location.reload();
-      }
+    if (response.ok) {
+      window.location.reload();
+    }
   };
 
   const handleLogout = () => {
@@ -319,7 +318,7 @@ const ProfileInfo = () => {
                 PASSWORD
               </Typography>
               <Typography variant="body1" color="white">
-                {"•".repeat('*',5)}
+                {"•".repeat("*", 5)}
               </Typography>
             </>
           )}
@@ -344,8 +343,8 @@ const ProfileInfo = () => {
                   MenuProps={{
                     PaperProps: {
                       sx: {
-                        backgroundColor: "var(--background-primary)",
-                        color: "var(--fontColor-main)",
+                        backgroundColor: "var(--text)",
+                        color: "var(--background)",
                       },
                     },
                   }}
@@ -354,8 +353,8 @@ const ProfileInfo = () => {
                     minWidth: "160px",
                     height: "40px",
                     backgroundColor: "transparent",
-                    border: "1px solid var(--fontColor-main)",
-                    color: "var(--fontColor-main)",
+                    border: "1px solid var(--text)!important",
+                    color: "var(--background)!important",
                     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                       border: "none",
                     },

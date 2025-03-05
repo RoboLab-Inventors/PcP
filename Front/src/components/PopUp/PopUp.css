@@ -13,7 +13,7 @@
 
 .popup-inner {
   padding: 32px;
-  background: rgb(255, 0, 0);
+  background: var(--background);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 85%;

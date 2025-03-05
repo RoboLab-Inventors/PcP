@@ -1,4 +1,3 @@
-import "./AboutUs.css";
 import HeaderSwitch from "../../components/HeaderSwitch/HeaderSwitch";
 import AboutUsViewer from "../../components/AboutUsViewer/AboutUsViewer";
 

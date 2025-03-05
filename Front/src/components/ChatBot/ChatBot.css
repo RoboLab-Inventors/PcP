@@ -6,7 +6,7 @@
   box-sizing: border-box;
   background-color: transparent;
   border: none;
-  color: var(--fontColor-main);
+  color: var(--text);
 }
 
 .textfield:focus {
@@ -18,27 +18,23 @@
 }
 
 .chatbot-input {
-  border: 1px solid var(--background-secondary);
-  box-shadow: var(--primary-color-main) 0px 0px 0.25em,
+  border: 1px solid var(--secondary);
+  box-shadow: var(--secondary) 0px 0px 0.25em,
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
-  background-color: var(--background-primary);
+  background-color: var(--background);
   border-radius: 4px;
   margin: 10px;
 }
 
 .chatbot-input:focus-within {
-  border-color: var(--primary-color-secondary);
+  border-color: var(--secondary);
   background-color: transparent;
 }
 
 .sendButton {
   background-color: transparent;
-  color: var(--primary-color-secondary);
-  border: 1px solid var(--background-secondary);
-  box-shadow: -25px -25px 15px -30px rgba(248, 231, 28, 1),
-    25px 25px 15px -30px rgba(248, 231, 28, 1),
-    0px 0px 15px -30px rgba(248, 231, 28, 1),
-    0px 0px 15px -30px rgba(248, 231, 28, 1);
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
   border-radius: 4px;
   padding: 10px;
   width: 20%;
@@ -46,8 +42,8 @@
 }
 
 .sendButton:hover {
-  background-color: var(--secondary-color-secondary);
-  color: var(--fontColor-main);
+  background-color: var(--secondary);
+  color: var(--background);
 }
 
 .textfield:focus {
@@ -56,39 +52,6 @@
 
 .textfield::placeholder {
   color: #b3b3b3;
-}
-
-.chatbot-input {
-  border: 1px solid var(--background-secondary);
-  box-shadow: var(--primary-color-main) 0px 0px 0.25em,
-    rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
-  background-color: var(--background-primary);
-  border-radius: 4px;
-  margin: 10px;
-}
-
-.chatbot-input:focus-within {
-  border-color: var(--primary-color-secondary);
-  background-color: transparent;
-}
-
-.sendButton {
-  background-color: transparent;
-  color: var(--primary-color-secondary);
-  border: 1px solid var(--background-secondary);
-  box-shadow: -25px -25px 15px -30px rgba(248, 231, 28, 1),
-    25px 25px 15px -30px rgba(248, 231, 28, 1),
-    0px 0px 15px -30px rgba(248, 231, 28, 1),
-    0px 0px 15px -30px rgba(248, 231, 28, 1);
-  border-radius: 4px;
-  padding: 10px;
-  width: 20%;
-  transition: all 0.3s;
-}
-
-.sendButton:hover {
-  background-color: var(--secondary-color-secondary);
-  color: var(--fontColor-main);
 }
 
 .chatToggleButton {

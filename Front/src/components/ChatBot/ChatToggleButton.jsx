@@ -22,8 +22,8 @@ const ChatToggleButton = ({ toggleChat }) => (
       position: "fixed",
       bottom: 16,
       right: 16,
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.fontColor.main,
+      backgroundColor: theme.palette.primary.secondary,
+      color: theme.palette.secondary.secondary,
       "&:hover": { backgroundColor: theme.palette.secondary.main },
     }}
   >

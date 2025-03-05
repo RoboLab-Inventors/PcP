@@ -29,8 +29,8 @@ import PropTypes from "prop-types";
 const accordionStyle = {
   backgroundColor: "transparent",
   border: "none",
-  borderBottom: "1px dotted var(--fontColor)",
-  color: "var(--fontColor)",
+  borderBottom: "1px dotted var(--accent)",
+  color: "var(--text)",
 };
 
 const AccordionComponent = ({ accordionIndex }) => {
@@ -45,11 +45,13 @@ const AccordionComponent = ({ accordionIndex }) => {
   const handleAccordionClick = (index) => {
     setTimeout(() => {
       const cards = document.querySelectorAll(".left-div .card");
-      
+
       if (index < cards.length) {
         cards[index].scrollIntoView({ behavior: "smooth" });
       } else {
-        console.warn(`Card with index ${index} not found, scrolling to carousel.`);
+        console.warn(
+          `Card with index ${index} not found, scrolling to carousel.`
+        );
         const carouselDiv = document.querySelector(".carousel-div");
         if (carouselDiv) {
           carouselDiv.scrollIntoView({ behavior: "smooth" });

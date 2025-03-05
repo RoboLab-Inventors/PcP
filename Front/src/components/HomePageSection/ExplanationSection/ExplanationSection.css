@@ -78,11 +78,11 @@
   width: 100%;
   border-radius: 30px;
   overflow: hidden;
-  box-shadow: 15px 15px 30px #4b0000, -15px -15px 30px #2b0000;
+  box-shadow: 15px 15px 30px #131313, -15px -15px 30px #000000;
 }
 
 .videoCard:hover {
-  border: 1px solid yellow;
+  border: 1px solid var(--primary);
   transform: scale(1.05);
 }
 
@@ -106,8 +106,8 @@
 
 .homeSeparator {
   width: 50%;
-  height: 20px;
-  background-color: #fff200; /* Change the color as needed */
+  height: 10px;
+  background-color: var(--accent); /* Change the color as needed */
   border-radius: 25px;
   margin: 20px auto; /* Adjust the margin as needed */
 }
