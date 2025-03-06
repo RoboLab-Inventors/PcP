@@ -84,7 +84,6 @@ const ConfigurationsList = () => {
                 sx={{ padding: 0, borderRadius: 0 }}
               >
                 <ProfileConfigurationCard
-                  idConfigurazione={config.idConfigurazione}
                   nome={config.nome}
                   descrizione={config.descrizione}
                   stato={config.stato}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, Box, Typography, TextField, Select, MenuItem } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -13,6 +13,8 @@ const CustomMenuItem = styled(MenuItem)(() => ({
 }));
 
 const CustomTextField = styled(TextField)(() => ({
+  color: "var(--fontColor-main)",
+  paddingBottom: "20px",
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
       borderColor: "var(--borderColor)",
@@ -39,6 +41,7 @@ const CustomTextField = styled(TextField)(() => ({
 }));
 
 const CustomSelect = styled(Select)(() => ({
+  marginBottomm: "20px",
   color: "var(--fontColor-main)",
   backgroundColor: "var(--background-primary)",
   "& .MuiOutlinedInput-notchedOutline": {
@@ -64,49 +67,27 @@ const style = {
   borderRadius: 2,
 };
 
-const CustomModal = ({ open = true, title, onClose, onConfirm, confirmLabel, setTitle, setDescription }) => {
+const CustomModalExport = ({ open = true, onClose, onConfirm, confirmLabel, setTitle, setDescription, setStato }) => {
   const [visibility, setVisibility] = useState("");
 
-  console.log("Modal open state:", open);
+  const handleStatoChange = (e) => {
+    setVisibility(e.target.value);
+    setStato(e.target.value);
+  };
 
   return (
-    <Modal open={Boolean(open)} onClose={onClose} container={document.body} aria-labelledby="modal-title" aria-describedby="modal-description">
+    <Modal open={Boolean(open)} onClose={onClose} aria-labelledby="modal-title">
       <Box sx={style}>
-        <Typography id="modal-title" variant="h6" component="h2">{title}</Typography>
-        <CustomTextField
-          label="Nome"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <CustomTextField
-          label="Descrizione"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          multiline
-          rows={4}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <div>
-          <Typography variant="body1">Stato</Typography>
-          <CustomSelect
-            fullWidth
-            value={visibility}
-            onChange={(e) => setVisibility(e.target.value)}
-            sx={{ mt: 1 }}
-          >
-            <CustomMenuItem value="">
-              <em>Seleziona</em>
-            </CustomMenuItem>
-            <CustomMenuItem value="Pubblico">Pubblico</CustomMenuItem>
-            <CustomMenuItem value="Privato">Privato</CustomMenuItem>
-          </CustomSelect>
-        </div>
-        <Typography id="select-description" sx={{ mt: 2 }}>
-          Se clicchi pubblica il tuo progetto sarà visibile a tutti.
-        </Typography>
+        <CustomTextField label="Nome" fullWidth onChange={(e) => setTitle(e.target.value)} />
+        <CustomTextField label="Descrizione" fullWidth multiline rows={4} onChange={(e) => setDescription(e.target.value)} />
+        
+        <Typography variant="body1">Stato</Typography>
+        <CustomSelect fullWidth value={visibility} onChange={handleStatoChange}>
+          <CustomMenuItem value=""><em>Seleziona</em></CustomMenuItem>
+          <CustomMenuItem value="Pubblico">Pubblico</CustomMenuItem>
+          <CustomMenuItem value="Privato">Privato</CustomMenuItem>
+        </CustomSelect>
+        
         <Box display="flex" justifyContent="space-between" mt={2}>
           <CustomButton onClick={onConfirm} label={confirmLabel} />
           <CustomButton onClick={onClose} label="Annulla" />
@@ -116,7 +97,7 @@ const CustomModal = ({ open = true, title, onClose, onConfirm, confirmLabel, set
   );
 };
 
-CustomModal.propTypes = {
+CustomModalExport.propTypes = {
   open: PropTypes.bool,
   title: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
@@ -124,6 +105,7 @@ CustomModal.propTypes = {
   confirmLabel: PropTypes.string.isRequired,
   setTitle: PropTypes.func.isRequired,
   setDescription: PropTypes.func.isRequired,
+  setStato: PropTypes.func.isRequired,
 };
 
-export default CustomModal;
+export default CustomModalExport;

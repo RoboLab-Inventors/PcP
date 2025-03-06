@@ -117,8 +117,8 @@ const RegisterCard = ({ switchToLogin }) => {
       }),
     });
     if (response.ok) {
-      const data = await response.json();
-      alert("Daje");
+      alert("Registrazione avvenuta con successo!");
+      switchToLogin();
     }
   };
 

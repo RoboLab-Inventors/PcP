@@ -1,4 +1,5 @@
 .explanationContainer {
+  position: relative;
   height: calc(100vh - 20vw);
   width: 80vw;
   display: flex;
@@ -110,4 +111,24 @@
   background-color: var(--accent); /* Change the color as needed */
   border-radius: 25px;
   margin: 20px auto; /* Adjust the margin as needed */
+}
+
+.terminiServiziContainer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.terminiServiziTitle {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--secondary);
+  text-align: center;
+  font-size: 1rem;
+}
+.terminiServiziTitle:hover {
+  color: var(--accent);
 }
