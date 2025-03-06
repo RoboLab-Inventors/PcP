@@ -17,13 +17,16 @@ import "./HeroSection.css";
 import Typography from "@mui/material/Typography";
 import CustomButton from "../../../CustomButton/CustomButton";
 
+
 /**
- * Gestisce il click del pulsante per scorrere alla vista dell'elemento con la classe 'left-div'.
- * Se l'elemento non viene trovato, viene stampato un messaggio di errore nella console.
+ * Gestisce il click per scorrere verso una specifica sezione della pagina.
+ * Se l'elemento con la classe 'left-div' è presente, scorre verso di esso.
+ * Altrimenti, se l'elemento con la classe 'sections-container' è presente, scorre verso di esso.
+ * Se nessuno dei due elementi è trovato, viene loggato un errore nella console.
  */
 const handleClick = () => {
   const leftDiv = document.querySelector('.left-div');
-  const sectionContainer = document.querySelector('.section-container');
+  const sectionContainer = document.querySelector('.sections-container');
   if (leftDiv) {
     leftDiv.scrollIntoView({ behavior: "smooth" });
   } else if (sectionContainer) {

@@ -1,4 +1,16 @@
-// filepath: /c:/Users/Ema/Documents/0Personale/PcProject/PcProject/Front/src/pages/ToolPage/ToolPage.jsx
+/**
+ * Pagina principale degli strumenti.
+ * 
+ * Questa pagina include i seguenti componenti:
+ * - HeaderMobile: l'intestazione per dispositivi mobili.
+ * - ToolGrid: la griglia degli strumenti.
+ * - BottomDrawer: il cassetto inferiore.
+ * - ChatBot: il chatbot.
+ * 
+ * Tutti i componenti sono avvolti dal provider ConfStringProvider per fornire il contesto delle stringhe di configurazione.
+ * 
+ * @component
+ */
 import HeaderMobile from "../../components/HeaderMobile/HeaderMobile";
 import ToolGrid from "../../components/ToolGrid/ToolGrid";
 import ChatBot from "../../components/ChatBot/ChatBot";

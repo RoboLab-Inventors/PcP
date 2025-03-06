@@ -1,3 +1,30 @@
+/**
+ * Componente ProfileInfo
+ * 
+ * Questo componente visualizza e consente di modificare le informazioni del profilo utente.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} Il componente ProfileInfo.
+ * 
+ * @example
+ * <ProfileInfo />
+ * 
+ * @description
+ * Il componente utilizza gli hook `useState` e `useEffect` per gestire lo stato e gli effetti collaterali.
+ * 
+ * @property {boolean} isEditing - Stato che indica se il profilo è in modalità modifica.
+ * @property {boolean} showPassword - Stato che indica se la password è visibile.
+ * @property {Object} user - Oggetto che contiene le informazioni dell'utente.
+ * @property {string} user.nome - Nome dell'utente.
+ * @property {string} user.cognome - Cognome dell'utente.
+ * @property {string} user.email - Email dell'utente.
+ * @property {string} user.username - Username dell'utente.
+ * @property {string} user.password - Password dell'utente.
+ * @property {string} user.dataNascita - Data di nascita dell'utente.
+ * @property {string} user.sesso - Sesso dell'utente.
+ *
+ */
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import { Typography, Select, MenuItem } from "@mui/material";
@@ -30,6 +57,18 @@ const ProfileInfo = () => {
   });
 
   useEffect(() => {
+    /**
+     * Recupera i dati dell'utente dal server.
+     * 
+     * Questa funzione esegue una richiesta POST al server per ottenere i dati dell'utente
+     * utilizzando l'email e il nome utente memorizzati nel localStorage. I dati dell'utente
+     * vengono quindi aggiornati nello stato locale.
+     * 
+     * @async
+     * @function fetchUserData
+     * @returns {Promise<void>} Una promessa che si risolve quando i dati dell'utente sono stati recuperati e lo stato è stato aggiornato.
+     * @throws {Error} Se si verifica un errore durante il recupero dei dati dell'utente.
+     */
     const fetchUserData = async () => {
       const email = localStorage.getItem("email");
       const username = localStorage.getItem("username");
@@ -62,6 +101,17 @@ const ProfileInfo = () => {
     setIsEditing(true);
   };
 
+  /**
+   * Gestisce il salvataggio delle informazioni dell'utente.
+   * 
+   * Questa funzione viene chiamata quando l'utente salva le modifiche al proprio profilo.
+   * Disabilita la modalità di modifica, aggiorna le informazioni nel localStorage e invia una richiesta
+   * al server per aggiornare i dati dell'utente.
+   * 
+   * @async
+   * @function handleSave
+   * @returns {void}
+   */
   const handleSave = async () => {
     setIsEditing(false);
     const emailAttuale = localStorage.getItem("email");

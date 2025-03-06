@@ -30,6 +30,12 @@ const LoginCard = ({ switchToRegister }) => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  /**
+   * Deriva una chiave e un vettore di inizializzazione (IV) da una password.
+   *
+   * @param {string} password - La password da cui derivare la chiave e l'IV.
+   * @returns {{ key: CryptoJS.lib.WordArray, iv: CryptoJS.lib.WordArray }} Un oggetto contenente la chiave derivata e l'IV.
+   */
   const deriveKeyAndIV = (password) => {
     const key = CryptoJS.PBKDF2(password, CryptoJS.SHA256(password), {
       keySize: 256 / 32,
@@ -42,6 +48,20 @@ const LoginCard = ({ switchToRegister }) => {
     return { key, iv: CryptoJS.enc.Hex.parse(iv) };
   };
 
+  /**
+   * Gestisce l'invio del modulo di login.
+   * 
+   * @param {Event} e - L'evento di submit del modulo.
+   * @returns {Promise<void>} - Una promessa che si risolve quando il login è completato.
+   * 
+   * La funzione esegue le seguenti operazioni:
+   * 1. Previene il comportamento predefinito del modulo.
+   * 2. Recupera l'email e la password dai campi di input.
+   * 3. Crittografa la password utilizzando una chiave derivata e un IV.
+   * 4. Invia una richiesta POST al server per autenticare l'utente.
+   * 5. Se la risposta contiene un token, lo salva nel localStorage insieme a username ed email.
+   * 6. Reindirizza l'utente alla homepage.
+   */
   const submit = async (e) => {
     e.preventDefault();
 

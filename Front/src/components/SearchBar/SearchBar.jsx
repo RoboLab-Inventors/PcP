@@ -1,3 +1,15 @@
+/**
+ * Componente SearchBar
+ * 
+ * Questo componente rappresenta una barra di ricerca con un campo di testo e un pulsante di ricerca.
+ * Utilizza i componenti di Material-UI per la struttura e lo stile.
+ * 
+ * @param {Object} props - Le proprietà passate al componente.
+ * @param {function} props.onChange - Funzione chiamata quando il contenuto del campo di testo cambia.
+ * @param {function} props.setSearchQuery - Funzione chiamata per impostare la query di ricerca.
+ * 
+ * @returns {JSX.Element} Il componente SearchBar.
+ */
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
@@ -33,7 +45,7 @@ const SearchBar = ({ onChange }) => (
           backgroundColor: "var(--background)",
           borderTopRightRadius: 0,
           borderBottomRightRadius: 0,
-          padding: "0.5rem", // Padding per allineare il contenuto
+          padding: "0.5rem",
           marginRight: "-1px",
           borderTop: "1px solid var(--secondary)",
           borderLeft: "1px solid var(--secondary)",

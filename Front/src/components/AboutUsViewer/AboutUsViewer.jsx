@@ -1,3 +1,16 @@
+/**
+ * Hook personalizzato per determinare se il dispositivo è mobile.
+ * Utilizza una combinazione di media query, controlli del puntatore, eventi touch e user agent.
+ *
+ * @returns {boolean} - Ritorna true se il dispositivo è considerato mobile, altrimenti false.
+ */
+
+/**
+ * Componente AboutUsViewer.
+ * Visualizza una sezione eroe e una sezione specifica per dispositivi mobili o desktop in base allo stato del dispositivo.
+ *
+ * @returns {JSX.Element} - Il componente JSX da renderizzare.
+ */
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import SectionComponent from "./DesktopViewer/SectionComponent/SectionComponent";

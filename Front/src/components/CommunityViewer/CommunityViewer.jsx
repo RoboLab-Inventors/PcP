@@ -6,7 +6,7 @@
  * @returns {JSX.Element} Il componente Community.
  *
  * @example
- * <Community />
+ * <CommunityViewer />
  *
  * @description
  * Il componente utilizza gli hook useState e useEffect per gestire lo stato delle configurazioni e per recuperare i dati dal server.

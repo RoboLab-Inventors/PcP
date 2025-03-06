@@ -10,7 +10,7 @@
  * 
  * @returns {JSX.Element} Un elemento span contenente il testo visualizzato con l'effetto di digitazione.
  */
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const TypingEffect = ({ text, speed = 15 }) => {
   const [displayedText, setDisplayedText] = useState('');

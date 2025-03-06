@@ -1,3 +1,19 @@
+/**
+ * Componente ScrollDownButton
+ * 
+ * Questo componente rende un pulsante che, quando cliccato, scorre la pagina verso il basso fino all'altezza della finestra.
+ * 
+ * @component
+ * @example
+ * return (
+ *   <ScrollDownButton />
+ * )
+ * 
+ * Funzioni:
+ * - handleScroll: Funzione che gestisce l'evento di click sul pulsante e scorre la pagina verso il basso.
+ * 
+ * @returns {JSX.Element} Il pulsante di scorrimento verso il basso.
+ */
 import "./ScrollDownButton.css";
 
 const ScrollDownButton = () => {

@@ -1,3 +1,17 @@
+/**
+ * Stile per il componente PopUpGenerico.
+ * 
+ * @type {Object}
+ * @property {string} position - Posizione assoluta dell'elemento.
+ * @property {string} top - Posizione verticale centrata al 50%.
+ * @property {string} left - Posizione orizzontale centrata al 50%.
+ * @property {string} transform - Trasformazione per centrare l'elemento.
+ * @property {number} width - Larghezza dell'elemento in pixel.
+ * @property {string} bgcolor - Colore di sfondo dell'elemento.
+ * @property {number} boxShadow - Ombra dell'elemento.
+ * @property {number} p - Padding dell'elemento.
+ * @property {number} borderRadius - Raggio del bordo dell'elemento.
+ */
 import PropTypes from "prop-types";
 import { Modal, Box, Typography } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";

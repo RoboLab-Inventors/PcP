@@ -1,11 +1,10 @@
 /**
- * Componente ProfileConfigurationCard
+ * Componente per la visualizzazione e gestione della configurazione del profilo.
  *
+ * @component
  * @param {Object} props - Le proprietà del componente.
- * @param {number} props.idConfigurazione - L'ID della configurazione.
- * @param {string} props.nome - Il nome della configurazione.
- * @param {string} props.descrizione - La descrizione della configurazione.
- *
+ * @param {string} props.nome - Il nome della configurazione del profilo.
+ * @param {string} props.descrizione - La descrizione della configurazione del profilo.
  * @returns {JSX.Element} Il componente ProfileConfigurationCard.
  */
 import "./ProfileConfigurationCard.css";
@@ -22,11 +21,11 @@ const ProfileConfigurationCard = ({ nome, descrizione }) => {
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const navigate = useNavigate();
-
+  
   const openPublishModal = () => {
     setIsPublishModalOpen(true);
   };
-
+  
   const closePublishModal = () => {
     setIsPublishModalOpen(false);
   };
@@ -34,29 +33,35 @@ const ProfileConfigurationCard = ({ nome, descrizione }) => {
   const openDeleteModal = () => {
     setIsDeleteModalOpen(true);
   };
-
+  
   const closeDeleteModal = () => {
     setIsDeleteModalOpen(false);
   };
-
+  
   const handlePublish = () => {
     openPublishModal();
   };
-
+  
   const handleDelete = () => {
     openDeleteModal();
   };
-
+  
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
-
+  
+  
   /**
-   * Gestisce la visibilità della configurazione.
-   *
-   * La funzione interna `publishConfiguration` invia una richiesta PUT al server per condividere la configurazione.
-   * Utilizza l'email e il nome memorizzati nel localStorage per creare il corpo della richiesta.
-   * Se la risposta del server ha uno stato 200, la pagina viene ricaricata.
+   * Funzione per gestire la visibilità della configurazione dell'utente.
+  *
+  * Questa funzione chiude il modal di pubblicazione e invia una richiesta PUT al server
+  * per condividere la configurazione dell'utente. Utilizza il token di autenticazione
+  * memorizzato nel localStorage per autorizzare la richiesta. Se la condivisione è avvenuta
+   * con successo, la pagina viene ricaricata.
+  *
+  * @function handleConfigurationVisibility
+   * @async
+   * @throws {Error} Se si verifica un errore durante la richiesta o la condivisione della configurazione.
    */
   const handleConfigurationVisibility = () => {
     closePublishModal();
@@ -82,6 +87,19 @@ const ProfileConfigurationCard = ({ nome, descrizione }) => {
     }, 300);
   };
   
+  
+  /**
+   * Funzione per gestire l'eliminazione della configurazione dell'utente.
+   *
+   * Questa funzione chiude il modal di eliminazione e invia una richiesta POST al server
+   * per eliminare la configurazione dell'utente. Utilizza il token di autenticazione
+   * memorizzato nel localStorage per autorizzare la richiesta. Se l'eliminazione è avvenuta
+   * con successo, la pagina viene ricaricata.
+   *
+   * @function handleConfigurationDelete
+   * @async
+   * @throws {Error} Se si verifica un errore durante la richiesta o l'eliminazione della configurazione.
+   */
   const handleConfigurationDelete = () => {
     closeDeleteModal();
     setTimeout(async () => {
@@ -105,6 +123,8 @@ const ProfileConfigurationCard = ({ nome, descrizione }) => {
       }
     }, 300);
   };
+
+  
   /**
    * Funzione per gestire la modifica della configurazione dell'utente.
    *

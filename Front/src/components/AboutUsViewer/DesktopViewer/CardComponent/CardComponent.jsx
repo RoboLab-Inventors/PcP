@@ -17,8 +17,17 @@ import PropTypes from "prop-types";
 const CardComponent = ({ coverImage, characterImage, onVisible }) => {
   const cardRef = useRef(null);
 
-  // Aggiunge una classe CSS quando il componente è visibile nella viewport
+  
   useEffect(() => {
+    /**
+     * Osservatore di intersezione per gestire la visibilità di un elemento.
+     * Aggiunge la classe "visible" quando l'elemento è visibile nel viewport
+     * e la rimuove quando non lo è.
+     *
+     * @param {IntersectionObserverEntry[]} entries - Array di oggetti IntersectionObserverEntry.
+     * @param {IntersectionObserverCallback} observer - L'osservatore di intersezione.
+     * @param {number} threshold - La soglia di visibilità dell'elemento (0.6).
+     */
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {

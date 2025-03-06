@@ -34,7 +34,7 @@ const Section = () => {
     setAccordionIndex(index);
   };
 
-  // Scrolla al componente Carousel quando
+  
   useEffect(() => {
     if (carouselRef.current) {
       carouselRef.current.addEventListener("load", () => {
@@ -45,7 +45,6 @@ const Section = () => {
     }
   }, [accordionIndex]);
 
-  // Aggiorna l'indice della fisarmonica quando il componente Carousel è visibile
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

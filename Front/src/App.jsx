@@ -1,3 +1,19 @@
+/**
+ * Componente principale dell'applicazione.
+ * 
+ * Utilizza Vanta.js per creare un effetto di sfondo animato e gestisce il routing dell'applicazione.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} Il componente App.
+ * 
+ * @example
+ * import React from 'react';
+ * import ReactDOM from 'react-dom';
+ * import App from './App';
+ * 
+ * ReactDOM.render(<App />, document.getElementById('root'));
+ */
 import { useEffect, useRef, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import RoutesPath from "./RoutesPath/RoutesPath.jsx";

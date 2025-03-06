@@ -9,7 +9,6 @@
  * @returns {JSX.Element} Il componente HeaderMobile.
  *
  * @example
- * // Esempio di utilizzo:
  * <HeaderMobile />
  *
  * @description

@@ -1,3 +1,36 @@
+/**
+ * Componente MobileSectionComponent
+ * 
+ * Questo componente visualizza diverse sezioni con immagini e descrizioni, 
+ * utilizzando un effetto di visibilità basato sull'intersezione del viewport.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} Il componente MobileSectionComponent.
+ * 
+ * @example
+ * return <MobileSectionComponent />
+ * 
+ * @description
+ * Il componente utilizza IntersectionObserver per rilevare quando le sezioni 
+ * entrano nel viewport e aggiorna lo stato `visibleSections` per gestire 
+ * la visibilità delle descrizioni delle sezioni. Inoltre, resetta lo stato 
+ * `visibleSections` quando si esce dal viewport dall'alto.
+ * 
+ * @dependencies
+ * - useEffect
+ * - useState
+ * - useRef
+ * - CardComponent
+ * - Carousel
+ * - Typography
+ * 
+ * @assets
+ * - RoboLabLogo
+ * - RoboLabWall
+ * - Controller
+ * - ControllerWall
+ */
 import { useEffect, useState, useRef } from "react";
 import "./MobileSectionComponent.css";
 import CardComponent from "../../DesktopViewer/CardComponent/CardComponent";

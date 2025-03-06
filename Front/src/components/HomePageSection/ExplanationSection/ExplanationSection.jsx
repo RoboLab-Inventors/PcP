@@ -1,3 +1,27 @@
+/**
+ * Componente ExplanationSection.
+ * 
+ * Questo componente visualizza una sezione di spiegazione con un video, un testo descrittivo e un link ai termini e servizi.
+ * 
+ * @component
+ * @returns {JSX.Element} Il componente ExplanationSection.
+ * 
+ * @example
+ * return (
+ *   <ExplanationSection />
+ * )
+ * 
+ * @typedef {Object} PopUpTerminiServiziProps
+ * @property {boolean} open - Stato di apertura del popup.
+ * @property {string} title - Titolo del popup.
+ * @property {string} description - Descrizione del popup.
+ * @property {function} onClose - Funzione per chiudere il popup.
+ * 
+ * @typedef {Object} TypographyProps
+ * @property {string} variant - Variante del componente Typography.
+ * @property {string} color - Colore del testo.
+ * @property {string} className - Classe CSS del componente.
+ */
 import { useState } from "react";
 import { Typography } from "@mui/material";
 import PopUpTerminiServizi from "../../PopUp/PopUpTerminiServizi";

@@ -1,6 +1,24 @@
+/**
+ * Componente ProfileViewer
+ * 
+ * Questo componente visualizza le informazioni del profilo e una lista di configurazioni.
+ * Se il dispositivo è mobile, mostra un pulsante per alternare la visualizzazione della lista di configurazioni.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} Il componente ProfileViewer.
+ * 
+ * @example
+ * <ProfileViewer />
+ * 
+ * @description
+ * Utilizza il hook personalizzato `useIsMobile` per determinare se il dispositivo è mobile.
+ * Se il dispositivo è mobile, mostra un pulsante per alternare la visualizzazione della lista di configurazioni.
+ * Se il dispositivo non è mobile, mostra la lista di configurazioni e le informazioni del profilo affiancate.
+ */
 import "./ProfileViewer.css";
-import CustomButton from "../customButton/CustomButton";
-import ProfileInfo from "../profileInfo/ProfileInfo";
+import CustomButton from "../CustomButton/CustomButton";
+import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import ConfigurationsList from "../../components/configurationsList/ConfigurationsList";
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
@@ -59,6 +77,11 @@ const ProfileViewer = () => {
   const [animate, setAnimate] = useState(false);
   const isMobile = useIsMobile();
 
+  /**
+   * Gestisce il click del pulsante per mostrare o nascondere le configurazioni.
+   * Se le configurazioni sono visibili, avvia un'animazione e nasconde le configurazioni dopo un timeout.
+   * Se le configurazioni non sono visibili, le mostra immediatamente.
+   */
   const handleButtonClick = () => {
     if (showConfigurations) {
       setAnimate(true);

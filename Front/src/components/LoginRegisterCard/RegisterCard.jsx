@@ -53,6 +53,12 @@ const RegisterCard = ({ switchToLogin }) => {
     firstName: "",
     lastName: "",
   });
+  /**
+   * Deriva una chiave e un vettore di inizializzazione (IV) da una password.
+   *
+   * @param {string} password - La password da cui derivare la chiave e l'IV.
+   * @returns {{ key: CryptoJS.lib.WordArray, iv: CryptoJS.lib.WordArray }} Un oggetto contenente la chiave derivata e l'IV.
+   */
   const deriveKeyAndIV = (password) => {
     const key = CryptoJS.PBKDF2(password, CryptoJS.SHA256(password), {
       keySize: 256 / 32,
@@ -83,13 +89,7 @@ const RegisterCard = ({ switchToLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
-
-  // const encryptPassword = (password) => {
-  //   const encryptionKey = 'your-encryption-key';
-  //   const iv = CryptoJS.enc.Hex.parse('00000000000000000000000000000000');
-  //   return CryptoJS.AES.encrypt(password, CryptoJS.enc.Utf8.parse(encryptionKey), { iv: iv }).toString();
-  // };
-
+  
   /**
    * Gestisce l'invio del modulo di registrazione.
    * @param {Event} e - L'evento di submit del modulo.

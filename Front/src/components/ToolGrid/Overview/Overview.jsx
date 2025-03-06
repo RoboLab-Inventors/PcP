@@ -1,4 +1,13 @@
-import { useState } from "react";
+/**
+ * Componente Overview.
+ *
+ * @param {Object} props - Le proprietà del componente.
+ * @param {Array} props.items - Array di oggetti da visualizzare nella griglia.
+ * @param {Function} props.onItemClick - Funzione chiamata quando un elemento viene cliccato.
+ * @param {number} [props.selectedIndex] - Indice dell'elemento selezionato.
+ *
+ * @returns {JSX.Element} Il componente Overview.
+ */
 import PropTypes from "prop-types";
 import "./Overview.css";
 

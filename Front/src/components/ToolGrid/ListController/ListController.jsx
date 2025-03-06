@@ -1,3 +1,13 @@
+/**
+ * Componente ListController
+ *
+ * @param {Object} props - Le proprietà del componente.
+ * @param {Array} props.items - Array di oggetti che rappresentano gli elementi della lista.
+ * @param {Function} props.onItemClick - Funzione chiamata quando un elemento della lista viene cliccato.
+ * @param {number} [props.selectedIndex] - Indice dell'elemento selezionato.
+ *
+ * @returns {JSX.Element} - Il componente ListController.
+ */
 import PropTypes from "prop-types";
 import ListItem from "./ListControllerItem";
 import "./ListController.css";

@@ -1,3 +1,16 @@
+/**
+ * Componente CustomModalTerminiServizi.
+ * 
+ * @param {Object} props - Le proprietà del componente.
+ * @param {boolean} [props.open=true] - Indica se il modal è aperto.
+ * @param {string} props.title - Il titolo del modal.
+ * @param {string} props.description - La descrizione del modal.
+ * @param {function} props.onClose - Funzione chiamata quando il modal viene chiuso.
+ * @param {function} props.onConfirm - Funzione chiamata quando viene confermata l'azione nel modal.
+ * @param {string} props.confirmLabel - Etichetta del pulsante di conferma.
+ * 
+ * @returns {JSX.Element} Il componente CustomModalTerminiServizi.
+ */
 import PropTypes from "prop-types";
 import { Modal, Box, Typography } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
@@ -34,8 +47,6 @@ CustomModalTerminiServizi.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
-  onConfirm: PropTypes.func.isRequired,
-  confirmLabel: PropTypes.string.isRequired,
 };
 
 export default CustomModalTerminiServizi;

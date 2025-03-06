@@ -1,3 +1,10 @@
+/**
+ * Componente principale per la pagina di login e registrazione.
+ * Utilizza uno stato interno per determinare se mostrare il modulo di login o quello di registrazione.
+ *
+ * @component
+ * @returns {JSX.Element} La pagina di login e registrazione.
+ */
 import { useState } from "react";
 import LoginCard from "../../components/LoginRegisterCard/LoginCard";
 import RegisterCard from "../../components/LoginRegisterCard/RegisterCard";

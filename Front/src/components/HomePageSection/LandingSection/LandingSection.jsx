@@ -1,3 +1,17 @@
+/**
+ * Componente LandingSection.
+ *
+ * Questo componente utilizza l'effetto Vanta.js per creare un'animazione di sfondo interattiva.
+ * Utilizza il hook useEffect per inizializzare e distruggere l'effetto Vanta.js.
+ *
+ * @component
+ * @example
+ * return (
+ *   <LandingSection />
+ * )
+ *
+ * @returns {JSX.Element} Il componente LandingSection.
+ */
 import { useEffect, useRef, useState } from "react";
 import { Typography } from "@mui/material";
 import ScrollDownButton from "../ScrollDownButton/ScrollDownButton";

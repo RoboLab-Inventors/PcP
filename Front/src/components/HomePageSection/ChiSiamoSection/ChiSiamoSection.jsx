@@ -1,3 +1,17 @@
+/**
+ * Componente ChiSiamoSection.
+ * 
+ * Questo componente rappresenta una sezione della homepage che descrive il progetto PcP,
+ * uno spinoff del RoboLab dell'Università degli studi di Bari “Aldo Moro”.
+ * 
+ * @component
+ * @returns {JSX.Element} La sezione ChiSiamo con un'immagine e una descrizione del progetto.
+ * 
+ * @example
+ * return (
+ *   <ChiSiamoSection />
+ * )
+ */
 import { Typography } from "@mui/material";
 import "./ChiSiamoSection.css";
 import RoboLabLogo from "../../../assets/images/RoboLabLogo.png";

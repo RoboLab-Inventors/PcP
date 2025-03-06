@@ -1,3 +1,39 @@
+/**
+ * Componente ResponsiveBottomDrawer.
+ * 
+ * Questo componente rappresenta un cassetto (drawer) che può essere aperto e chiuso
+ * dall'utente. Include funzionalità per importare ed esportare configurazioni.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} Il componente ResponsiveBottomDrawer.
+ * 
+ * @example
+ * <ResponsiveBottomDrawer />
+ * 
+ * @function
+ * @name ResponsiveBottomDrawer
+ * 
+ * @description
+ * - Utilizza lo stato locale per gestire l'apertura del cassetto e del modal.
+ * - Permette di importare configurazioni da un file .txt.
+ * - Permette di esportare configurazioni tramite una richiesta POST a un endpoint specifico.
+ * 
+ * @state {boolean} isFullOpen - Stato che indica se il cassetto è completamente aperto.
+ * @state {boolean} isModalOpen - Stato che indica se il modal è aperto.
+ * @state {string} title - Titolo della configurazione da esportare.
+ * @state {string} description - Descrizione della configurazione da esportare.
+ * @state {string} stato - Stato della configurazione da esportare.
+ * 
+ * @context {object} ConfStringContext - Contesto che fornisce la stringa di configurazione.
+ * 
+ * @function openModal - Apre il modal.
+ * @function closeModal - Chiude il modal.
+ * @function toggleDrawer - Alterna lo stato di apertura del cassetto.
+ * @function importConfiguration - Gestisce l'importazione di una configurazione da un file .txt.
+ * @function handleExport - Apre il modal per confermare l'esportazione.
+ * @function confirmExport - Conferma l'esportazione della configurazione e invia una richiesta POST.
+ */
 import { useState, useContext } from "react";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -28,6 +64,14 @@ const ResponsiveBottomDrawer = () => {
     setIsFullOpen(!isFullOpen);
   };
 
+  /**
+   * Funzione per importare una configurazione da un file di testo.
+   * Crea un elemento input di tipo file, permette la selezione di un file .txt,
+   * legge il contenuto del file e lo salva nel localStorage con la chiave "str".
+   * 
+   * @function importConfiguration
+   * @returns {void}
+   */
   const importConfiguration = () => {
     const input = document.createElement("input");
     input.type = "file";
@@ -59,6 +103,16 @@ const ResponsiveBottomDrawer = () => {
     openModal(); // Apre il modal quando l'utente preme "Esporta"
   };
   
+  /**
+   * Funzione che conferma l'esportazione di una configurazione.
+   * Chiude il modal e invia una richiesta POST al server per esportare la configurazione.
+   * Se la richiesta ha successo, scarica il file di configurazione.
+   * 
+   * @async
+   * @function confirmExport
+   * @returns {Promise<void>} Nessun valore di ritorno.
+   * @throws {Error} Se si verifica un errore durante l'export.
+   */
   const confirmExport = async () => {
     closeModal();
   
