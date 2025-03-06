@@ -42,12 +42,9 @@ const ProfileHeaderSection = () => {
       {loggedIn ? (
         <Avatar onClick={handleProfileClick} />
       ) : (
-        <div className="headerButtonsContainer">
           <div className="headerLoginButton">
             <CustomButton label="Accedi" onClick={handleLoginClick} />
           </div>
-          <CustomButton label="Registrati" onClick={handleLoginClick} />
-        </div>
       )}
     </>
   );

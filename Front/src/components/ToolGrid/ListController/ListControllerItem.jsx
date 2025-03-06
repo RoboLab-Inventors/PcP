@@ -19,11 +19,15 @@ import Chart from "../Chart/Chart";
 import { useInView } from "react-intersection-observer";
 import "./ListController.css";
 
-const ListItem = ({ item, onClick }) => {
+const ListItem = ({ item, onClick, isSelected }) => {
   const { ref, inView } = useInView({ triggerOnce: false });
 
   return (
-    <div className="list-item" onClick={onClick} ref={ref}>
+    <div
+      className={`list-item ${isSelected ? "selected" : ""}`}
+      onClick={onClick}
+      ref={ref}
+    >
       <div className="mini-chart">
         {inView && (
           <Chart
@@ -45,6 +49,7 @@ const ListItem = ({ item, onClick }) => {
 ListItem.propTypes = {
   item: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
 };
 
 export default ListItem;

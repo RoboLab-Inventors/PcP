@@ -90,7 +90,9 @@ const ChatBot = () => {
 
   return (
     <>
-      <ChatToggleButton open={open} toggleChat={toggleChat} />
+      {!open || !isMobile ? (
+        <ChatToggleButton open={open} toggleChat={toggleChat} />
+      ) : null}
       {open && (
         <ChatWindow
           messages={messages}

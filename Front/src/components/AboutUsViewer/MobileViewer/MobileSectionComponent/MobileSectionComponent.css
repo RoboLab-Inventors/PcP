@@ -1,18 +1,33 @@
-.section-container{
+.sections-container{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    gap: 20%;
+    height: 300vh;
+    justify-content: space-between;
 }
 
-.section-image{
-    width: 100%;
-    height: 40vh;
+.container-section-image{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
+.section-image{
+    width: 80%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-section-carousel{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-carousel{
+    width: 80%;
+    align-items: center;
+}
 
 .section-description{
     width: 100%;
@@ -20,8 +35,17 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 50vh;
+    height: 40vh;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-in, transform 0.8s ease-in;
 }
+
+.section-description.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .section-description-content{
     display: flex;
     justify-content: center;

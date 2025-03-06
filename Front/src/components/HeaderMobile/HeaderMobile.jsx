@@ -87,6 +87,7 @@ const HeaderMobile = () => {
             backgroundColor: "#4900006b",
             backdropFilter: "blur(10px)",
             maxWidth: isSmallScreen ? "100vw" : "300px",
+            overflowX: "hidden",
           },
         }}
       >
@@ -171,12 +172,21 @@ const HeaderMobile = () => {
               opacity: "0.7",
             }}
           />
-          <div
-            onClick={() => handleMenuItemClick("/Profile")}
-            className="menu-item"
-          >
-            Profilo
-          </div>
+            {localStorage.getItem("token") ? (
+            <div
+              onClick={() => handleMenuItemClick("/Profile")}
+              className="menu-item"
+            >
+              Profilo
+            </div>
+            ) : (
+            <div
+              onClick={() => handleMenuItemClick("/LoginRegister")}
+              className="menu-item"
+            >
+              Login
+            </div>
+            )}
           <Divider
             variant="middle"
             sx={{

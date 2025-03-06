@@ -5,7 +5,7 @@ import "./SearchBar.css";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 
-const SearchBar = ({ setSearchQuery }) => (
+const SearchBar = ({ onChange }) => (
   <form>
     <Box
       sx={{
@@ -46,9 +46,7 @@ const SearchBar = ({ setSearchQuery }) => (
       <TextField
         id="search-bar"
         className="text"
-        onChange={(e) => {
-          setSearchQuery(e.target.value);
-        }}
+        onChange={onChange}
         label="Cerca Configurazione"
         placeholder="Cerca Configurazione..."
         size="small"
