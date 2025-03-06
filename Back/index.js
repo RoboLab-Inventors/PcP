@@ -7,7 +7,7 @@ const port = 3000; // Porta su cui il server è in ascolto
 const jwt = require("jsonwebtoken"); // Libreria necessaria per la gestione dei token JWT
 app.use(cors()); // Middleware per la gestione dei CORS
 app.use(express.json()); // Middleware per la gestione dei body delle richieste in formato JSON
-
+const secretKey = "chiavesegreta"; // Chiave segreta per la creazione e la verifica dei token
 /*
 * Funzione per la verifica del token
 req: richiesta del client
@@ -116,13 +116,14 @@ app.get("/downloadConfiguration", authenticateToken, (req, res) => {
  * res: risposta del server
  */
 app.post("/exportConfiguration", authenticateToken, (req, res) => {
-    // Estrai i dati della configurazione dal body della richiesta
-    const { email, nome, descrizione, stato, configurazione, username } =req.body;
-    // Prepara il percorso del nome del file da mandare al client
-    const filePath = `./${username}_config.txt`;
-    // Crea il file con i dati della configurazione
-    const fileContent = JSON.stringify(configurazione, null, 2);
-    /*
+  // Estrai i dati della configurazione dal body della richiesta
+  const { email, nome, descrizione, stato, configurazione, username } =
+    req.body;
+  // Prepara il percorso del nome del file da mandare al client
+  const filePath = `./${username}_config.txt`;
+  // Crea il file con i dati della configurazione
+  const fileContent = JSON.stringify(configurazione, null, 2);
+  /*
     *(method) JSON.stringify(value: any, replacer?: (number | string)[] | null, space?: string | number): string (+1 overload)
     *Converts a JavaScript value to a JavaScript Object Notation (JSON) string.
 
@@ -132,7 +133,7 @@ app.post("/exportConfiguration", authenticateToken, (req, res) => {
 
     *@param space — Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
     */
-    // Scrivi il file
+  // Scrivi il file
   fs.writeFile(filePath, fileContent, (err) => {
     /*
     *function writeFile(path: fs.PathOrFileDescriptor, data: string | NodeJS.ArrayBufferView, callback: fs.NoParamCallback): void (+1 overload)
@@ -144,7 +145,7 @@ app.post("/exportConfiguration", authenticateToken, (req, res) => {
     *filePath: percorso del file
     *err: errore di scrittura del file
     */
-   //In caso di errore viene stampato server-side e restituito anche al client, altrimenti viene inserita la configurazione nel database
+    //In caso di errore viene stampato server-side e restituito anche al client, altrimenti viene inserita la configurazione nel database
     if (err) {
       console.error("Errore durante la scrittura del file:", err);
       return res
@@ -152,11 +153,12 @@ app.post("/exportConfiguration", authenticateToken, (req, res) => {
         .json({ message: "Errore durante la scrittura del file" });
     }
     //query per l'inserimento della configurazione nel database
-    const query ="INSERT INTO configurazioni (email, nome, descrizione, dataPubblicazione, stato, configurazione, dataCreazione) VALUES(?,?,?,?,?,?,?)"; //? = placeholder per i valori
+    const query =
+      "INSERT INTO configurazioni (email, nome, descrizione, dataPubblicazione, stato, configurazione, dataCreazione) VALUES(?,?,?,?,?,?,?)"; //? = placeholder per i valori
     // Formatta la query con i valori da inserire e la stampa server-side
     //query:query da eseguire
     //[email,nome,descrizione,new Date(),stato,fileContent,new Date()]:valori da inserire nella query
-    const formattedQuery = mysql.format(query, [    
+    const formattedQuery = mysql.format(query, [
       email,
       nome,
       descrizione,
@@ -178,12 +180,12 @@ app.post("/exportConfiguration", authenticateToken, (req, res) => {
     ];
     // Esegui la query
     db.query(query, values, (err, result) => {
-        /*
-        *query: query da eseguire
-        *values: valori da inserire nella query
-        *err: errore di esecuzione della query
-        *result: risultato della query
-        */
+      /*
+       *query: query da eseguire
+       *values: valori da inserire nella query
+       *err: errore di esecuzione della query
+       *result: risultato della query
+       */
       //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
       if (err) {
         console.error("Errore di database:", err);
@@ -192,7 +194,7 @@ app.post("/exportConfiguration", authenticateToken, (req, res) => {
     });
     //In caso di successo, viene restituito un file al client con i dati della configurazione chiamato "username_config.txt"
     res.download(filePath, `${username}_config.txt`, (err) => {
-        //In caso di errore durante l'invio del file, esso viene stampato server-side e restituito al client
+      //In caso di errore durante l'invio del file, esso viene stampato server-side e restituito al client
       if (err) {
         console.error("Errore durante l'invio del file:", err);
         return res
@@ -225,11 +227,11 @@ app.post("/getUserData", authenticateToken, (req, res) => {
   const formattedQuery = mysql.format(query, [username, email]);
   console.log(formattedQuery);
   /*
-    *query: query da eseguire
-    *[username,email]: valori da inserire nella query
-    *err: errore di esecuzione della query
-    *result: risultato della query
-  */
+   *query: query da eseguire
+   *[username,email]: valori da inserire nella query
+   *err: errore di esecuzione della query
+   *result: risultato della query
+   */
   db.query(query, [username, email], (err, result) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
@@ -238,10 +240,10 @@ app.post("/getUserData", authenticateToken, (req, res) => {
     }
     //Se l'utente è presente nel database, restituisci le sue informazioni
     if (result.length > 0) {
-    //In caso di successo, restituisci le informazioni del primo e unico utente trovato
+      //In caso di successo, restituisci le informazioni del primo e unico utente trovato
       return res.send({ data: result[0] });
     } else {
-     //Se l'utente non è presente nel database, restituisci un errore conforme agli standard HTTP definiti nella RFC 9110.
+      //Se l'utente non è presente nel database, restituisci un errore conforme agli standard HTTP definiti nella RFC 9110.
       return res.status(404).send({ message: "Utente non trovato" });
     }
   });
@@ -254,16 +256,16 @@ app.post("/getUserData", authenticateToken, (req, res) => {
  * res: risposta del server
  */
 app.get("/getCommunityConfiguration", authenticateToken, (req, res) => {
-    // Query per l'estrazione delle configurazioni pubbliche dal database
+  // Query per l'estrazione delle configurazioni pubbliche dal database
   const query =
     "SELECT configurazioni.idConfigurazione,configurazioni.nome,configurazioni.descrizione,users.username FROM configurazioni,users WHERE stato='Pubblico' and (configurazioni.email= users.email)";
-    // Esegui la query
-    //Non è stato messa formattedQuery perchè non ci sono valori da inserire
-    /**
-     * query: query da eseguire
-     * err: errore di esecuzione della query
-     * result: risultato della query
-     */
+  // Esegui la query
+  //Non è stato messa formattedQuery perchè non ci sono valori da inserire
+  /**
+   * query: query da eseguire
+   * err: errore di esecuzione della query
+   * result: risultato della query
+   */
   db.query(query, (err, result) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
@@ -279,19 +281,19 @@ app.get("/getCommunityConfiguration", authenticateToken, (req, res) => {
   });
 });
 /*
-* /modifyConfiguration endpoint a cui fare la richiesta
-* post metodo della richiesta che si aspetta il server
-* authenticateToken middleware per la verifica del token
-* req: richiesta del client
-* res: risposta del server 
-*/
+ * /modifyConfiguration endpoint a cui fare la richiesta
+ * post metodo della richiesta che si aspetta il server
+ * authenticateToken middleware per la verifica del token
+ * req: richiesta del client
+ * res: risposta del server
+ */
 app.post("/modifyConfiguration", authenticateToken, (req, res) => {
   // Estrai i dati della configurazione dal body della richiesta
   const { nome, email } = req.body;
   // Query per l'estrazione della configurazione dal database
   const query =
     "SELECT configurazione FROM configurazioni WHERE nome=? AND email=?";
-    // Formatta la query con i valori da inserire e la stampa server-side
+  // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [nome, email]);
   console.log(formattedQuery);
   /**
@@ -308,7 +310,7 @@ app.post("/modifyConfiguration", authenticateToken, (req, res) => {
     }
     //Se la configurazione è presente nel database, restituiscila al client altrimenti viene restituito un messaggio di errore
     if (result.length > 0) {
-        //Viene salvata la prima configurazione trovata in una variabile
+      //Viene salvata la prima configurazione trovata in una variabile
       const configurazione = result[0].configurazione;
       // Controllo per verificare che configurazione non sia null o undefined
       if (configurazione) {
@@ -331,18 +333,18 @@ app.post("/modifyConfiguration", authenticateToken, (req, res) => {
  */
 app.post("/deleteConfiguration", (req, res) => {
   // Estrai i dati della configurazione dal body della richiesta
-  const {email,nome} = req.body;
-// Query per l'eliminazione della configurazione dal database
+  const { email, nome } = req.body;
+  // Query per l'eliminazione della configurazione dal database
   const query = "DELETE FROM configurazioni WHERE email = ? AND nome = ?";
   // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [email, nome]);
   console.log(formattedQuery);
-/*
-* query: query da eseguire
-* [email,nome]: valori da inserire nella query
-* err: errore di esecuzione della query
-* result: risultato della query
-*/
+  /*
+   * query: query da eseguire
+   * [email,nome]: valori da inserire nella query
+   * err: errore di esecuzione della query
+   * result: risultato della query
+   */
   db.query(query, [email, nome], (err, result) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
@@ -365,20 +367,20 @@ app.post("/deleteConfiguration", (req, res) => {
  * res: risposta del server
  */
 app.put("/shareConfiguration", authenticateToken, (req, res) => {
-    // Estrai i dati della configurazione dal body della richiesta
+  // Estrai i dati della configurazione dal body della richiesta
   const { email, nome } = req.body;
   // Query per cambiare lo stato della configurazione
   const query =
     "UPDATE configurazioni SET stato='Pubblico' WHERE email=? and nome=?";
-    // Formatta la query con i valori da inserire e la stampa server-side
+  // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [email, nome]);
   console.log(formattedQuery);
   /*
-    * query: query da eseguire
-    * [email,nome]: valori da inserire nella query
-    * err: errore di esecuzione della query
-    * result: risultato della query
-  */
+   * query: query da eseguire
+   * [email,nome]: valori da inserire nella query
+   * err: errore di esecuzione della query
+   * result: risultato della query
+   */
   db.query(query, [email, nome], (err, result) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
@@ -394,19 +396,19 @@ app.put("/shareConfiguration", authenticateToken, (req, res) => {
   });
 });
 /*
-* /privateConfiguration endpoint a cui fare la richiesta
-* put metodo della richiesta che si aspetta il server
-* authenticateToken middleware per la verifica del token
-* req: richiesta del client
-* res: risposta del server
-*/
+ * /privateConfiguration endpoint a cui fare la richiesta
+ * put metodo della richiesta che si aspetta il server
+ * authenticateToken middleware per la verifica del token
+ * req: richiesta del client
+ * res: risposta del server
+ */
 app.put("/privateConfiguration", authenticateToken, (req, res) => {
   // Estrai i dati della configurazione dal body della richiesta
-    const { email, name } = req.body;
-    // Query per cambiare lo stato della configurazione
+  const { email, name } = req.body;
+  // Query per cambiare lo stato della configurazione
   const query =
     "UPDATE configurazioni SET stato='Privato' WHERE email=? and nome=?";
-    // Formatta la query con i valori da inserire e la stampa server-side
+  // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [email, name]);
   console.log(formattedQuery);
   /**
@@ -437,19 +439,19 @@ app.put("/privateConfiguration", authenticateToken, (req, res) => {
  * res: risposta del server
  */
 app.post("/getConfigurations", authenticateToken, (req, res) => {
-    // Estrai l'email dal body della richiesta
+  // Estrai l'email dal body della richiesta
   const email = req.body.email;
-    // Query per l'estrazione delle configurazioni dell'utente dal database
+  // Query per l'estrazione delle configurazioni dell'utente dal database
   const query = "SELECT * FROM `configurazioni` WHERE email=?";
   // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [email]);
   console.log(formattedQuery);
-    /*
-    *query: query da eseguire
-    *[email]: valori da inserire nella query
-    *err: errore di esecuzione della query
-    *result: risultato della query
-    */
+  /*
+   *query: query da eseguire
+   *[email]: valori da inserire nella query
+   *err: errore di esecuzione della query
+   *result: risultato della query
+   */
   db.query(query, [email], (err, result) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
@@ -472,20 +474,20 @@ app.post("/getConfigurations", authenticateToken, (req, res) => {
  * res: risposta del server
  */
 app.post("/downloadConfiguration", authenticateToken, (req, res) => {
-    // Estrai l'id della configurazione e il nome dal body della richiesta
+  // Estrai l'id della configurazione e il nome dal body della richiesta
   const { idConfigurazione, name } = req.body;
-    // Query per l'estrazione della configurazione dal database
+  // Query per l'estrazione della configurazione dal database
   const query =
     "SELECT configurazione,username FROM configurazioni,users WHERE idConfigurazione = '? and name=?' and (configurazione.email=users.email)";
-    // Formatta la query con i valori da inserire e la stampa server-side
+  // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [idConfigurazione]);
   console.log(formattedQuery);
-    /*
-    *query: query da eseguire
-    *[idConfigurazione,name]: valori da inserire nella query
-    *err: errore di esecuzione della query
-    *result: risultato della query
-    */
+  /*
+   *query: query da eseguire
+   *[idConfigurazione,name]: valori da inserire nella query
+   *err: errore di esecuzione della query
+   *result: risultato della query
+   */
   db.query(query, [idConfigurazione, name], (err, result) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
@@ -534,12 +536,12 @@ app.post("/downloadConfiguration", authenticateToken, (req, res) => {
  * res: risposta del server
  */
 app.post("/downloadConfigurationProfile", authenticateToken, (req, res) => {
-    // Estrai l'email e il nome dal body della richiesta
+  // Estrai l'email e il nome dal body della richiesta
   const { email, name } = req.body;
-    // Query per l'estrazione della configurazione dal database
+  // Query per l'estrazione della configurazione dal database
   const query =
     "SELECT configurazione FROM configurazioni WHERE nome = ? and email=?";
-    // Formatta la query con i valori da inserire e la stampa server-side
+  // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [name, email]);
   console.log(formattedQuery);
   /**
@@ -570,7 +572,7 @@ app.post("/downloadConfigurationProfile", authenticateToken, (req, res) => {
     const filePath = `./${name}_config.json`;
     // Scrivi il file
     fs.writeFile(filePath, configuration, (err) => {
-        //In caso di errore viene stampato server-side e restituito anche al client, altrimenti viene inviato il file al client
+      //In caso di errore viene stampato server-side e restituito anche al client, altrimenti viene inviato il file al client
       if (err) {
         console.error("Errore durante la scrittura del file:", err);
         return res
@@ -614,10 +616,10 @@ const db = mysql.createConnection({
  * registerUser sarà implementato quando verrà implementata la registrazione per gli utenti
  */
 app.post("/registerAdmin", (req, res) => {
-    // Estrai email, password e username dal body della richiesta
-  const {email,password,username} = req.body;
-    // Query per l'inserimento dell'utente nel database
-  const query = "INSERT INTO admins(email,username,password) VALUES(?,?,?)";// ? = placeholder per i valori
+  // Estrai email, password e username dal body della richiesta
+  const { email, password, username } = req.body;
+  // Query per l'inserimento dell'utente nel database
+  const query = "INSERT INTO admins(email,username,password) VALUES(?,?,?)"; // ? = placeholder per i valori
   /**
    * query: query da eseguire
    * [email,username,password]: valori da inserire nella query
@@ -630,32 +632,32 @@ app.post("/registerAdmin", (req, res) => {
       console.error("Errore di database:", err);
       return result.status(500).send({ message: "Errore di database" });
     } else {
-        //Se la registrazione è avvenuta con successo, restituisci un messaggio di successo al client
+      //Se la registrazione è avvenuta con successo, restituisci un messaggio di successo al client
       res.send({ message: "Registrazione completata con successo!" });
     }
   });
 });
 /*
-* /loginAdmin endpoint a cui fare la richiesta
-* post metodo della richiesta che si aspetta il server
-* req: richiesta del client
-* res: risposta del server
-* loginAdmin sarà implementato quando verrà implementato il login per gli admin 
-*/
+ * /loginAdmin endpoint a cui fare la richiesta
+ * post metodo della richiesta che si aspetta il server
+ * req: richiesta del client
+ * res: risposta del server
+ * loginAdmin sarà implementato quando verrà implementato il login per gli admin
+ */
 app.post("/loginAdmin", (req, res) => {
   // Estrai email e password dal body della richiesta
-  const {email,password} = req.body;
-    // Query per l'estrazione dell'admin dal database
+  const { email, password } = req.body;
+  // Query per l'estrazione dell'admin dal database
   const query = `SELECT * FROM admins WHERE "email" = ? AND password = ?`;
   // Formatta la query con i valori da inserire e la stampa server-side
-const formattedQuery = mysql.format(query, [email, password]);
-console.log(formattedQuery);
-/**
- * query: query da eseguire
- * [email,password]: valori da inserire nella query
- * err: errore di esecuzione della query
- * results: risultato della query
- */
+  const formattedQuery = mysql.format(query, [email, password]);
+  console.log(formattedQuery);
+  /**
+   * query: query da eseguire
+   * [email,password]: valori da inserire nella query
+   * err: errore di esecuzione della query
+   * results: risultato della query
+   */
   db.query(query, [email, password], (err, results) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
@@ -681,19 +683,19 @@ console.log(formattedQuery);
  * res: risposta del server
  */
 app.delete("/deleteAdmin", authenticateToken, (req, res) => {
-    // Estrai l'email dal body della richiesta
+  // Estrai l'email dal body della richiesta
   const username = req.body.username;
-    // Query per l'eliminazione dell'utente dal database
+  // Query per l'eliminazione dell'utente dal database
   const query = `DELETE FROM admins WHERE username = ?`;
   // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [username]);
-    console.log(formattedQuery);
-    /**
-     * query: query da eseguire
-     * [username]: valori da inserire nella query
-     * err: errore di esecuzione della query
-     * result: risultato della query
-     */
+  console.log(formattedQuery);
+  /**
+   * query: query da eseguire
+   * [username]: valori da inserire nella query
+   * err: errore di esecuzione della query
+   * result: risultato della query
+   */
   db.query(query, username, (err, result) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
@@ -718,49 +720,49 @@ app.delete("/deleteAdmin", authenticateToken, (req, res) => {
  * res: risposta del server
  */
 app.put("/modifyAdmin", authenticateToken, (ris, req) => {
-    // Estrai i dati dell'utente dal body della richiesta
+  // Estrai i dati dell'utente dal body della richiesta
   const { emailAttuale, email, password } = req.body;
-  if(email)
-//In base al campo della richiesta, viene eseguita la query corrispondente
-  if (email) {
-    // Query per la modifica dell'email dell'utente
-    const query = "UPDATE admins SET email=? WHERE email=?";
-    /**
-     * query: query da eseguire
-     * [email,emailAttuale]: valori da inserire nella query
-     * err: errore di esecuzione della query
-     * result: risultato della query
-    */
-    db.query(query, [email, emailAttuale], (err, result) => {
-      if (err) {
-        console.error("Errore di database:", err);
-        //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
-        return res.status(500).send({ message: "Errore di database" });
-      } else {
-        //Se la modifica è avvenuta con successo, restituisci un messaggio di successo al client
-        res.send({ message: "Modifica completata con successo!" });
-      }
-    });
-  } else if (password) {
-    // Query per la modifica della password dell'utente
-    const query = "UPDATE admins SET password=? WHERE email=?";
-    /**
-     * query: query da eseguire
-     * [password,emailAttuale]: valori da inserire nella query
-     * err: errore di esecuzione della query
-     * result: risultato della query
-     */
-    db.query(query, [password, emailAttuale], (err, result) => {
-      if (err) {
-        console.error("Errore di database:", err);
-        //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
-        return res.status(500).send({ message: "Errore di database" });
-      } else {
-        //Se la modifica è avvenuta con successo, restituisci un messaggio di successo al client
-        res.send({ message: "Modifica completata con successo!" });
-      }
-    });
-  }
+  if (email)
+    if (email) {
+      //In base al campo della richiesta, viene eseguita la query corrispondente
+      // Query per la modifica dell'email dell'utente
+      const query = "UPDATE admins SET email=? WHERE email=?";
+      /**
+       * query: query da eseguire
+       * [email,emailAttuale]: valori da inserire nella query
+       * err: errore di esecuzione della query
+       * result: risultato della query
+       */
+      db.query(query, [email, emailAttuale], (err, result) => {
+        if (err) {
+          console.error("Errore di database:", err);
+          //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
+          return res.status(500).send({ message: "Errore di database" });
+        } else {
+          //Se la modifica è avvenuta con successo, restituisci un messaggio di successo al client
+          res.send({ message: "Modifica completata con successo!" });
+        }
+      });
+    } else if (password) {
+      // Query per la modifica della password dell'utente
+      const query = "UPDATE admins SET password=? WHERE email=?";
+      /**
+       * query: query da eseguire
+       * [password,emailAttuale]: valori da inserire nella query
+       * err: errore di esecuzione della query
+       * result: risultato della query
+       */
+      db.query(query, [password, emailAttuale], (err, result) => {
+        if (err) {
+          console.error("Errore di database:", err);
+          //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
+          return res.status(500).send({ message: "Errore di database" });
+        } else {
+          //Se la modifica è avvenuta con successo, restituisci un messaggio di successo al client
+          res.send({ message: "Modifica completata con successo!" });
+        }
+      });
+    }
 });
 /**
  * /deleteUser endpoint a cui fare la richiesta
@@ -769,22 +771,22 @@ app.put("/modifyAdmin", authenticateToken, (ris, req) => {
  * req: richiesta del client
  * res: risposta del server
  * è stato usato il metodo post perchè delete non permette alla richiesta di avere un corpo
- * funzione che sarà usabile quando verrà implementato il cancella profilo 
+ * funzione che sarà usabile quando verrà implementato il cancella profilo
  */
 app.post("/deleteUser", authenticateToken, (req, res) => {
-    // Estrai l'email dal body della richiesta
+  // Estrai l'email dal body della richiesta
   const username = req.body.username;
-    // Query per l'eliminazione dell'utente dal database
+  // Query per l'eliminazione dell'utente dal database
   const query = `DELETE FROM users WHERE username = ?`;
   // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [username]);
-    console.log(formattedQuery);
-    /**
-     * query: query da eseguire
-     * [username]: valori da inserire nella query
-     * err: errore di esecuzione della query
-     * result: risultato della query
-     */
+  console.log(formattedQuery);
+  /**
+   * query: query da eseguire
+   * [username]: valori da inserire nella query
+   * err: errore di esecuzione della query
+   * result: risultato della query
+   */
   db.query(query, username, (err, result) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
@@ -808,11 +810,11 @@ app.post("/deleteUser", authenticateToken, (req, res) => {
  * res: risposta del server
  */
 app.post("/loginUser", (req, res) => {
-    // Estrai i dati dell'utente dal body della richiesta
-  const {email,password} = req.body;
-// Query per l'estrazione dell'utente dal database
-  const query = `SELECT * FROM users WHERE email= ? AND password = ?`;//? = placeholder per i valori
-    // Formatta la query con i valori da inserire e la stampa server-side
+  // Estrai i dati dell'utente dal body della richiesta
+  const { email, password } = req.body;
+  // Query per l'estrazione dell'utente dal database
+  const query = `SELECT * FROM users WHERE email= ? AND password = ?`; //? = placeholder per i valori
+  // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [email, password]);
   console.log(formattedQuery);
   /**
@@ -829,7 +831,7 @@ app.post("/loginUser", (req, res) => {
      * results: risultato della query
      */
     if (err) {
-        //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
+      //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
       console.error("Errore di database:", err);
       return res.status(500).send({ message: "Errore di database" });
     }
@@ -854,9 +856,10 @@ app.post("/loginUser", (req, res) => {
   });
 });
 app.put("/modifyUser", authenticateToken, (req, res) => {
-    // Estrai i dati dell'utente dal body della richiesta
-  const { email, username, birthDate, gender, nome, cognome, emailAttuale } =req.body;
-    // Query per l'aggiornamento dell'utente nel database
+  // Estrai i dati dell'utente dal body della richiesta
+  const { email, username, birthDate, gender, nome, cognome, emailAttuale } =
+    req.body;
+  // Query per l'aggiornamento dell'utente nel database
   const sql = `UPDATE users SET email=? ,username = ?,  dataNascita = ?, sesso = ? , nome = ?, cognome = ? WHERE email = ?;`;
   const values = [
     email,
@@ -870,20 +873,20 @@ app.put("/modifyUser", authenticateToken, (req, res) => {
   // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(sql, values);
   console.log(formattedQuery);
-    /**
-     * query: query da eseguire
-     * [email, username, birthDate,gender,nome,cognome,emailAttuale]: valori da inserire nella query
-     * err: errore di esecuzione della query
-     * result: risultato della query
-     * values: valori da inserire nella query     
-     */ 
+  /**
+   * query: query da eseguire
+   * [email, username, birthDate,gender,nome,cognome,emailAttuale]: valori da inserire nella query
+   * err: errore di esecuzione della query
+   * result: risultato della query
+   * values: valori da inserire nella query
+   */
   db.query(sql, values, (err, result) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
       console.error("Errore nell'aggiornamento:", err);
       res.status(500).send("Errore del server");
     } else {
-        //Se l'aggiornamento è andato a buon fine, restituisci un messaggio di successo al client
+      //Se l'aggiornamento è andato a buon fine, restituisci un messaggio di successo al client
       res.send("Aggiornamento riuscito");
     }
   });
@@ -895,12 +898,13 @@ app.put("/modifyUser", authenticateToken, (req, res) => {
  * res: risposta del server
  */
 app.post("/registerUser", (req, res) => {
-    // Estrai i dati dell'utente dal body della richiesta
-  const { email, username, password, birthDate,gender,firstName,lastName }=req.body;
-    // Query per l'inserimento dell'utente nel database
+  // Estrai i dati dell'utente dal body della richiesta
+  const { email, username, password, birthDate, gender, firstName, lastName } =
+    req.body;
+  // Query per l'inserimento dell'utente nel database
   const query =
     "INSERT INTO users(email, username, password, dataNascita, sesso, nome,cognome) VALUES(?,?,?,?,?,?,?)"; //? = placeholder per i valori
-// Formatta la query con i valori da inserire e la stampa server-side
+  // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [
     email,
     username,
@@ -922,7 +926,7 @@ app.post("/registerUser", (req, res) => {
     query,
     [email, username, password, birthDate, gender, firstName, lastName],
     (err, results) => {
-        //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
+      //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
       if (err) {
         console.error("Errore di database:", err);
         return res.status(500).send({ message: "Errore di database" });
@@ -943,9 +947,9 @@ app.post("/registerUser", (req, res) => {
  * res: risposta del server
  */
 app.get("/lesson", (req, res) => {
-    // Query per l'estrazione delle lezioni dal database
+  // Query per l'estrazione delle lezioni dal database
   const query = "SELECT * FROM lezioni";
-    // Esegui la query
+  // Esegui la query
   console.log(query);
   /**
    * query: query da eseguire
@@ -970,8 +974,8 @@ app.get("/lesson", (req, res) => {
  * res: risposta del server
  */
 app.put("/modifyLesson", authenticateToken, (req, res) => {
-    // Estrai i dati della lezione dal body della richiesta
-  const {nomeLezione,testoLezione,lezioneSelezionata} = req.body;
+  // Estrai i dati della lezione dal body della richiesta
+  const { nomeLezione, testoLezione, lezioneSelezionata } = req.body;
   //Inizio della query composta
   let query = `UPDATE lezioni SET `;
   if (nomeLezione) {
@@ -987,19 +991,19 @@ app.put("/modifyLesson", authenticateToken, (req, res) => {
   }
   // Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query);
-    console.log(formattedQuery);
-    /**
-     * query: query da eseguire
-     * err: errore di esecuzione della query
-     * result: risultato della query
-     */
+  console.log(formattedQuery);
+  /**
+   * query: query da eseguire
+   * err: errore di esecuzione della query
+   * result: risultato della query
+   */
   db.query(query, (err, result) => {
     //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
     if (err) {
       console.error("Errore di database:", err);
       return res.status(500).send({ message: "Errore di database" });
     } else {
-        //Se la lezione è stata modificata con successo, restituisci un messaggio di successo
+      //Se la lezione è stata modificata con successo, restituisci un messaggio di successo
       res.send({ message: "Lezione modificata con successo!" });
     }
   });
@@ -1013,13 +1017,13 @@ app.put("/modifyLesson", authenticateToken, (req, res) => {
  * endpoint disponibile solo all'admin per la gestione delle lezioni, non è stato implementato perchè admin è in sviluppi futuri
  */
 app.post("/addLesson", authenticateToken, (req, res) => {
-    // Estrai i dati della lezione dal body della richiesta
-  const {nomeLezione,testoLezione} = req.body;
+  // Estrai i dati della lezione dal body della richiesta
+  const { nomeLezione, testoLezione } = req.body;
   // Query per l'inserimento della lezione nel database
   const query = "INSERT INTO lezioni(testoLezione,nomeLezione) VALUES(?,?)";
   //Formatta la query con i valori da inserire e la stampa server-side
   const formattedQuery = mysql.format(query, [testoLezione, nomeLezione]);
-    console.log(formattedQuery);
+  console.log(formattedQuery);
   db.query(query, [testoLezione, nomeLezione], (err, result) => {
     if (err) {
       console.error("Errore di database:", err);
@@ -1039,39 +1043,39 @@ app.post("/addLesson", authenticateToken, (req, res) => {
  * endpoint disponibile solo all'admin per la gestione delle lezioni, non è stato implementato perchè admin è in sviluppi futuri
  */
 app.post("/deleteLesson", authenticateToken, (req, res) => {
-    // Estrai il nome della lezione dal body della richiesta
-    const nomeLezione = req.body.nomeLezione;
-    // Query per l'eliminazione della lezione dal database
-    const query = `DELETE FROM lezioni WHERE nomeLezione = ?`;
-    // Formatta la query con i valori da inserire e la stampa server-side
-    const formattedQuery = mysql.format(query, [nomeLezione]);
-    console.log(formattedQuery);
-    /**
-     * query: query da eseguire
-     * [nomeLezione]: valori da inserire nella query
-     * err: errore di esecuzione della query
-     * result: risultato della query
-     */
-    db.query(query, nomeLezione, (err, result) => {
-        //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
-        if (err) {
-        console.error("Errore di database:", err);
-        return res.status(500).send({ message: "Errore di database" });
-        }
-        //Se la lezione è stata eliminata con successo, restituisci un messaggio di successo al client altrimenti viene restituito un messaggio di errore
-        if (result.affectedRows > 0) {
-        console.log("Lezione eliminata con successo:", result);
-        return res.send({ message: "Lezione eliminata con successo!" });
-        } else {
-        console.log("Lezione non trovata");
-        return res.status(404).send({ message: "Lezione non trovata" });
-        }
-    });
+  // Estrai il nome della lezione dal body della richiesta
+  const nomeLezione = req.body.nomeLezione;
+  // Query per l'eliminazione della lezione dal database
+  const query = `DELETE FROM lezioni WHERE nomeLezione = ?`;
+  // Formatta la query con i valori da inserire e la stampa server-side
+  const formattedQuery = mysql.format(query, [nomeLezione]);
+  console.log(formattedQuery);
+  /**
+   * query: query da eseguire
+   * [nomeLezione]: valori da inserire nella query
+   * err: errore di esecuzione della query
+   * result: risultato della query
+   */
+  db.query(query, nomeLezione, (err, result) => {
+    //In caso di errore viene stampato server-side l'errore e restituito al client con uno stato personalizazto e conforme agli standard  HTTP definiti nella RFC 9110.
+    if (err) {
+      console.error("Errore di database:", err);
+      return res.status(500).send({ message: "Errore di database" });
+    }
+    //Se la lezione è stata eliminata con successo, restituisci un messaggio di successo al client altrimenti viene restituito un messaggio di errore
+    if (result.affectedRows > 0) {
+      console.log("Lezione eliminata con successo:", result);
+      return res.send({ message: "Lezione eliminata con successo!" });
+    } else {
+      console.log("Lezione non trovata");
+      return res.status(404).send({ message: "Lezione non trovata" });
+    }
+  });
 });
 
 // Gestione della connessione al database
 db.connect((err) => {
-    //In caso di errore viene stampato server-side l'errore
+  //In caso di errore viene stampato server-side l'errore
   if (err) {
     console.error("Errore di connessione al DB:", err);
   }
