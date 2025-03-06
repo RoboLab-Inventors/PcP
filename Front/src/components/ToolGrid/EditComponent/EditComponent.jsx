@@ -145,16 +145,10 @@ const EditComponent = ({ items, chartData }) => {
   return (
     <div className="editContainer">
       <div className="button-container">
-        <CustomButton
-          label="Salva Modifiche"
-          backgroundColor="var(--primary-color-secondary)"
-          bgColor="var(--secondary-color-secondary)"
-          borderColor="var(--background-primary)"
-          onClick={handleSave}
-        />
+        <CustomButton label="Salva Modifiche" onClick={handleSave} />
       </div>
       <>
-        <Typography variant="h6" color={theme.palette.primary.secondary}>
+        <Typography variant="h6" color={theme.palette.secondary.main}>
           TIPO
         </Typography>
         <div className="input-container">
@@ -171,7 +165,7 @@ const EditComponent = ({ items, chartData }) => {
         </div>
       </>
       <>
-        <Typography variant="h6" color={theme.palette.primary.secondary}>
+        <Typography variant="h6" color={theme.palette.secondary.main}>
           INPUT
         </Typography>
         <div className="input-container">
@@ -188,7 +182,7 @@ const EditComponent = ({ items, chartData }) => {
         </div>
       </>
       <>
-        <Typography variant="h6" color={theme.palette.primary.secondary}>
+        <Typography variant="h6" color={theme.palette.secondary.main}>
           CONVERSIONE
         </Typography>
         <Select
@@ -198,8 +192,12 @@ const EditComponent = ({ items, chartData }) => {
             width: "100%",
             height: "40px",
             backgroundColor: "transparent",
-            border: "1px solid var(--fontColor-main)",
-            color: "var(--fontColor-main)",
+            border: "1px solid var(--text)!important",
+            color: "var(--background)!important",
+            "& .MuiSelect-icon": {
+              // Targeting the dropdown arrow icon
+              color: "var(--background)!important", // Set the color of the arrow icon here
+            },
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               border: "none",
             },
@@ -209,6 +207,8 @@ const EditComponent = ({ items, chartData }) => {
               style: {
                 maxHeight: 200,
                 overflowY: "auto",
+                backgroundColor: "var(--text)",
+                color: "var(--darkgrey)",
               },
             },
           }}
@@ -232,7 +232,7 @@ const EditComponent = ({ items, chartData }) => {
         </Select>
       </>
       <>
-        <Typography variant="h6" color={theme.palette.primary.secondary}>
+        <Typography variant="h6" color={theme.palette.secondary.main}>
           PULSANTE DI ARRIVO
         </Typography>
         <Select
@@ -242,8 +242,12 @@ const EditComponent = ({ items, chartData }) => {
             width: "100%",
             height: "40px",
             backgroundColor: "transparent",
-            border: "1px solid var(--fontColor-main)",
-            color: "var(--fontColor-main)",
+            border: "1px solid var(--text)!important",
+            color: "var(--background)!important",
+            "& .MuiSelect-icon": {
+              // Targeting the dropdown arrow icon
+              color: "var(--background)!important", // Set the color of the arrow icon here
+            },
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               border: "none",
             },
@@ -253,6 +257,8 @@ const EditComponent = ({ items, chartData }) => {
               style: {
                 maxHeight: 200,
                 overflowY: "auto",
+                backgroundColor: "var(--text)",
+                color: "var(--darkgrey)",
               },
             },
           }}

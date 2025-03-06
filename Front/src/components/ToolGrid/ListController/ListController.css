@@ -1,33 +1,35 @@
 .list-controller {
-    width: 100%;
-    max-height: 100%;
-    overflow-y: auto;
-  }
-  
-  .list-item {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px 0 10px 0;
-    border-top: 1px solid var(--secondary-color-main);
-    border-bottom: 1px solid var(--secondary-color-main);
-  }
-  
-  .list-item:hover {
-    background-color: var(--primary-color-secondary-opacity);
-  }
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+}
 
-  .list-item.selected {
-    background-color: var(--primary-color-secondary-opacity);
-  }
-  
-  .mini-chart {
-    width: 100px;
-    height: 100px;
-    margin-right: 20px;
-    padding-left: 20px;
-  }
-  
-  .item-name {
-    flex-grow: 1;
-  }
+.list-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0 10px 0;
+  border-top: 1px solid var(--darkgrey);
+  border-bottom: 1px solid var(--darkgrey);
+}
+
+.list-item:hover {
+  background-color: var(--accent);
+  backdrop-filter: opacity(0.5);
+}
+
+.list-item.selected {
+  background-color: var(--accent);
+  backdrop-filter: opacity(0.5);
+}
+
+.mini-chart {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  padding-left: 20px;
+}
+
+.item-name {
+  flex-grow: 1;
+}

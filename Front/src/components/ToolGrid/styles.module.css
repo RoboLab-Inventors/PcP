@@ -47,7 +47,7 @@
   --background-color: transparent;
 }
 .ResizeHandleOuter[data-resize-handle-active] {
-  --background-color: var(--secondary-color-secondary);
+  --background-color: var(--accent);
 }
 
 .ResizeHandleInner {
@@ -57,7 +57,7 @@
   left: 0.25em;
   right: 0.25em;
   border-radius: 0.25em;
-  background-color: var(--primary-color-main);
+  background-color: var(--accent);
   transition: background-color 0.2s linear;
 }
 

@@ -50,7 +50,7 @@ const Chart = memo(
         {
           label: "Real-time Data",
           data: Array(length).fill(0),
-          borderColor: theme.palette.primary.secondary,
+          borderColor: theme.palette.secondary.main,
           backgroundColor: "rgba(213, 161, 40, 0.5)",
           color: theme.palette.fontColor.main,
           borderWidth: 3,

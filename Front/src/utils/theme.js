@@ -21,6 +21,10 @@ const palette = {
     primary: getCssVariable("--background"),
     secondary: getCssVariable("--text"),
   },
+  dark: {
+    main: getCssVariable("--darkgrey"),
+    secondary: getCssVariable("--grey"),
+  },
 };
 
 const heading = {

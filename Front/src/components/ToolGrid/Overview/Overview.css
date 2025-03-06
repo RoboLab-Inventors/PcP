@@ -15,8 +15,8 @@
 
 .table-item {
   background-color: transparent;
-  border: 1px solid var(--primary-color-secondary);
-  color: var(--fontColor-main);
+  border: 1px solid var(--darkgrey);
+  color: var(--text);
   padding: 12px;
   display: flex;
   justify-content: center;
@@ -28,9 +28,11 @@
 }
 
 .table-item:hover {
-  background-color: var(--primary-color-secondary-opacity);
+  background-color: var(--accent);
+  backdrop-filter: opacity(0.5);
 }
 
 .table-item.selected {
-  background-color: var(--primary-color-secondary-opacity);
+  background-color: var(--accent);
+  backdrop-filter: opacity(0.5);
 }
