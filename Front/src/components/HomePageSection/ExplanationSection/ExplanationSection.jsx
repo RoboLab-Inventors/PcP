@@ -34,6 +34,11 @@ const ExplanationSection = () => {
             spazio community configurazioni fatte da altri utenti.
           </Typography>
         </div>
+        <div className="terminiServiziContainer">
+          <Typography variant="p" className="terminiServiziTitle">
+            Termini e Servizi
+          </Typography>
+        </div>
       </div>
     </>
   );
