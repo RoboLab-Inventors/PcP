@@ -35,7 +35,10 @@ const ExplanationSection = () => {
           </Typography>
         </div>
         <div className="terminiServiziContainer">
-          <Typography variant="p" className="terminiServiziTitle" onClick={}>
+          <Typography
+            variant="p"
+            className="terminiServiziTitle" /*onClick={}*/
+          >
             Termini e Servizi
           </Typography>
         </div>
