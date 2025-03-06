@@ -1,9 +1,29 @@
+import { useState } from "react";
 import { Typography } from "@mui/material";
+import PopUpTerminiServizi from "../../PopUp/PopUpTerminiServizi";
 import "./ExplanationSection.css";
 
 const ExplanationSection = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
+      <PopUpTerminiServizi
+        open={isModalOpen}
+        title="Termini e Servizi"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+          auctor, nunc nec ultricies ultricies, nunc eros ultricies
+          tortor, nec ultricies tortor nunc nec nunc. "
+        onClose={closeModal}
+      />
       <div className="homeSeparator"></div>
       <div className="explanationContainer">
         <div className="explanationVideo">
@@ -37,7 +57,8 @@ const ExplanationSection = () => {
         <div className="terminiServiziContainer">
           <Typography
             variant="p"
-            className="terminiServiziTitle" /*onClick={}*/
+            className="terminiServiziTitle"
+            onClick={openModal}
           >
             Termini e Servizi
           </Typography>

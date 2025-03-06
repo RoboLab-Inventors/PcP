@@ -8,34 +8,6 @@
       href="./src/assets/icons/logoHeader.svg"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Function to check token and redirect if necessary
-        function checkTokenAndRedirect(event) {
-          const token = localStorage.getItem("token");
-          console.log("Token:", token);
-
-          const anchor = event.target.closest("a");
-          if (anchor) {
-            console.log("Anchor href:", anchor.href);
-          }
-
-          if (!token && anchor && anchor.href.includes("/Profile")) {
-            event.preventDefault();
-            console.log("Redirecting to /LoginRegister");
-            window.location.href = "/LoginRegister";
-          }
-        }
-
-        // Add event listener to all links
-        document.addEventListener("click", function (event) {
-          if (event.target.closest("a")) {
-            console.log("Link clicked");
-            checkTokenAndRedirect(event);
-          }
-        });
-      });
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.waves.min.js"></script>
     <title>PCP</title>

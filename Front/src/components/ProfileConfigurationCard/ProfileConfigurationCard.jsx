@@ -12,22 +12,43 @@ import "./ProfileConfigurationCard.css";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Download, EditNote, Publish, Delete } from "@mui/icons-material";
-import PopUp from "../PopUp/PopUp";
+import GenericPopUp from "../PopUp/PopUpGenerico";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { BASE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
-const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione }) => {
+const ProfileConfigurationCard = ({ nome, descrizione }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  const openPublishModal = () => {
+    setIsPublishModalOpen(true);
+  };
+
+  const closePublishModal = () => {
+    setIsPublishModalOpen(false);
+  };
+
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const handlePublish = () => {
+    openPublishModal();
+  };
+
+  const handleDelete = () => {
+    openDeleteModal();
+  };
 
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
-  };
-
-  const handleDeleteClick = () => {
-    setShowDeletePopup(true);
   };
 
   /**
@@ -38,23 +59,51 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione }) => {
    * Se la risposta del server ha uno stato 200, la pagina viene ricaricata.
    */
   const handleConfigurationVisibility = () => {
-    async function publishConfiguration() {
-      const response = await fetch(`${BASE_URL}/shareConfiguration`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({
-          email: localStorage.getItem("email"),
-          nome: nome,
-        }),
-      });
-      if (response.status === 200) {
-        window.location.reload();
+    closePublishModal();
+    setTimeout(async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/shareConfiguration`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            email: localStorage.getItem("email"),
+            nome: nome,
+          }),
+        });
+        if (response.status === 200) {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Errore durante la pubblicazione:", error);
       }
-    }
-    publishConfiguration();
+    }, 300);
+  };
+  
+  const handleConfigurationDelete = () => {
+    closeDeleteModal();
+    setTimeout(async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/deleteConfiguration`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            email: localStorage.getItem("email"),
+            nome: nome,
+          }),
+        });
+        if (response.status === 200) {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Errore durante la pubblicazione:", error);
+      }
+    }, 300);
   };
   /**
    * Funzione per gestire la modifica della configurazione dell'utente.
@@ -78,15 +127,14 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione }) => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify({
-            nome: nome, // Assicurati che 'nome' sia definito correttamente
+            nome: nome,
             email: localStorage.getItem("email"),
           }),
         });
 
-        // Controlla se la risposta è OK
         if (response.ok) {
-          const data = await response.json(); // Aggiungi 'await' per risolvere la promessa
-          localStorage.setItem("str", data.configurazione); // Salva nel localStorage come stringa JSON
+          const data = await response.json();
+          localStorage.setItem("str", data.configurazione);
           navigate("/Tool");
         } else {
           console.error(
@@ -95,7 +143,7 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione }) => {
           );
         }
       } catch (error) {
-        alert("Errore: " + error.message); // Gestione degli errori
+        alert("Errore: " + error.message);
       }
     };
 
@@ -153,29 +201,26 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione }) => {
     downloadConfiguration();
   };
 
-  const handleClosePopup = () => {
-    async function deleteConfiguration() {
-      const response = await fetch(`${BASE_URL}/deleteConfiguration`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({
-          email: localStorage.getItem("email"),
-          nome: nome,
-        }),
-      });
-      if (response.status === 200) {
-        window.location.reload();
-      }
-    }
-    deleteConfiguration();
-    setShowDeletePopup(false);
-  };
-
   return (
     <div className={`profileCardWrapper ${isOpen ? "open" : ""}`}>
+      {isPublishModalOpen && (
+        <GenericPopUp
+          title={"Attenzione!"}
+          description = {"Sicuro di voler pubblicare la configurazione? Una volta pubblicata, la configurazione sarà visibile a tutti gli utenti."}
+          onClose={closePublishModal}
+          onConfirm={handleConfigurationVisibility}
+          confirmLabel="Pubblica"
+        />
+      )}
+      {isDeleteModalOpen && (
+        <GenericPopUp
+          title={"Attenzione!"}
+          description = {"Sicuro di voler eliminare la configurazione? Una volta eliminata, la configurazione non sarà più recuperabile."}
+          onClose={closeDeleteModal}
+          onConfirm={handleConfigurationDelete}
+          confirmLabel="Elimina"
+        />
+      )}
       <div className="profileCardContainer" onClick={toggleDropdown}>
         <div className="titleContainer">
           <Typography variant="h6">{nome}</Typography>
@@ -199,32 +244,21 @@ const ProfileConfigurationCard = ({ idConfigurazione, nome, descrizione }) => {
             <span className="profileTooltip">Scarica</span>
             <Download />
           </div>
-          <div
-            className="reactionButton"
-            onClick={handleConfigurationVisibility}
-          >
+          <div className="reactionButton" onClick={handlePublish}>
             <span className="profileTooltip">Pubblica</span>
             <Publish />
           </div>
-          <div className="reactionButton" onClick={handleDeleteClick}>
+          <div className="reactionButton" onClick={handleDelete}>
             <span className="profileTooltip">Elimina</span>
             <Delete />
           </div>
         </div>
       </div>
-      {showDeletePopup && (
-        <PopUp
-          title="Conferma Eliminazione"
-          message="Sei sicuro di voler eliminare questa configurazione?"
-          onClose={handleClosePopup}
-        ></PopUp>
-      )}
     </div>
   );
 };
 
 ProfileConfigurationCard.propTypes = {
-  idConfigurazione: PropTypes.number.isRequired,
   nome: PropTypes.string.isRequired,
   descrizione: PropTypes.string.isRequired,
 };

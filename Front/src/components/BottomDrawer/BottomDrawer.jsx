@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
@@ -6,7 +6,7 @@ import Backdrop from "@mui/material/Backdrop";
 import CustomButton from "../CustomButton/CustomButton";
 import { BASE_URL } from "../../constants";
 import { ConfStringContext } from "../ToolGrid/EditComponent/ConfStringContext";
-import PopUp from "../PopUp/PopUp";
+import PopUp from "../PopUp/PopUpEsporta";
 
 const ResponsiveBottomDrawer = () => {
   const [isFullOpen, setIsFullOpen] = useState(false);
@@ -14,10 +14,10 @@ const ResponsiveBottomDrawer = () => {
   const { confString } = useContext(ConfStringContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [stato, setStato] = useState("");
 
   const openModal = () => {
     setIsModalOpen(true);
-    console.log("Modal aperto");
   };
 
   const closeModal = () => {
@@ -55,37 +55,49 @@ const ResponsiveBottomDrawer = () => {
     input.click();
   };
 
-  const exportConfiguration = async () => {
-    openModal();
-    // const response = await fetch(`${BASE_URL}/exportConfiguration`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //   },
-    //   body: JSON.stringify({
-    //     email: localStorage.getItem("email"),
-    //     nome: title,
-    //     descrizione: description,
-    //     stato: "Pubblico",
-    //     configurazione: confString,
-    //     username: localStorage.getItem("username"),
-    //   }),
-    // });
-
-    // if (response.ok) {
-    //   const blob = await response.blob();
-    //   const url = window.URL.createObjectURL(blob);
-    //   const a = document.createElement("a");
-    //   a.href = url;
-    //   a.download = `${localStorage.getItem("username")}_config.txt`;
-    //   document.body.appendChild(a);
-    //   a.click();
-    //   a.remove();
-    // } else {
-    //   console.error("Errore durante il download della configurazione");
-    // }
+  const handleExport = () => {
+    openModal(); // Apre il modal quando l'utente preme "Esporta"
   };
+  
+  const confirmExport = async () => {
+    closeModal();
+  
+    setTimeout(async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/exportConfiguration`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            email: localStorage.getItem("email"),
+            nome: title,
+            descrizione: description,
+            stato: stato,
+            configurazione: confString,
+            username: localStorage.getItem("username"),
+          }),
+        });
+  
+        if (response.ok) {
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${localStorage.getItem("username")}_config.txt`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          console.error("Errore durante il download della configurazione");
+        }
+      } catch (error) {
+        console.error("Errore durante l'export:", error);
+      }
+    }, 300); // Permette al modal di chiudersi visibilmente prima della richiesta
+  };
+  
 
   return (
     <>
@@ -104,10 +116,11 @@ const ResponsiveBottomDrawer = () => {
         <PopUp
           title={title}
           onClose={closeModal}
-          onConfirm={exportConfiguration}
+          onConfirm={confirmExport}
           confirmLabel="Esporta"
           setTitle={setTitle}
           setDescription={setDescription}
+          setStato={setStato}
         />
       )}
       <Drawer
@@ -196,7 +209,7 @@ const ResponsiveBottomDrawer = () => {
           >
             <CustomButton
               label="Esporta"
-              onClick={isFullOpen ? exportConfiguration : undefined}
+              onClick={isFullOpen ? handleExport : undefined}
             />
             <CustomButton
               label="Importa"
