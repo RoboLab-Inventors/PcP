@@ -11,6 +11,10 @@
 // The only restriction is to not publish any  
 // extension for browsers or native application
 // without getting a written permission first.
+
+
+
+https://github.com/gblazex/smoothscroll/blob/master/src/middlemouse.js
 //
 
 (function () {
@@ -129,7 +133,6 @@ function init() {
 
         addEvent('resize', refreshSize);
 
-        // TODO: attributeFilter?
         var config = {
             attributes: true, 
             childList: true, 
@@ -319,7 +322,6 @@ function wheel(event) {
         return true;
     }
 
-    // TODO:
     //
     // wheelDeltaY (DEPRECATED):
     //   - Mac: positive (+) for scrolling down; Win: negative (-) for up

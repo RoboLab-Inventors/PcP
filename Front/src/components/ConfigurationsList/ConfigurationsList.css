@@ -1,27 +1,27 @@
 .listContainer {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-y: auto;
+  height: 100%; /* Occupa tutta l'altezza disponibile */
+  width: 100%; /* Occupa tutta la larghezza disponibile */
+  display: flex; /* Usa flexbox per la disposizione degli elementi */
+  align-items: center; /* Centra gli elementi verticalmente */
+  justify-content: center; /* Centra gli elementi orizzontalmente */
+  overflow-y: auto; /* Abilita lo scroll verticale se necessario */
 }
 
 .configurationCard {
-  transition: all 0.5s;
-  border: 1px solid black;
-  width: 50%;
-  height: 50%;
-  border-radius: 30px;
-  overflow: hidden;
-  box-shadow: 15px 15px 30px #131313, -15px -15px 30px #000000;
+  transition: all 0.5s; /* Transizione fluida per tutti i cambiamenti */
+  border: 1px solid black; /* Bordo nero di 1px */
+  width: 50%; /* Occupa il 50% della larghezza del contenitore */
+  height: 50%; /* Occupa il 50% dell'altezza del contenitore */
+  border-radius: 30px; /* Angoli arrotondati */
+  overflow: hidden; /* Nasconde il contenuto che eccede i bordi */
+  box-shadow: 15px 15px 30px #131313, -15px -15px 30px #000000; /* Ombra tridimensionale con effetto rilievo */
 }
 
 .configurationCard:hover {
-  border: 1px solid var(--accent);
-  transform: scale(1.05);
+  border: 1px solid var(--accent); /* Cambia il colore del bordo quando il cursore è sopra */
+  transform: scale(1.05); /* Ingrandisce leggermente la card al passaggio del mouse */
 }
 
 .configurationCard:active {
-  transform: scale(0.95) rotateZ(1.7deg);
+  transform: scale(0.95) rotateZ(1.7deg); /* Rimpicciolisce leggermente e ruota la card quando viene cliccata */
 }

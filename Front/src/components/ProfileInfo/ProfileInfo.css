@@ -1,105 +1,119 @@
+/* Container principale per le informazioni, centrate orizzontalmente e verticalmente */
 .infoContainer {
-  width: auto;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  width: auto; /* Larghezza automatica per adattarsi al contenuto */
+  height: auto; /* Altezza automatica per adattarsi al contenuto */
+  display: flex; /* Utilizza Flexbox per il layout */
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center; /* Centra verticalmente */
+  flex-direction: column; /* Gli elementi figli sono disposti in colonna */
 }
 
+/* Flusso principale delle informazioni, centrato */
 .primaryInfoFlow {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%; /* Larghezza al 100% */
+  display: flex; /* Layout Flexbox */
+  flex-direction: column; /* Disposizione in colonna */
+  justify-content: center; /* Centra gli elementi figli */
+  align-items: center; /* Centra gli elementi figli */
 }
 
+/* Titolo del nome, centrato orizzontalmente */
 .nameTitle {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  display: flex; /* Flexbox per la disposizione */
+  flex-direction: row; /* Disposizione in riga */
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center; /* Centra verticalmente */
+  width: 100%; /* Larghezza al 100% */
 }
 
+/* Contenitore per gli input, con padding aggiuntivo nella parte inferiore */
 .container-container {
-  padding-bottom: 5%;
+  padding-bottom: 5%; /* Padding inferiore */
 }
 
+/* Contenitore per gli input, posizionato relativisticamente per gli iconi */
 .input-container {
-  position: relative;
-  display: flex;
-  align-items: center;
+  position: relative; /* Posizionamento relativo */
+  display: flex; /* Layout Flexbox */
+  align-items: center; /* Allineamento degli elementi figli */
 }
 
+/* Stili per il campo di input principale */
 .input-insert {
-  width: 100%;
-  height: 40px;
-  padding: 0 40px 0 10px;
-  font-size: 16px;
-  border: 1px solid var(--text) !important;
-  color: var(--background) !important;
-  border-radius: 10px;
-  outline: none;
-  background: transparent;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  width: 100%; /* Larghezza al 100% */
+  height: 40px; /* Altezza del campo */
+  padding: 0 40px 0 10px; /* Padding interno (spazio a sinistra e destra) */
+  font-size: 16px; /* Dimensione del font */
+  border: 1px solid var(--text) !important; /* Bordo con il colore definito nella variabile */
+  color: var(--background) !important; /* Colore del testo */
+  border-radius: 10px; /* Angoli arrotondati */
+  outline: none; /* Rimuove il contorno di default */
+  background: transparent; /* Sfondo trasparente */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transizione per il bordo e l'ombra */
 }
 
+/* Focus sull'input */
 .input-insert:focus {
-  border-color: var(--primary) !important;
-  box-shadow: 0 0 4px var(--primary) !important;
+  border-color: var(--primary) !important; /* Colore del bordo quando in focus */
+  box-shadow: 0 0 4px var(--primary) !important; /* Aggiunge un'ombra */
 }
 
+/* Etichetta dell'input che si sposta quando l'input è in focus o non è vuoto */
 .input-label {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 14px;
-  color: var(--text) !important;
-  transition: all 0.3s;
-  pointer-events: none;
+  position: absolute; /* Posizionamento assoluto per l'etichetta */
+  left: 10px; /* Posizione a sinistra */
+  top: 50%; /* Posizione verticale centrale */
+  transform: translateY(-50%); /* Centra verticalmente */
+  font-size: 14px; /* Dimensione del font */
+  color: var(--text) !important; /* Colore del testo */
+  transition: all 0.3s; /* Transizione per lo spostamento */
+  pointer-events: none; /* Disabilita l'interazione dell'etichetta */
 }
 
+/* Modifica la posizione dell'etichetta quando l'input è in focus o ha un valore */
 .input-insert:focus + .input-label,
 .input-insert:not(:placeholder-shown) + .input-label {
-  top: -10px;
-  left: 8px;
-  font-size: 12px;
-  color: var(--text) !important;
+  top: -10px; /* Sposta l'etichetta sopra il campo */
+  left: 8px; /* Posizione a sinistra */
+  font-size: 12px; /* Dimensione del font ridotta */
+  color: var(--text) !important; /* Colore del testo */
 }
 
+/* Icona per la password */
 .password-icon {
-  position: absolute;
-  right: 13px;
-  color: var(--text) !important;
+  position: absolute; /* Posizionamento assoluto per l'icona */
+  right: 13px; /* Posizione a destra */
+  color: var(--text) !important; /* Colore dell'icona */
 }
 
+/* Stili per il campo data */
 .date-container {
-  max-width: 70%;
+  max-width: 70%; /* Larghezza massima del 70% */
 }
 
+/* Input data, con stili simili all'input principale */
 .date-insert {
-  box-sizing: border-box;
-  width: 100%;
-  height: 40px;
-  padding: 0 10px 0 10px;
-  font-size: 16px;
-  border: 1px solid var(--text) !important;
-  color: var(--background) !important;
-  border-radius: 10px;
-  outline: none;
-  background: transparent;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  color-scheme: dark;
+  box-sizing: border-box; /* Includi padding e bordo nelle dimensioni */
+  width: 100%; /* Larghezza al 100% */
+  height: 40px; /* Altezza del campo */
+  padding: 0 10px 0 10px; /* Padding interno */
+  font-size: 16px; /* Dimensione del font */
+  border: 1px solid var(--text) !important; /* Bordo */
+  color: var(--background) !important; /* Colore del testo */
+  border-radius: 10px; /* Angoli arrotondati */
+  outline: none; /* Rimuove il contorno di default */
+  background: transparent; /* Sfondo trasparente */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transizione */
+  color-scheme: dark; /* Impostazioni per la modalità scura */
 }
 
+/* Focus sul campo data */
 .date-insert:focus {
-  border-color: var(--primary) !important;
-  box-shadow: 0 0 4px var(--primary) !important;
+  border-color: var(--primary) !important; /* Colore del bordo quando in focus */
+  box-shadow: 0 0 4px var(--primary) !important; /* Ombra al focus */
 }
 
+/* Modifica la posizione dell'etichetta per il campo data */
 .date-insert:focus + .input-label,
 .date-insert:not(:placeholder-shown) + .input-label {
   top: -10px;
@@ -108,6 +122,7 @@
   color: var(--text) !important;
 }
 
+/* Contenitore responsive per la data e il genere */
 .dobAndGenderResponsive {
   width: 100%;
   height: 100%;
@@ -115,32 +130,37 @@
   justify-content: center;
   align-items: center;
 }
+
+/* Stili per il campo genere */
 .gender-container {
-  max-width: 70%;
-  width: 100%; /* Ensure it takes full width */
-  box-sizing: border-box; /* Include padding and border in width */
+  max-width: 70%; /* Larghezza massima del 70% */
+  width: 100%; /* Larghezza al 100% */
+  box-sizing: border-box; /* Include padding e bordo nelle dimensioni */
 }
 
+/* Input per il genere */
 .gender-insert {
-  flex-shrink: 1;
-  box-sizing: border-box;
-  width: calc(100% - 20px);
-  height: 40px;
-  padding: 0 10px; /* Adjusted padding */
-  font-size: 16px;
-  border: 1px solid var(--text) !important;
-  color: var(--background) !important;
-  border-radius: 10px;
-  outline: none;
-  background: transparent;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  flex-shrink: 1; /* Non si restringe oltre il 100% */
+  box-sizing: border-box; /* Includi padding e bordo nelle dimensioni */
+  width: calc(100% - 20px); /* Larghezza calcolata per lasciare spazio ai bordi */
+  height: 40px; /* Altezza del campo */
+  padding: 0 10px; /* Padding interno */
+  font-size: 16px; /* Dimensione del font */
+  border: 1px solid var(--text) !important; /* Bordo */
+  color: var(--background) !important; /* Colore del testo */
+  border-radius: 10px; /* Angoli arrotondati */
+  outline: none; /* Rimuove il contorno di default */
+  background: transparent; /* Sfondo trasparente */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transizione */
 }
 
+/* Focus sul campo genere */
 .gender-insert:focus {
-  border-color: var(--primary) !important;
-  box-shadow: 0 0 4px var(--primary) !important;
+  border-color: var(--primary) !important; /* Colore del bordo quando in focus */
+  box-shadow: 0 0 4px var(--primary) !important; /* Ombra al focus */
 }
 
+/* Modifica la posizione dell'etichetta per il campo genere */
 .gender-insert:focus + .input-label,
 .gender-insert:not(:placeholder-shown) + .input-label {
   top: -10px;
@@ -149,6 +169,7 @@
   color: var(--text) !important;
 }
 
+/* Rimuove la freccia del calendario dal campo data */
 ::-webkit-calendar-picker-indicator {
-  cursor: none;
+  cursor: none; /* Nasconde la freccia del calendario */
 }

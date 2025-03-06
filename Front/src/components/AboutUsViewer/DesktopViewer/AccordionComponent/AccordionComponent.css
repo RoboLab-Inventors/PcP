@@ -1,6 +1,6 @@
 .accordion-container {
-  width: 40vw;
-  z-index: 1000;
-  overflow: auto;
-  position: relative;
+  width: 40vw;           /* Imposta la larghezza del contenitore al 40% della larghezza del viewport */
+  z-index: 1000;         /* Un alto valore z-index assicura che l'accordion appaia sopra altri elementi */
+  overflow: auto;        /* Abilita lo scorrimento se il contenuto supera le dimensioni del contenitore */
+  position: relative;    /* Posiziona l'elemento rispetto alla sua posizione normale */
 }

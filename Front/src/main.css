@@ -1,75 +1,84 @@
 :root {
-  --primary: #7c0000;
-  --secondary: #aa0000;
-  --accent: #c4a000;
-  --background: #f4e8dc;
-  --text: #f4e8dc;
-  --grey: #4a4a4a;
-  --darkgrey: #1a1a1a;
+  /* Definizione delle variabili di colore per il sito */
+  --primary: #7c0000; /* Colore primario */
+  --secondary: #aa0000; /* Colore secondario */
+  --accent: #c4a000; /* Colore di accento */
+  --background: #f4e8dc; /* Colore di sfondo */
+  --text: #f4e8dc; /* Colore del testo */
+  --grey: #4a4a4a; /* Colore grigio */
+  --darkgrey: #1a1a1a; /* Colore grigio scuro */
+  --lightgrey: #d1d1d17c; /* Colore grigio chiaro */
 }
 
 body {
-  color: var(--text);
-  min-height: 100vh;
-  margin: 0;
-  font-family: "SpaceGrotesk";
+  /* Impostazioni per il corpo del documento */
+  color: var(--text); /* Colore del testo */
+  min-height: 100vh; /* Imposta l'altezza minima del body al 100% della finestra */
+  margin: 0; /* Rimuove il margine predefinito */
+  font-family: "SpaceGrotesk"; /* Imposta il font di base */
 }
 
 * {
+  /* Disabilita il cursore per tutti gli elementi */
   cursor: none !important;
 }
 
 *:hover {
+  /* Disabilita il cursore al passaggio del mouse su qualsiasi elemento */
   cursor: none !important;
 }
 
-/* width */
+/* Stile per la barra di scorrimento */
 body::-webkit-scrollbar {
-  width: 10px;
-  display: none;
+  width: 10px; /* Imposta la larghezza della scrollbar */
+  display: none; /* Nasconde la scrollbar */
 }
 
-/* Track */
+/* Stile per il track della scrollbar (parte scorrevole) */
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: var(--background); /* Colore di sfondo del track */
 }
 
-/* Handle */
+/* Stile per il "thumb" della scrollbar (parte che può essere trascinata) */
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: var(--primary); /* Colore di sfondo del thumb */
 }
 
-/* Handle on hover */
+/* Stile del thumb al passaggio del mouse */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary);
+  background: var(--secondary); /* Colore del thumb al passaggio del mouse */
 }
 
 .background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  z-index: -1; /* Assicurati che lo sfondo sia dietro gli altri contenuti */
+  /* Impostazioni per l'immagine di sfondo fissa */
+  position: fixed; /* Posiziona l'immagine in modo fisso */
+  top: 0; /* Posizione in alto */
+  left: 0; /* Posizione a sinistra */
+  width: 100%; /* Occupa tutta la larghezza */
+  height: 100%; /* Occupa tutta l'altezza */
+  background-size: cover; /* Copre l'intera area senza distorcere */
+  background-position: center; /* Posiziona l'immagine al centro */
+  z-index: -1; /* Posiziona l'immagine di sfondo dietro al contenuto */
 }
 
 font-face {
-  font-family: "GT-Alpina"; /* Scegli un nome per il font */
+  /* Definisce il font "GT-Alpina" */
+  font-family: "GT-Alpina"; /* Nome del font */
   src: url("./assets/fonts/GT-Alpina-Condensed-Thin-Trial.otf")
-    format("opentype"); /* Percorso al file OTF */
-  font-weight: normal; /* Puoi specificare il peso se necessario */
-  font-style: normal; /* Puoi specificare lo stile se necessario */
+    format("opentype"); /* Percorso del file OTF */
+  font-weight: normal; /* Peso del font */
+  font-style: normal; /* Stile del font */
 }
 
 @font-face {
-  font-family: "SpaceGrotesk"; /* Scegli un nome per il font */
-  src: url("./assets/fonts/SpaceGrotesk-Light.ttf") format("opentype"); /* Percorso al file OTF */
-  font-weight: normal; /* Puoi specificare il peso se necessario */
-  font-style: normal; /* Puoi specificare lo stile se necessario */
+  /* Definisce il font "SpaceGrotesk" */
+  font-family: "SpaceGrotesk"; /* Nome del font */
+  src: url("./assets/fonts/SpaceGrotesk-Light.ttf") format("opentype"); /* Percorso del file OTF */
+  font-weight: normal; /* Peso del font */
+  font-style: normal; /* Stile del font */
 }
 
 input {
-  font-family: "SpaceGrotesk";
+  /* Imposta il font per gli input */
+  font-family: "SpaceGrotesk"; /* Font "SpaceGrotesk" per gli input */
 }

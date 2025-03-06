@@ -1,6 +1,6 @@
-.carousel-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+.carousel-container {
+    display: flex; /* Imposta il layout del contenitore su flexbox */
+    justify-content: center; /* Centra gli elementi figli orizzontalmente */
+    align-items: center; /* Centra gli elementi figli verticalmente */
+    width: 100%; /* Imposta la larghezza del contenitore al 100% del genitore */
 }

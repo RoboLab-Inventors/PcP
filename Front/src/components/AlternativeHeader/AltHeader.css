@@ -1,46 +1,47 @@
 .tabs {
-  display: flex;
-  position: relative;
-  background-color: var(--primary);
-  padding: 0.75rem;
-  border-radius: 99px;
+  display: flex; /* Dispone gli elementi in riga */
+  position: relative; /* Imposta una posizione relativa rispetto al contenitore */
+  background-color: var(--primary); /* Usa una variabile CSS per il colore di sfondo */
+  padding: 0.75rem; /* Aggiunge spazio interno */
+  border-radius: 99px; /* Applica un bordo molto arrotondato per un aspetto morbido */
 }
 
 .container {
-  display: flex;
-  position: fixed;
-  overflow: hidden;
-  border-radius: 99px;
-  top: 40px;
-  justify-content: center;
-  width: 100%;
-  transition: transform 0.3s ease-in-out;
-  z-index: 1000;
+  display: flex; /* Usa flexbox per la disposizione degli elementi */
+  position: fixed; /* Fissa la posizione in alto nella pagina */
+  overflow: hidden; /* Nasconde gli elementi che escono dal contenitore */
+  border-radius: 99px; /* Applica angoli arrotondati */
+  top: 40px; /* Posiziona il contenitore a 40px dall'alto */
+  justify-content: center; /* Centra gli elementi orizzontalmente */
+  width: 100%; /* Occupa tutta la larghezza della viewport */
+  transition: transform 0.3s ease-in-out; /* Aggiunge una transizione fluida */
+  z-index: 1000; /* Porta l'elemento in primo piano */
 }
 
+/* Stati di visibilità del contenitore */
 .container.hidden {
   transition: transform 0.3s ease-in-out; 
-  transform: translateY(calc(-100% - 40px));
+  transform: translateY(calc(-100% - 40px)); /* Nasconde il contenitore fuori dallo schermo */
 }
 
 .container.visible {
   transition: transform 0.3s ease-in-out;
-  transform: translateY(0);
+  transform: translateY(0); /* Rende visibile il contenitore */
 }
 
 .logo-image {
-  width: 120%; 
-  height: auto;
-  transition: transform 0.3s ease-in-out;
+  width: 120%; /* Imposta la larghezza oltre il 100% per un effetto di riempimento */
+  height: auto; /* Mantiene le proporzioni dell'immagine */
+  transition: transform 0.3s ease-in-out; /* Aggiunge un'animazione di trasformazione */
 }
 
 .logo-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-  background-color: var(--primary);
+  position: relative; /* Imposta una posizione relativa per contenere elementi assoluti */
+  display: flex; /* Usa flexbox */
+  justify-content: center; /* Centra gli elementi orizzontalmente */
+  align-items: center; /* Centra gli elementi verticalmente */
+  z-index: 2; /* Porta il logo sopra gli altri elementi */
+  background-color: var(--primary); /* Usa il colore primario di sfondo */
 }
 
 .container.hidden {
@@ -54,40 +55,44 @@
   z-index: 2;
 }
 
+/* Nasconde i radio button */
 .container input[type="radio"] {
   display: none;
 }
 
 .tab {
-  font-size: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  width: 10vw;
-  max-width: 75px;
-  min-width: 60px;
-  font-weight: 500;
-  border-radius: 99px;
-  transition: color 0.15s ease-in;
+  font-size: 11px; /* Imposta una dimensione del testo ridotta */
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Centra il testo verticalmente */
+  justify-content: center; /* Centra il testo orizzontalmente */
+  height: 30px; /* Imposta un'altezza fissa */
+  width: 10vw; /* Imposta la larghezza dinamica rispetto alla viewport */
+  max-width: 75px; /* Imposta una larghezza massima */
+  min-width: 60px; /* Imposta una larghezza minima */
+  font-weight: 500; /* Rende il testo leggermente più spesso */
+  border-radius: 99px; /* Angoli molto arrotondati */
+  transition: color 0.15s ease-in; /* Aggiunge una transizione fluida sul colore */
 }
+
+/* Adatta la dimensione del testo per schermi molto piccoli */
 @media (max-width: 245px) {
   .tab {
     font-size: 18px;
   }
 }
 
+/* Cambia il colore della tab selezionata */
 .container input[type="radio"]:checked + label {
   color: var(--fontColor);
 }
+
+/* Movimento del glider in base alla tab selezionata */
 .container input[id="radio-1"]:checked ~ .glider {
   transform: translateX(0);
 }
-
 .container input[id="radio-2"]:checked ~ .glider {
   transform: translateX(100%);
 }
-
 .container input[id="radio-3"]:checked ~ .glider {
   transform: translateX(200%);
 }
@@ -98,24 +103,26 @@
   transform: translateX(400%);
 }
 
+/* Glider che evidenzia la tab selezionata */
 .glider {
-  position: absolute;
-  display: flex;
-  height: 30px;
-  width: 10vw;
-  max-width: 75px;
-  min-width: 60px;
-  background-color: var(--secondary);
-  z-index: 1;
-  border-radius: 99px;
-  transition: transform 0.25s ease-out;
+  position: absolute; /* Posizione assoluta per sovrapporsi alle tab */
+  display: flex; /* Usa flexbox */
+  height: 30px; /* Stessa altezza delle tab */
+  width: 10vw; /* Stessa larghezza delle tab */
+  max-width: 75px; /* Larghezza massima */
+  min-width: 60px; /* Larghezza minima */
+  background-color: var(--secondary); /* Colore di sfondo diverso per evidenziare */
+  z-index: 1; /* Posiziona il glider sotto il testo */
+  border-radius: 99px; /* Angoli molto arrotondati */
+  transition: transform 0.25s ease-out; /* Aggiunge una transizione fluida */
 }
 
+/* Sezione per il profilo */
 .profile {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  right: 3vw;
-  height: 100%;
+  position: absolute; /* Posizione assoluta all'interno del contenitore */
+  display: flex; /* Usa flexbox */
+  justify-content: center; /* Centra gli elementi orizzontalmente */
+  align-items: center; /* Centra gli elementi verticalmente */
+  right: 3vw; /* Posiziona il profilo a destra */
+  height: 100%; /* Occupa tutta l'altezza del contenitore */
 }

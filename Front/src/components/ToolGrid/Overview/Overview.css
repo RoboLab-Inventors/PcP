@@ -1,38 +1,43 @@
 .table-container {
-  overflow-y: auto;
-  margin: 8px;
-  width: 100%;
-  max-height: 100%;
+  /* Imposta il contenitore della tabella con scorrimento verticale e margine */
+  overflow-y: auto; /* Abilita lo scorrimento verticale se il contenuto è troppo grande */
+  margin: 8px; /* Applica un margine di 8px intorno al contenitore */
+  width: 100%; /* Imposta la larghezza del 100% del contenitore */
+  max-height: 100%; /* Imposta l'altezza massima del 100% */
 }
 
 .table {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 8px;
-  width: 100%;
-  height: 100%;
+  /* Definisce la struttura della tabella come una griglia con colonne flessibili */
+  display: grid; /* Utilizza il layout a griglia per gli elementi */
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Crea colonne con larghezza minima di 120px e massima distribuzione flessibile */
+  gap: 8px; /* Aggiunge uno spazio di 8px tra le celle */
+  width: 100%; /* Imposta la larghezza del 100% del contenitore */
+  height: 100%; /* Imposta l'altezza al 100% del contenitore */
 }
 
 .table-item {
-  background-color: transparent;
-  border: 1px solid var(--darkgrey);
-  color: var(--text);
-  padding: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  min-height: 80px;
+  /* Definisce l'aspetto di ciascun elemento della tabella */
+  background-color: transparent; /* Sfondo trasparente */
+  border: 1px solid white; /* Aggiunge un bordo bianco */
+  color: var(--text); /* Imposta il colore del testo */
+  padding: 12px; /* Padding di 12px per creare spazio interno */
+  display: flex; /* Disposizione flessibile per il contenuto */
+  justify-content: center; /* Allinea orizzontalmente al centro */
+  align-items: center; /* Allinea verticalmente al centro */
+  border-radius: 6px; /* Angoli arrotondati */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra leggera */
+  text-align: center; /* Allinea il testo al centro */
+  min-height: 80px; /* Imposta un'altezza minima di 80px per le celle */
 }
 
 .table-item:hover {
-  background-color: var(--accent);
-  backdrop-filter: opacity(0.5);
+  /* Modifica l'aspetto dell'elemento quando il mouse è sopra */
+  background-color: var(--accent); /* Cambia lo sfondo al colore accentuato */
+  backdrop-filter: opacity(0.5); /* Aggiunge un effetto di trasparenza al fondo */
 }
 
 .table-item.selected {
-  background-color: var(--accent);
-  backdrop-filter: opacity(0.5);
+  /* Modifica l'aspetto dell'elemento selezionato */
+  background-color: var(--accent); /* Cambia lo sfondo al colore accentuato */
+  backdrop-filter: opacity(0.5); /* Aggiunge un effetto di trasparenza al fondo */
 }

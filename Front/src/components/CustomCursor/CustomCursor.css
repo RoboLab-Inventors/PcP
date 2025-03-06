@@ -1,35 +1,36 @@
+/* Nasconde il cursore personalizzato su schermi più piccoli (max 768px) */
 @media screen and (max-width: 768px) {
   .custom-cursor {
-    display: none !important;
+    display: none !important; /* Forza la rimozione del cursore personalizzato */
   }
 }
 
 .custom-cursor {
-  position: fixed;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: white;
-  pointer-events: none;
-  z-index: 11000;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: exclusion;
-  backdrop-filter: blur(8px);
-  transition: opacity 0.4s ease, width 0.4s ease, height 0.4s ease, transform 0.4s ease;
-  opacity: 1;
+  position: fixed; /* Il cursore rimane fisso rispetto alla finestra del browser */
+  width: 24px; /* Larghezza iniziale del cursore */
+  height: 24px; /* Altezza iniziale del cursore */
+  border-radius: 50%; /* Rende il cursore circolare */
+  background-color: white; /* Colore di sfondo bianco */
+  pointer-events: none; /* Evita che il cursore personalizzato interferisca con gli eventi del mouse */
+  z-index: 11000; /* Assicura che il cursore sia sempre sopra tutti gli altri elementi */
+  transform: translate(-50%, -50%); /* Centra il cursore rispetto alla posizione del mouse */
+  mix-blend-mode: exclusion; /* Effetto di fusione che cambia il colore in base allo sfondo */
+  backdrop-filter: blur(8px); /* Effetto sfocato dietro al cursore */
+  transition: opacity 0.4s ease, width 0.4s ease, height 0.4s ease, transform 0.4s ease; /* Transizioni fluide */
+  opacity: 1; /* Cursore visibile di default */
 }
 
 .custom-cursor.fading {
-  opacity: 0;
-  width: 0px;
-  height: 0px;
-  transform: translate(-50%, -50%) scale(0.1);
+  opacity: 0; /* Rende il cursore trasparente */
+  width: 0px; /* Riduce la larghezza a 0 */
+  height: 0px; /* Riduce l'altezza a 0 */
+  transform: translate(-50%, -50%) scale(0.1); /* Riduce ulteriormente la dimensione con uno scaling */
 }
 
 .custom-cursor.active {
-  opacity: 1;
+  opacity: 1; /* Rende il cursore completamente visibile */
 }
 
 .custom-cursor.hovering {
-  transform: translate(-50%, -50%) scale(0.3);
+  transform: translate(-50%, -50%) scale(0.3); /* Ingrandisce il cursore durante l'hover */
 }

@@ -1,16 +1,19 @@
 .editContainer {
+    /* Imposta un contenitore flessibile in colonna, centrando gli elementi verticalmente e allineandoli a sinistra */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
-    width: 100%;
-    height: 100%;
-    padding: 10%;
-    position: relative;
-}
-
-.button-container {
-    position: absolute;
-    top: 10%;
-    right: 1%;
-}
+    flex-direction: column; /* Gli elementi figli saranno disposti in una colonna */
+    justify-content: center; /* Allinea gli elementi al centro lungo l'asse principale (verticale) */
+    align-items: left; /* Allinea gli elementi a sinistra lungo l'asse trasversale (orizzontale) */
+    width: 100%; /* Imposta la larghezza al 100% del contenitore */
+    height: 100%; /* Imposta l'altezza al 100% del contenitore */
+    padding: 10%; /* Applica un padding del 10% su tutti i lati del contenitore */
+    position: relative; /* Rende il contenitore il punto di riferimento per gli elementi posizionati in modo assoluto */
+  }
+  
+  .button-container {
+    /* Posiziona il contenitore dei pulsanti in modo assoluto, con una distanza dal lato superiore e destro */
+    position: absolute; /* Posizionamento assoluto all'interno del contenitore relativo */
+    top: 10%; /* Distanza del 10% dal lato superiore del contenitore */
+    right: 1%; /* Distanza dell'1% dal lato destro del contenitore */
+  }
+  

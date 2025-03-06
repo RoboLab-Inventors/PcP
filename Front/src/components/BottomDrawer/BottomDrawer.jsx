@@ -100,7 +100,13 @@ const ResponsiveBottomDrawer = () => {
   };
 
   const handleExport = () => {
-    openModal(); // Apre il modal quando l'utente preme "Esporta"
+    if(confString.length !== 0) 
+    {
+      openModal(); // Apre il modal quando l'utente preme "Esporta"
+    }
+    else
+      alert("Devi salvare la configurazione prima di esportarla");
+
   };
   
   /**
@@ -117,6 +123,7 @@ const ResponsiveBottomDrawer = () => {
     closeModal();
   
     setTimeout(async () => {
+      console.log(JSON.stringify(confString))
       try {
         const response = await fetch(`${BASE_URL}/exportConfiguration`, {
           method: "POST",

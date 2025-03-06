@@ -1,6 +1,7 @@
+/* Stili per il pulsante di login nell'intestazione */
 .headerLoginButton {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative; /* Posizionamento relativo per posizionare gli eventuali elementi figli rispetto a questo */
+  display: flex; /* Utilizza il layout flexbox per allineare gli elementi */
+  justify-content: center; /* Allinea orizzontalmente gli elementi figli al centro */
+  align-items: center; /* Allinea verticalmente gli elementi figli al centro */
 }

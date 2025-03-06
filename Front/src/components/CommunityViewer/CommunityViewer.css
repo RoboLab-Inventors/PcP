@@ -1,31 +1,30 @@
 .searchbarContainer {
-    margin-top: 134px;
-    margin-bottom: 20px;
-    width: 100%;
-    height: 41px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .gridContainer {
-    margin-top: 100px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 250px);
-    gap: 20px; /* Add gap between grid items */
-    justify-items: center; /* Center items horizontally */
-    align-items: center; /* Align items to the start vertically */
-    justify-content: center; /* Center columns horizontally */
-  }
-  
-  .item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  
+  margin-top: 134px; /* Margine superiore per la posizione verticale */
+  margin-bottom: 20px; /* Margine inferiore per separarlo dagli altri elementi */
+  width: 100%; /* Occupa tutta la larghezza disponibile */
+  height: 41px; /* Altezza fissa della barra di ricerca */
+  display: flex; /* Utilizza il modello flexbox */
+  justify-content: center; /* Centra il contenuto orizzontalmente */
+  align-items: center; /* Centra il contenuto verticalmente */
+}
+
+.gridContainer {
+  margin-top: 100px; /* Margine superiore per la posizione verticale */
+  width: 100%; /* Occupa tutta la larghezza disponibile */
+  display: grid; /* Utilizza il layout a griglia */
+  grid-template-columns: repeat(auto-fill, 250px); /* Crea colonne flessibili di 250px */
+  gap: 20px; /* Spazio tra gli elementi della griglia */
+  justify-items: center; /* Centra gli elementi all'interno delle celle della griglia */
+  align-items: center; /* Allinea gli elementi verticalmente */
+  justify-content: center; /* Centra l'intera griglia orizzontalmente */
+}
+
+.item {
+  display: flex; /* Utilizza il modello flexbox per il contenuto */
+  justify-content: center; /* Centra il contenuto orizzontalmente */
+  align-items: center; /* Centra il contenuto verticalmente */
+  padding-left: 10px; /* Padding a sinistra */
+  padding-right: 10px; /* Padding a destra */
+  padding-top: 10px; /* Padding superiore */
+  padding-bottom: 10px; /* Padding inferiore */
+}

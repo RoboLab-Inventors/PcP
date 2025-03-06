@@ -1,35 +1,41 @@
 .list-controller {
-  width: 100%;
-  max-height: 100%;
-  overflow-y: auto;
+  /* Imposta il contenitore della lista con larghezza al 100% e altezza massima al 100%, permettendo lo scorrimento verticale */
+  width: 100%; /* Larghezza del 100% del contenitore */
+  max-height: 100%; /* Imposta un'altezza massima del 100% */
+  overflow-y: auto; /* Abilita lo scorrimento verticale se il contenuto è troppo grande */
 }
 
 .list-item {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 10px 0 10px 0;
-  border-top: 1px solid var(--darkgrey);
-  border-bottom: 1px solid var(--darkgrey);
+  /* Definisce il singolo elemento della lista come un contenitore flessibile, allineando gli elementi al centro */
+  display: flex; /* Disposizione flessibile orizzontale degli elementi */
+  align-items: center; /* Allinea gli elementi verticalmente al centro */
+  width: 100%; /* Imposta la larghezza al 100% del contenitore */
+  padding: 10px 0 10px 0; /* Applica un padding verticale di 10px (superiore e inferiore) */
+  border-top: 1px solid var(--darkgrey); /* Aggiunge un bordo superiore grigio scuro */
+  border-bottom: 1px solid var(--darkgrey); /* Aggiunge un bordo inferiore grigio scuro */
 }
 
 .list-item:hover {
-  background-color: var(--accent);
-  backdrop-filter: opacity(0.5);
+  /* Modifica l'aspetto dell'elemento della lista al passaggio del mouse */
+  background-color: var(--grey); /* Cambia lo sfondo a grigio */
+  backdrop-filter: opacity(0.5); /* Aggiunge un effetto di trasparenza al background */
 }
 
 .list-item.selected {
-  background-color: var(--accent);
-  backdrop-filter: opacity(0.5);
+  /* Modifica l'aspetto dell'elemento selezionato nella lista */
+  background-color: var(--lightgrey); /* Cambia lo sfondo a grigio chiaro */
+  backdrop-filter: opacity(0.5); /* Aggiunge un effetto di trasparenza al background */
 }
 
 .mini-chart {
-  width: 100px;
-  height: 100px;
-  margin-right: 20px;
-  padding-left: 20px;
+  /* Imposta un'area per un mini grafico con una larghezza e altezza fissa */
+  width: 100px; /* Larghezza fissa di 100px */
+  height: 100px; /* Altezza fissa di 100px */
+  margin-right: 20px; /* Distanza di 20px a destra */
+  padding-left: 20px; /* Distanza di 20px a sinistra */
 }
 
 .item-name {
-  flex-grow: 1;
+  /* Permette al nome dell'elemento di crescere e occupare lo spazio disponibile */
+  flex-grow: 1; /* Fa sì che il nome occupi lo spazio rimanente nella riga */
 }

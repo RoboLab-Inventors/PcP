@@ -28,48 +28,80 @@
  * @property {boolean} isMobile - Indica se il dispositivo è mobile.
  * @property {PaperProps} PaperProps - Proprietà di stile per il componente Paper.
  */
-import { useState, useEffect, useRef } from "react";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import ChatToggleButton from "./ChatToggleButton";
-import ChatWindow from "./ChatWindow";
-import sendMessageToBot from "./CharWithOolama"; // Importa la funzione sendMessageToBot
+import { useState, useEffect, useRef } from "react"; // Importa hook di React
+import useMediaQuery from "@mui/material/useMediaQuery"; // Importa hook per media queries
+import ChatToggleButton from "./ChatToggleButton"; // Importa il pulsante per aprire/chiudere la chat
+import ChatWindow from "./ChatWindow"; // Importa la finestra della chat
+import sendMessageToBot from "./CharWithOolama"; // Importa la funzione per inviare il messaggio al bot
+import { BASE_URL } from "../../constants"; // Importa URL di base per le API
 
 const ChatBot = () => {
-  const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-  const isMobile = useMediaQuery("(max-width: 768px)");
-  const messagesEndRef = useRef(null);
+  const [open, setOpen] = useState(false); // Stato per controllare se la chat è aperta o chiusa
+  const [messages, setMessages] = useState([]); // Stato per memorizzare i messaggi della chat
+  const [input, setInput] = useState(""); // Stato per memorizzare il messaggio di input dell'utente
+  const isMobile = useMediaQuery("(max-width: 768px)"); // Verifica se il dispositivo è mobile
+  const messagesEndRef = useRef(null); // Riferimento per scrollare fino in fondo ai messaggi
 
-  const toggleChat = () => setOpen(!open);
+  const toggleChat = () => setOpen(!open); // Funzione per aprire/chiudere la chat
 
   /**
-   * Invia un messaggio al bot e aggiorna lo stato dei messaggi.
-   *
-   * Se l'input è vuoto o contiene solo spazi bianchi, la funzione non fa nulla.
-   * Altrimenti, aggiunge il messaggio dell'utente alla lista dei messaggi e invia il messaggio al bot.
-   *
-   * Se la risposta del bot è ricevuta con successo, viene aggiunta alla lista dei messaggi.
-   * In caso di errore, viene aggiunto un messaggio di errore alla lista dei messaggi.
-   *
-   * @async
-   * @function sendMessage
-   * @returns {Promise<void>} - Una promessa che si risolve quando il messaggio è stato inviato e la risposta è stata gestita.
+   * Invia i dati del messaggio dell'utente al server per l'archiviazione.
+   */
+  const insertData = async (input) => {
+    try {
+      const response = await fetch(`${BASE_URL}/insertChatResult`, {
+        method: "POST", // Metodo POST per inviare i dati
+        headers: {
+          "Content-Type": "application/json", // Tipo di contenuto JSON
+        },
+        body: JSON.stringify({
+          message: input, // Messaggio dell'utente
+          email: localStorage.getItem("email"), // Recupera l'email dell'utente dal localStorage
+        }),
+      });
+    } catch (error) {
+      console.log("Error:", error); // Stampa eventuali errori nel log
+    }
+  };
+
+  /**
+   * Funzione per inviare il messaggio dell'utente al bot e aggiornare i messaggi.
+   * Se non c'è risposta, viene mostrato un messaggio di errore.
    */
   const sendMessage = async () => {
-    if (!input.trim()) return;
-    const newMessages = [...messages, { text: input, sender: "user" }];
-    setMessages(newMessages);
-    setInput("");
+    if (!input.trim()) {
+      // Se l'input è vuoto, esce dalla funzione
+      console.log("Input vuoto, esco dalla funzione");
+      return;
+    }
+    /**
+     * @param {string} userInput - Il messaggio dell'utente da inviare al bot.
+     * @returns {Promise<string>} - La risposta del bot.
+     * @throws {Error} - Se c'è un errore durante la richiesta.
+     */
+    insertData(input); // Salva il messaggio dell'utente
+    const newMessages = [...messages, { text: input, sender: "user" }]; // Aggiungi il messaggio dell'utente alla lista dei messaggi
+    setMessages(newMessages); // Aggiorna lo stato dei messaggi
+    setInput(""); // Resetta l'input
 
     try {
-      const response = await sendMessageToBot(input); // Utilizza la funzione sendMessageToBot per inviare il messaggio
-      setMessages([...newMessages, { text: response, sender: "bot" }]);
+      const response = await sendMessageToBot(input); // Invia il messaggio al bot
+
+      if (response) {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: response, sender: "bot" },
+        ]); // Aggiungi la risposta del bot
+      } else {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: "Nessuna risposta dal bot", sender: "bot" },
+        ]); // Risposta vuota
+      }
     } catch (error) {
-      console.error("Error:", error);
-      setMessages([
-        ...newMessages,
-        { text: "Errore nella risposta del server", sender: "bot" },
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: "Errore nella risposta del server", sender: "bot" }, // Messaggio di errore
       ]);
     }
   };
@@ -77,34 +109,33 @@ const ChatBot = () => {
   useEffect(() => {
     /**
      * Scorre automaticamente fino alla fine dei messaggi con un'animazione fluida.
-     * Utilizza un timeout di 100 millisecondi per garantire che l'elemento di destinazione sia presente nel DOM.
      */
     const scrollToBottom = () => {
       setTimeout(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 100);
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); // Scorre fino all'elemento di fine
+      }, 100); // Attende 100ms prima di eseguire lo scroll
     };
 
-    scrollToBottom();
-  }, [messages]);
+    scrollToBottom(); // Chiama la funzione per scorrere automaticamente
+  }, [messages]); // Eseguito ogni volta che i messaggi cambiano
 
   return (
     <>
       {!open || !isMobile ? (
-        <ChatToggleButton open={open} toggleChat={toggleChat} />
+        <ChatToggleButton open={open} toggleChat={toggleChat} /> // Mostra il pulsante per aprire/chiudere la chat
       ) : null}
       {open && (
         <ChatWindow
-          messages={messages}
-          input={input}
-          setInput={setInput}
-          sendMessage={sendMessage}
-          toggleChat={toggleChat}
-          messagesEndRef={messagesEndRef}
-          isMobile={isMobile}
+          messages={messages} // Passa i messaggi alla finestra della chat
+          input={input} // Passa l'input alla finestra della chat
+          setInput={setInput} // Passa la funzione per aggiornare l'input
+          sendMessage={sendMessage} // Passa la funzione per inviare il messaggio
+          toggleChat={toggleChat} // Passa la funzione per chiudere la chat
+          messagesEndRef={messagesEndRef} // Passa il riferimento per lo scroll
+          isMobile={isMobile} // Passa se il dispositivo è mobile
           PaperProps={{
             sx: {
-              transition: "transform 0.3s ease-in-out",
+              transition: "transform 0.3s ease-in-out", // Aggiunge un'animazione al componente Paper
             },
           }}
         />
@@ -113,4 +144,4 @@ const ChatBot = () => {
   );
 };
 
-export default ChatBot;
+export default ChatBot; // Esporta il componente ChatBot

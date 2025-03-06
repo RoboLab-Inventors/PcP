@@ -1,62 +1,70 @@
+/* Contenitore principale per la vista del profilo, posizionato in basso e fisso */
 .profileViewerContainer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+  position: fixed; /* Posizionamento fisso rispetto alla finestra */
+  bottom: 0; /* Posizionato nella parte inferiore della finestra */
+  left: 0; /* Posizionato a sinistra */
+  width: 100%; /* Larghezza al 100% della finestra */
+  height: 100%; /* Altezza al 100% della finestra */
+  display: flex; /* Utilizza Flexbox per disporre gli elementi */
+  justify-content: center; /* Centra orizzontalmente gli elementi */
+  align-items: center; /* Centra verticalmente gli elementi */
+  flex-direction: row; /* Gli elementi sono disposti in riga */
 }
 
+/* Lista delle configurazioni, con larghezza del 40% e altezza dinamica */
 .configurationsList {
-  width: 40%;
-  height: calc(100% - 150px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 40%; /* Larghezza al 40% */
+  height: calc(100% - 150px); /* Altezza dinamica, ridotta di 150px */
+  display: flex; /* Utilizza Flexbox per il layout */
+  justify-content: center; /* Centra orizzontalmente gli elementi */
+  align-items: center; /* Centra verticalmente gli elementi */
 }
 
+/* Contenitore per le informazioni del profilo, con larghezza del 60% */
 .profileInfo {
-  width: 60%;
-  height: calc(100% - 150px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 60%; /* Larghezza al 60% */
+  height: calc(100% - 150px); /* Altezza dinamica, ridotta di 150px */
+  display: flex; /* Utilizza Flexbox per il layout */
+  justify-content: center; /* Centra orizzontalmente gli elementi */
+  align-items: center; /* Centra verticalmente gli elementi */
 }
 
+/* Bottone per mostrare le configurazioni, posizionato fisso in alto a destra */
 .showConfigurationsButton {
-  position: fixed;
-  top: 14px;
-  right: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: fixed; /* Posizionamento fisso */
+  top: 14px; /* Posizionato a 14px dalla parte superiore */
+  right: 25px; /* Posizionato a 25px dal lato destro */
+  display: flex; /* Utilizza Flexbox per il layout */
+  justify-content: center; /* Centra orizzontalmente il contenuto */
+  align-items: center; /* Centra verticalmente il contenuto */
 }
 
+/* Animazione per far entrare il contenuto da sinistra */
 .animateFromLeft {
-  animation: slideInFromLeft 0.5s forwards;
+  animation: slideInFromLeft 0.5s forwards; /* Animazione per far entrare il contenuto da sinistra */
 }
 
+/* Animazione per far uscire il contenuto verso sinistra */
 .animateToLeft {
-  animation: slideOutToLeft 0.5s forwards;
+  animation: slideOutToLeft 0.5s forwards; /* Animazione per far uscire il contenuto verso sinistra */
 }
 
+/* Definizione dell'animazione per l'ingresso da sinistra */
 @keyframes slideInFromLeft {
   from {
-    transform: translateX(-100%);
+    transform: translateX(-100%); /* Inizia completamente a sinistra */
   }
   to {
-    transform: translateX(0);
+    transform: translateX(0); /* Termina nella posizione originale */
   }
 }
 
+/* Definizione dell'animazione per l'uscita verso sinistra */
 @keyframes slideOutToLeft {
   from {
-    transform: translateX(0);
+    transform: translateX(0); /* Inizia nella posizione originale */
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(-100%); /* Termina completamente a sinistra */
   }
 }

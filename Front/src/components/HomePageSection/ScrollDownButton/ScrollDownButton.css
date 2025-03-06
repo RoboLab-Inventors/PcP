@@ -1,58 +1,64 @@
+/* Stile per il pulsante */
 .button {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: var(--secondary);
-  border: none;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 0px 0px 4px var(--primary);
-  cursor: pointer;
-  transition-duration: 0.3s;
-  overflow: hidden;
-  position: absolute;
-  bottom: 20px;
+  width: 50px; /* Larghezza iniziale del pulsante */
+  height: 50px; /* Altezza iniziale del pulsante */
+  border-radius: 50%; /* Forma del pulsante rotonda */
+  background-color: var(--secondary); /* Colore di sfondo del pulsante */
+  border: none; /* Rimuove il bordo */
+  font-weight: 600; /* Grassetto per il testo */
+  display: flex; /* Usa flexbox per allineamento */
+  align-items: center; /* Allinea verticalmente il contenuto */
+  justify-content: center; /* Allinea orizzontalmente il contenuto */
+  box-shadow: 0px 0px 0px 4px var(--primary); /* Ombra esterna del pulsante */
+  cursor: pointer; /* Mostra il cursore come una mano */
+  transition-duration: 0.3s; /* Durata della transizione per gli effetti */
+  overflow: hidden; /* Nasconde eventuali contenuti che escono dal pulsante */
+  position: absolute; /* Posizione assoluta */
+  bottom: 20px; /* Distanza dal fondo della pagina */
 }
 
+/* Stile per l'icona SVG all'interno del pulsante */
 .svgIcon {
-  width: 12px;
-  transition-duration: 0.3s;
-  transform: rotate(180deg);
+  width: 12px; /* Larghezza iniziale dell'icona */
+  transition-duration: 0.3s; /* Durata della transizione per l'icona */
+  transform: rotate(180deg); /* Ruota l'icona di 180 gradi */
 }
 
+/* Colore del percorso all'interno dell'icona SVG */
 .svgIcon path {
-  fill: var(--text);
+  fill: var(--text); /* Colore del percorso dell'icona */
 }
 
+/* Effetti al passaggio del mouse sul pulsante */
 .button:hover {
-  width: 140px;
-  border-radius: 50px;
-  transition-duration: 0.3s;
-  background-color: var(--primary);
-  box-shadow: 0px 0px 0px 4px var(--secondary);
-  align-items: center;
+  width: 140px; /* Aumenta la larghezza del pulsante */
+  border-radius: 50px; /* Arrotonda gli angoli */
+  transition-duration: 0.3s; /* Durata della transizione per il cambiamento di larghezza */
+  background-color: var(--primary); /* Cambia il colore di sfondo */
+  box-shadow: 0px 0px 0px 4px var(--secondary); /* Cambia l'ombra esterna */
+  align-items: center; /* Mantiene l'allineamento verticale */
 }
 
+/* Effetti sull'icona SVG durante l'hover */
 .button:hover .svgIcon {
-  /* width: 20px; */
-  transition-duration: 0.3s;
-  transform: translateY(-200%);
+  /* width: 20px; (se abilitato, aumenta la larghezza dell'icona) */
+  transition-duration: 0.3s; /* Durata della transizione per l'icona */
+  transform: translateY(-200%); /* Muove l'icona verso l'alto */
 }
 
+/* Testo che appare sotto il pulsante */
 .button::before {
-  position: absolute;
-  bottom: -20px;
-  content: "Scopri di Più";
-  color: var(--text);
-  /* transition-duration: .3s; */
-  font-size: 0px;
+  position: absolute; /* Posizione assoluta */
+  bottom: -20px; /* Posiziona il testo sotto il pulsante */
+  content: "Scopri di Più"; /* Testo che appare */
+  color: var(--text); /* Colore del testo */
+  font-size: 0px; /* Inizialmente il testo è invisibile */
 }
 
+/* Effetti di hover sul testo */
 .button:hover::before {
-  font-size: 13px;
-  opacity: 1;
-  bottom: unset;
-  transition-duration: 0.3s;
+  font-size: 13px; /* Rende il testo visibile e lo imposta alla dimensione corretta */
+  opacity: 1; /* Rende il testo completamente visibile */
+  bottom: unset; /* Annulla la distanza inferiore */
+  transition-duration: 0.3s; /* Durata della transizione per il testo */
 }

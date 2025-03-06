@@ -1,33 +1,34 @@
-  .grid-container {
-    display: grid;
-    grid-template-columns: 3fr 2fr; 
-    min-height: 100vh;
-  }
-  
-  .left-div {
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .right-div {
-    position: sticky; 
-    top: 0; 
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.grid-container {
+  display: grid; /* Utilizza il layout CSS Grid */
+  grid-template-columns: 3fr 2fr; /* Divide il contenitore in due colonne con proporzioni 3:2 */
+  min-height: 100vh; /* Imposta un'altezza minima pari all'intera viewport */
+}
 
-  .carousel-div{
-    position: relative;
-    width: 80%;
-  }
-  .accordion-container {
-    width: 40vw;
-    z-index: 1000;
-    overflow: auto;
-    position: relative;
-  }
+.left-div {
+  height: auto; /* L'altezza si adatta al contenuto */
+  display: flex; /* Usa flexbox per la disposizione degli elementi interni */
+  flex-direction: column; /* Dispone gli elementi in colonna */
+  justify-content: space-between; /* Distribuisce gli elementi con spazio tra di loro */
+  align-items: center; /* Centra gli elementi orizzontalmente */
+}
+
+.right-div {
+  position: sticky; /* Mantiene la posizione fissa quando si scrolla la pagina */
+  top: 0; /* Fissa il div in alto */
+  height: 100vh; /* Occupa l'intera altezza della viewport */
+  display: flex; /* Usa flexbox per la disposizione interna */
+  justify-content: center; /* Centra il contenuto orizzontalmente */
+  align-items: center; /* Centra il contenuto verticalmente */
+}
+
+.carousel-div {
+  position: relative; /* Permette di posizionare elementi figli in base a questo contenitore */
+  width: 80%; /* Occupa l'80% della larghezza del suo contenitore */
+}
+
+.accordion-container {
+  width: 40vw; /* Imposta la larghezza al 40% della viewport */
+  z-index: 1000; /* Assicura che l'accordion sia visibile sopra altri elementi */
+  overflow: auto; /* Aggiunge lo scrolling se il contenuto supera lo spazio disponibile */
+  position: relative; /* Permette di posizionare elementi figli in base a questo contenitore */
+}

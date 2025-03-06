@@ -1,120 +1,121 @@
 .cardWrapper {
-  min-height: 40px; /* Imposta un'altezza minima per evitare salti */
-  width: 250px;
-  background-color: var(--darkgrey);
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start; /* Mantiene tutte le card ancorate in alto */
+  min-height: 40px; /* Altezza minima per evitare salti visivi */
+  width: 250px; /* Larghezza fissa della card */
+  background-color: var(--darkgrey); /* Colore di sfondo preso da una variabile CSS */
+  border-radius: 15px; /* Angoli arrotondati */
+  display: flex; /* Usa flexbox per la disposizione degli elementi */
+  flex-direction: column; /* Dispone gli elementi verticalmente */
+  align-self: flex-start; /* Allinea tutte le card in alto */
 }
 
 .cardContainer {
-  width: 250px;
-  height: 40px;
-  background-color: var(--secondary);
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+  width: 250px; /* Larghezza fissa */
+  height: 40px; /* Altezza fissa della card chiusa */
+  background-color: var(--secondary); /* Colore di sfondo */
+  border-radius: 15px; /* Angoli arrotondati */
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Allinea gli elementi verticalmente al centro */
+  flex-direction: row; /* Dispone gli elementi orizzontalmente */
 }
 
 .cardWrapper.open .cardContainer {
-  height: auto; /* Adjust height when open */
+  height: auto; /* Altezza dinamica quando la card è aperta */
 }
 
 .titleContainer {
-  overflow: hidden;
-  width: 206px;
-  height: 40px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: 10px;
-  position: relative;
+  overflow: hidden; /* Nasconde il contenuto che esce dai bordi */
+  width: 206px; /* Larghezza del contenitore del titolo */
+  height: 40px; /* Altezza fissa */
+  display: flex; /* Usa flexbox */
+  justify-content: flex-start; /* Allinea il testo a sinistra */
+  align-items: center; /* Centra verticalmente */
+  margin-left: 10px; /* Spazio a sinistra */
+  position: relative; /* Posizione relativa per eventuali elementi posizionati assolutamente */
 }
 
 .titleContainer .MuiTypography-root {
-  white-space: nowrap; /* Prevents text from wrapping */
-  overflow: visible; /* Hides overflowing text */
-  display: inline-block;
-  max-width: 100%;
-  transition: transform 0.5s ease-in-out;
-  transform: translateX(0);
+  white-space: nowrap; /* Impedisce il ritorno a capo del testo */
+  overflow: visible; /* Nasconde il testo che eccede la larghezza */
+  display: inline-block; /* Mostra il testo come elemento inline */
+  max-width: 100%; /* Impedisce che il testo superi la larghezza del contenitore */
+  transition: transform 0.5s ease-in-out; /* Effetto di transizione fluida */
+  transform: translateX(0); /* Posizione di partenza del testo */
 }
 
-/* Animate text on hover */
+/* Animazione del testo al passaggio del mouse */
 .titleContainer:hover .MuiTypography-root {
-  animation: slideText 3s linear infinite alternate;
+  animation: slideText 3s linear infinite alternate; /* Fa scorrere il testo orizzontalmente */
 }
 
 .buttonsContainer {
-  width: 230px;
-  height: 40px;
-  background-color: var(--secondary);
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 10px;
+  width: 230px; /* Larghezza fissa */
+  height: 40px; /* Altezza fissa */
+  background-color: var(--secondary); /* Colore di sfondo */
+  border-radius: 15px; /* Angoli arrotondati */
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Allinea gli elementi verticalmente */
+  flex-direction: row; /* Dispone gli elementi orizzontalmente */
+  justify-content: space-between; /* Spazia uniformemente gli elementi */
+  padding-left: 10px; /* Spazio interno a sinistra */
+  padding-right: 10px; /* Spazio interno a destra */
 }
 
 .logoContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra orizzontalmente */
+  margin-right: 10px; /* Spazio a destra */
 }
 
+/* Animazione per far scorrere il testo */
 @keyframes slideText {
   0% {
-    transform: translateX(0);
+    transform: translateX(0); /* Posizione iniziale */
   }
   100% {
-    transform: translateX(-50%); /* Moves text left */
+    transform: translateX(-50%); /* Sposta il testo verso sinistra */
   }
 }
 
 .arrowIcon {
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out; /* Transizione fluida per la rotazione */
 }
 
 .arrowIcon.rotate {
-  transform: rotate(180deg);
+  transform: rotate(180deg); /* Ruota l'icona di 180 gradi */
 }
 
-/* Dropdown Section */
+/* Sezione dropdown */
 .dropdownSection {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  max-height: 0; /* Altezza iniziale nascosta */
+  overflow: hidden; /* Nasconde il contenuto eccedente */
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; /* Transizione fluida per altezza e padding */
 }
 
 .dropdownSection.open {
-  max-height: 500px; /* Adjust based on content */
+  max-height: 500px; /* Altezza massima quando aperto (puoi regolarla) */
 }
 
 .descriptionContainer {
-  max-height: 100px;
-  min-height: 20px;
-  padding: 10px;
-  word-wrap: break-word; /* Ensures long words break */
-  overflow-wrap: break-word; /* Alternative for word breaking */
-  white-space: normal; /* Allows multi-line text */
-  overflow-y: auto; /* Enables vertical scrolling if content overflows */
+  max-height: 100px; /* Altezza massima della descrizione */
+  min-height: 20px; /* Altezza minima */
+  padding: 10px; /* Spazio interno */
+  word-wrap: break-word; /* Spezza parole lunghe */
+  overflow-wrap: break-word; /* Alternativa per la compatibilità */
+  white-space: normal; /* Consente il testo su più righe */
+  overflow-y: auto; /* Abilita lo scrolling verticale se il contenuto è troppo lungo */
 }
 
-/* Ensures scrollbar appears only when needed */
+/* Mostra la scrollbar solo quando necessario */
 .descriptionContainer::-webkit-scrollbar {
-  width: 8px;
+  width: 8px; /* Larghezza della scrollbar */
 }
 
 .descriptionContainer::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2); /* Colore della "maniglia" della scrollbar */
+  border-radius: 10px; /* Angoli arrotondati */
 }
 
 .descriptionContainer::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent; /* Sfondo della scrollbar trasparente */
 }

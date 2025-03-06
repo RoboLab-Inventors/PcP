@@ -16,25 +16,42 @@ import { Modal, Box, Typography } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 
 const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "var(--darkgrey)",
-    boxShadow: 24,
-    p: 4,
-    borderRadius: 2,
-  };
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "var(--darkgrey)",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 2,
+  maxHeight: "80vh",  // Increased from 30vh to provide more space if needed
+  height: "auto",     // Added to ensure proper sizing
+  overflowY: "auto",
+  display: "flex",    // Added to create a flex container
+  flexDirection: "column", // Stack children vertically
+};
+
 const CustomModalTerminiServizi = ({ open = true, title, description, onClose}) => {
   return (
     <Modal open={Boolean(open)} onClose={onClose} aria-labelledby="modal-title">
       <Box sx={style}>
-        <Typography id="modal-title" variant="h3" component="h2" sx={{ textAlign: "center", paddingBottom: 5 }} >
+        <Typography id="modal-title" variant="h3" component="h2" sx={{ textAlign: "center", paddingBottom: 5, flexShrink: 0 }} >
           {title}
         </Typography>
-        <Typography variant="body1" sx={{ textAlign: "center", paddingBottom: 5 }}>{description}</Typography>      
-        <Box display="flex" justifyContent="space-between" mt={2}>
+        <Typography 
+          variant="body1" 
+          sx={{ 
+            textAlign: "center", 
+            paddingBottom: 5,
+            overflowY: "auto", // Ensure this specific content can scroll
+            flexGrow: 1,      // Allow this to grow and take available space
+            wordBreak: "break-word" // Prevent text from overflowing horizontally
+          }}
+        >
+          {description}
+        </Typography>      
+        <Box display="flex" justifyContent="space-between" mt={2} sx={{ flexShrink: 0 }}>
           <CustomButton onClick={onClose} label="Chiudi" />
         </Box>
       </Box>

@@ -1,61 +1,65 @@
-.sections-container{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    height: 300vh;
-    justify-content: space-between;
-}
-
-.container-section-image{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.section-image{
-    width: 80%;
-    height: 50vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.container-section-carousel{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.section-carousel{
-    width: 80%;
-    align-items: center;
-}
-
-.section-description{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 40vh;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-in, transform 0.8s ease-in;
-}
-
-.section-description.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.section-description-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 80%;
-}
-
-.section-content{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
+.sections-container {
+    display: flex; /* Usa flexbox per la disposizione degli elementi */
+    flex-direction: column; /* Organizza gli elementi in colonna */
+    min-height: 100vh; /* Imposta un'altezza minima pari all'intera viewport */
+    height: 300vh; /* Imposta un'altezza pari a tre volte la viewport per effetto scrolling */
+    justify-content: space-between; /* Distribuisce le sezioni con spazio tra di loro */
+  }
+  
+  .container-section-image {
+    display: flex; /* Utilizza flexbox */
+    justify-content: center; /* Centra il contenuto orizzontalmente */
+    align-items: center; /* Centra il contenuto verticalmente */
+  }
+  
+  .section-image {
+    width: 80%; /* Occupa l'80% della larghezza del contenitore */
+    height: 50vh; /* Imposta un'altezza pari a metà viewport */
+    display: flex; /* Usa flexbox per gestire il contenuto interno */
+    justify-content: center; /* Centra gli elementi orizzontalmente */
+    align-items: center; /* Centra gli elementi verticalmente */
+  }
+  
+  .container-section-carousel {
+    width: 100%; /* Occupa tutta la larghezza disponibile */
+    display: flex; /* Usa flexbox */
+    justify-content: center; /* Centra il contenuto orizzontalmente */
+    align-items: center; /* Centra il contenuto verticalmente */
+  }
+  
+  .section-carousel {
+    width: 80%; /* Occupa l'80% della larghezza del contenitore */
+    align-items: center; /* Allinea gli elementi verticalmente */
+  }
+  
+  .section-description {
+    width: 100%; /* Occupa tutta la larghezza disponibile */
+    display: flex; /* Usa flexbox */
+    justify-content: center; /* Centra il contenuto orizzontalmente */
+    align-items: center; /* Centra il contenuto verticalmente */
+    flex-direction: column; /* Dispone gli elementi in colonna */
+    height: 40vh; /* Imposta un'altezza del 40% della viewport */
+    opacity: 0; /* Inizialmente nascosto */
+    transform: translateY(20px); /* Sposta l'elemento verso il basso per animazione */
+    transition: opacity 0.8s ease-in, transform 0.8s ease-in; /* Definisce una transizione fluida */
+  }
+  
+  .section-description.visible {
+    opacity: 1; /* Rende visibile la descrizione */
+    transform: translateY(0); /* Riporta l'elemento alla posizione originale */
+  }
+  
+  .section-description-content {
+    display: flex; /* Usa flexbox */
+    justify-content: center; /* Centra il contenuto orizzontalmente */
+    align-items: center; /* Centra il contenuto verticalmente */
+    flex-direction: column; /* Dispone gli elementi in colonna */
+    width: 80%; /* Occupa l'80% della larghezza disponibile */
+  }
+  
+  .section-content {
+    display: flex; /* Usa flexbox */
+    justify-content: center; /* Centra il contenuto orizzontalmente */
+    align-items: center; /* Centra il contenuto verticalmente */
+  }
+  
