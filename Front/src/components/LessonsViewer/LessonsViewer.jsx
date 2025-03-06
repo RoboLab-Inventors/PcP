@@ -64,7 +64,10 @@ function LessonViewer() {
       }}
     >
       {/* Sidebar */}
-      <Grid2 xs={4} sx={{ borderRight: "1px solid #ccc" }}>
+      <Grid2
+        xs={4}
+        sx={{ borderRight: "1px solid #ccc", width: "30%", minWidth: 150 }}
+      >
         <List>
           {lessons.map((lesson, index) => (
             <ListItem key={index} disablePadding>
@@ -79,7 +82,12 @@ function LessonViewer() {
       {/* Content Area */}
       <Grid2
         xs={8}
-        sx={{ padding: 2, overflow: "auto", maxHeight: "calc(100vh - 134px)" }}
+        sx={{
+          padding: 2,
+          overflow: "auto",
+          maxHeight: "calc(100vh - 134px)",
+          width: "70%",
+        }}
       >
         {selectedLesson ? (
           <>
