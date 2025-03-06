@@ -1,8 +1,8 @@
 /**
  * Componente RoutesPath
- * 
+ *
  * Questo componente definisce le rotte dell'applicazione utilizzando il componente Routes di react-router-dom.
- * 
+ *
  * Rotte definite:
  * - "/" : Home
  * - "*" : Home (rotta di fallback)
@@ -12,7 +12,7 @@
  * - "/AboutUs" : AboutUs
  * - "/LoginRegister" : LoginRegisterPage
  * - "/Profile" : Profile
- * 
+ *
  * @component
  */
 import Home from "../pages/Homepage/Home";
@@ -22,6 +22,7 @@ import Lessons from "../pages/Lessons/Lessons";
 import Community from "../pages/Community/Community";
 import LoginRegisterPage from "../pages/LoginRegisterPage/LoginRegisterPage";
 import Profile from "../pages/Profile/Profile";
+import ProtectedRoute from "./ProtectedRoute";
 import { Route, Routes } from "react-router-dom";
 
 function RoutesPath() {
@@ -31,11 +32,32 @@ function RoutesPath() {
         <Route path="/" element={<Home />} />
         <Route path="*" element={<Home />} />
         <Route path="Tool" element={<ToolPage />} />
-        <Route path="Lessons" element={<Lessons />} />
-        <Route path="Community" element={<Community />} />
         <Route path="AboutUs" element={<AboutUs />} />
         <Route path="LoginRegister" element={<LoginRegisterPage />} />
-        <Route path="Profile" element={<Profile />} />
+        <Route
+          path="Community"
+          element={
+            <ProtectedRoute>
+              <Community />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="Lessons"
+          element={
+            <ProtectedRoute>
+              <Lessons />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="Profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
