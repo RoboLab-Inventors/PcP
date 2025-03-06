@@ -1,7 +1,7 @@
 .cardWrapper {
   min-height: 40px; /* Imposta un'altezza minima per evitare salti */
   width: 250px;
-  background-color: var(--background);
+  background-color: var(--darkgrey);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
